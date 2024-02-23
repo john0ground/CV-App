@@ -1,39 +1,35 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+interface PersonalDetailsProps { fullName:string, niche:string}
+interface ContactDetailsProps {email:string, contactNumber:string, address:string}
 
-function App() {
-    const [count, setCount] = useState(0);
-
-    return (
-        <>
-            <div>
-                <a href="https://vitejs.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank">
-                    <img
-                        src={reactLogo}
-                        className="logo react"
-                        alt="React logo"
-                    />
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
-        </>
+function PersonalDetails({fullName, niche}: PersonalDetailsProps) {
+    return(
+        <section>
+            <h2>{fullName}</h2>
+            <span>{niche}</span>
+        </section>
     );
 }
 
-export default App;
+function ContactDetails({email, contactNumber, address}: ContactDetailsProps) {
+    return (
+        <section>
+            <span>{email}</span>
+            <span>{contactNumber}</span>
+            <span>{address}</span>
+        </section>
+    );
+}
+
+export default function App() {
+
+    return (
+        <div>  
+            <PersonalDetails fullName="Jonathan" niche="developer" />
+            <ContactDetails 
+                email="myaddress@gmail.com"
+                contactNumber="123-345-679"
+                address="Nuuk, Greenland"
+            />
+        </div>
+    );
+}
