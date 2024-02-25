@@ -6,16 +6,13 @@ export default function App() {
     const [headerDetails, setHeaderDetails] = useState({fullName: '', niche: ''});
     const [contactDetails, setContactDetails] = useState({email:'', contactNumber:'', address:''});
 
-    function handleHeaderDetails(value, key) {
-        const newDetails = {...headerDetails, [key]:value}
-        setHeaderDetails(newDetails);
+    function handleHeaderDetails(value:string, key:string) {
+        setHeaderDetails(prevDetails => ({ ...prevDetails, [key]:value}));
     }
 
-    function handleContactDetails(value, key) {
-        const newDetails = {...contactDetails, [key]:value}
-        setContactDetails(newDetails);
+    function handleContactDetails(value:string, key:string) {
+        setContactDetails(prevDetails => ({ ...prevDetails, [key]:value }));
     } 
-
 
     return (
         <>
