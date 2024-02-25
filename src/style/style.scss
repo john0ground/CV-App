@@ -6,6 +6,16 @@
     box-sizing: border-box;
 }
 
+section {
+    border: 1px solid blue;
+    width: fit-content;
+    padding: 2rem;
+}
+
 input {
     border: 1px solid green;
+}
+
+.content, .editor {
+    border: 1px solid skyblue;
 }
