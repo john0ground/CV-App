@@ -6,16 +6,26 @@
     box-sizing: border-box;
 }
 
+body {
+    background: #EEF3F6;
+}
+
 section {
-    border: 1px solid blue;
+    border: 1px solid rgba(0, 0, 255, 0.459);
     width: fit-content;
     padding: 2rem;
 }
 
 input {
-    border: 1px solid green;
+    background: #fff;
+    border:none;
+    box-shadow: 1px 1px 2px #0000002d;
+    border-radius: 10px;
+    height: 2.5rem;
+    width: 100%;
+    margin: 0.3rem 0 1rem 0;
 }
 
 .content, .editor {
-    border: 1px solid skyblue;
+    border: 1px solid rgba(0, 128, 0, 0.452);
 }
