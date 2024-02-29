@@ -8,10 +8,11 @@ interface InputProps {
 function TextInput({label, name, value, onChange}: InputProps) {
     return (
         <>
-            <label htmlFor={name}>{label}</label>
+            <label htmlFor={'input-' + name}>{label}</label>
             <input 
                 type="text" 
                 name={name} 
+                id={'input-' + name}
                 value={value} 
                 onChange={ onChange }
             />
@@ -20,3 +21,5 @@ function TextInput({label, name, value, onChange}: InputProps) {
 }
 
 export { TextInput }
+
+//  id for
