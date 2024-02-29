@@ -17,7 +17,7 @@ function HeaderInputs({ details, handleChange }: HeaderInputsProps) {
             <div className="input-row">
                 <TextInput
                     label='Full Name'
-                    name='input-fullName'
+                    name='fullName'
                     value={details.fullName}
                     onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'fullName')}
                 />
@@ -25,7 +25,7 @@ function HeaderInputs({ details, handleChange }: HeaderInputsProps) {
             <div className="input-row">
                 <TextInput
                     label='Niche'
-                    name='input-niche'
+                    name='niche'
                     value={details.niche}
                     onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'niche')}
                 />
