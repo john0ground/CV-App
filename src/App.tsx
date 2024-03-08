@@ -2,17 +2,17 @@ import { CvHeader, HeaderInputs } from './components/Header';
 import { CvContact, ContactInputs } from './components/Contact';
 import { CvEducation, EducationInputs } from './components/Education';
 import { WorkInputs, CvWork } from './components/Work';
-import { ProjectInputs, CvProject } from './components/Projects';
+import { ProjectInputs, CvProject, Details as ProjectDetails } from './components/Projects';
 
 import { useState } from 'react';
+import { v4 as uuid } from 'uuid';
 import './style/style.scss';
-
-import { TextInput } from './components/Inputs';
 
 export default function App() {
     const [headerDetails, setHeaderDetails] = useState({fullName: '', niche: ''});
     const [contactDetails, setContactDetails] = useState({email:'', contactNumber:'', address:''});
-    const [projectDetails, setProjectDetails] = useState({ project:'', description:'' });
+
+    const [projectDetails, setProjectDetails] = useState<ProjectDetails[]>([{ project:'', description:'', key: uuid() }]);
     const [workDetails, setWorkDetails] = useState({
         companyName: '',
         positionTitle:'',
@@ -28,18 +28,18 @@ export default function App() {
         endYear: ''
     });
 
-    function loadSampleDetails() {
-        const newHeaderDetails = { ...headerDetails, fullName: 'Nathan Drake', niche: 'Frontend Dev' };
-        const newContactDetails = {
-            ...contactDetails,
-            email: 'nate.drake@gmail.com',
-            contact: '(123) 456 7890',
-            address: '123 Main Street Apartment 4B Springfield, IL 62701'
-        }
+    // function loadSampleDetails() {
+    //     const newHeaderDetails = { ...headerDetails, fullName: 'Nathan Drake', niche: 'Frontend Dev' };
+    //     const newContactDetails = {
+    //         ...contactDetails,
+    //         email: 'nate.drake@gmail.com',
+    //         contact: '(123) 456 7890',
+    //         address: '123 Main Street Apartment 4B Springfield, IL 62701'
+    //     }
 
-        setHeaderDetails(newHeaderDetails);
-        setContactDetails(newContactDetails);
-    }
+    //     setHeaderDetails(newHeaderDetails);
+    //     setContactDetails(newContactDetails);
+    // }
 
     function handleHeaderDetails(value:string, key:string) {
         setHeaderDetails(prevDetails => ({ ...prevDetails, [key]:value}));
@@ -47,23 +47,23 @@ export default function App() {
 
     function handleContactDetails(value:string, key:string) {
         setContactDetails(prevDetails => ({ ...prevDetails, [key]:value }));
-        loadSampleDetails();
     }
 
     function handleWorkDetails(value:string, key:string) {
         setWorkDetails(prevDetails => ({ ...prevDetails, [key]:value }));
     }
 
-    function handleProjectDetails(value:string, key:string) {
-        setProjectDetails(prevDetails => ({ ...prevDetails, [key]:value }));
+    function handleProjectDetails(value:string, property: keyof ProjectDetails, key:string) {
+        const prevDetails = [...projectDetails]
+        const projectIndex = prevDetails.findIndex((proj) => proj.key === key);
+        prevDetails[projectIndex][property] = value;
+
+        setProjectDetails(prevDetails);
     }
     
     function handleEducationDetails(value:string, key:string) {
         setEducationDetails(prevDetails => ({ ...prevDetails, [key]:value }));
     }
-
-    const stateTest = [{one: 'one', two: 'two'}, {three: 'three', four: 'four'}];
-    console.log(stateTest);
 
     return (
         <>
@@ -72,9 +72,11 @@ export default function App() {
                 <ContactInputs details={contactDetails} handleChange={handleContactDetails} />
                 <EducationInputs details={educationDetails} handleChange={handleEducationDetails} />
                 <WorkInputs details={workDetails} handleChange={handleWorkDetails} />
-                <button>Add Work</button>
+                <button>Add Project</button>
 
-                <ProjectInputs details={projectDetails} handleChange={handleProjectDetails} />
+                {projectDetails.map((project) => (
+                    <ProjectInputs key={project.key} details={project} handleChange={handleProjectDetails} />
+                ))}
             </div>
 
             <div className='cv'>
@@ -87,18 +89,23 @@ export default function App() {
 
                 <div className="cv-main">
                     <CvWork details={workDetails} />
-                    <CvProject details={projectDetails} />
+                    {projectDetails.map((project) => (
+                        <CvProject key={project.key} details={project} />
+                    ))}
                 </div>
             </div>
 
-            <div className="playground">
+            {/* <div className="playground">
                 <TextInput 
                     label='State Test'
                     name='state-test'
                     value={stateTest[0]['one']}
                     onChange={(e: { target: { value: string; }; }) => handleWorkDetails(e.target.value, 'location')}
                 />
-            </div>
+            </div> */}
         </>
     );
 }
+
+//  project details mapping
+//  place key on every component from map
