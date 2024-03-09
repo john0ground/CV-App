@@ -1,12 +1,13 @@
 import { TextInput } from "./Inputs";
-type ChangeHandler = (value:string, key:string) => void;
-interface Details {
+type ChangeHandler = (value:string, property: keyof Details, key:string) => void;
+export interface Details {
     companyName: string,
     positionTitle: string,
     startDate: string,
     endDate: string,
     location: string,
-    description: string
+    description: string,
+    key: string
 }
 
 interface WorkInputsProps {
@@ -18,7 +19,7 @@ interface CvWorkProps {
     details: Details
 }
 
-function WorkInputs({ details, handleChange }: WorkInputsProps) {
+export function WorkInputs({ details, handleChange }: WorkInputsProps) {
     return (
         <section className="work-inputs">
             <div className="input-row">
@@ -26,7 +27,8 @@ function WorkInputs({ details, handleChange }: WorkInputsProps) {
                     label='Company Name'
                     name='company-name'
                     value={details.companyName}
-                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'companyName')}
+                    id = {details.key}
+                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'companyName', details.key)}
                 />
             </div>
             <div className="input-row">
@@ -34,7 +36,8 @@ function WorkInputs({ details, handleChange }: WorkInputsProps) {
                     label='Position Title'
                     name='position-title'
                     value={details.positionTitle}
-                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'positionTitle')}
+                    id = {details.key}
+                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'positionTitle', details.key)}
                 />
             </div>
             <div className="input-row">
@@ -42,7 +45,8 @@ function WorkInputs({ details, handleChange }: WorkInputsProps) {
                     label='Start Date'
                     name='start-date'
                     value={details.startDate}
-                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'startDate')}
+                    id={details.key}
+                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'startDate', details.key)}
                 />
             </div>
             <div className="input-row">
@@ -50,7 +54,8 @@ function WorkInputs({ details, handleChange }: WorkInputsProps) {
                     label='End Date'
                     name='end-date'
                     value={details.endDate}
-                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'endDate')}
+                    id = {details.key}
+                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'endDate', details.key)}
                 />
             </div>
             <div className="input-row">
@@ -58,7 +63,8 @@ function WorkInputs({ details, handleChange }: WorkInputsProps) {
                     label='Location'
                     name='location'
                     value={details.location}
-                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'location')}
+                    id = {details.key}
+                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'location', details.key)}
                 />
             </div>
             <div className="input-row">
@@ -66,14 +72,15 @@ function WorkInputs({ details, handleChange }: WorkInputsProps) {
                     label='Description'
                     name='description'
                     value={details.description}
-                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'description')}
+                    id = {details.key}
+                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'description', details.key)}
                 />
             </div>
         </section>
     );
 }
 
-function CvWork({ details }: CvWorkProps) {
+export function CvWork({ details }: CvWorkProps) {
     return (
         <section>
             <span>{ details.companyName }</span>
@@ -85,5 +92,3 @@ function CvWork({ details }: CvWorkProps) {
         </section>
     );
 }
-
-export { WorkInputs, CvWork }

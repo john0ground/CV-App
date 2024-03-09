@@ -1,6 +1,6 @@
 import { TextInput } from "./Inputs";
 type ChangeHandler = (value:string, key:string) => void;
-interface Details { fullName:string, niche:string }
+interface Details { fullName:string, niche:string, key:string }
 
 interface HeaderInputsProps {
     details: Details;
@@ -19,6 +19,7 @@ function HeaderInputs({ details, handleChange }: HeaderInputsProps) {
                     label='Full Name'
                     name='fullName'
                     value={details.fullName}
+                    id={details.key}
                     onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'fullName')}
                 />
             </div>
@@ -27,6 +28,7 @@ function HeaderInputs({ details, handleChange }: HeaderInputsProps) {
                     label='Niche'
                     name='niche'
                     value={details.niche}
+                    id={details.key}
                     onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'niche')}
                 />
             </div>

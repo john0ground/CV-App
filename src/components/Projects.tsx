@@ -19,6 +19,7 @@ export function ProjectInputs({details, handleChange}: ProjectInputsProps) {
                     label='Project'
                     name='project'
                     value={ details.project }
+                    id = { details.key }
                     onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'project', details.key)}
                 />
             </div>
@@ -27,6 +28,7 @@ export function ProjectInputs({details, handleChange}: ProjectInputsProps) {
                     label='Description'
                     name='project-description'
                     value = { details.description } 
+                    id = {details.key}
                     onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'description', details.key)}
                 />
             </div>

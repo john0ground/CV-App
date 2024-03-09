@@ -1,10 +1,11 @@
 import { TextInput } from "./Inputs";
-type ChangeHandler = (value:string, key:string) => void;
-interface Details { 
+type ChangeHandler = (value:string, property: keyof Details, key:string) => void;
+export interface Details { 
     school: string,
     field: string,
     startYear: string,
     endYear: string
+    key: string
 }
 
 interface EducationInputsProps {
@@ -16,7 +17,7 @@ interface CvEducationProps {
     details: Details
 }
 
-function EducationInputs({ details, handleChange }: EducationInputsProps) {
+export function EducationInputs({ details, handleChange }: EducationInputsProps) {
     return (
         <section className="education-inputs">
             <div className="input-row">
@@ -24,7 +25,8 @@ function EducationInputs({ details, handleChange }: EducationInputsProps) {
                     label='School'
                     name='school'
                     value={details.school}
-                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'school')}
+                    id={details.key}
+                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'school', details.key)}
                 />
             </div>
             <div className="input-row">
@@ -32,7 +34,8 @@ function EducationInputs({ details, handleChange }: EducationInputsProps) {
                     label='Field'
                     name='field'
                     value={details.field}
-                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'field')}
+                    id={details.key}
+                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'field', details.key)}
                 />
             </div>
             <div className="input-row">
@@ -40,7 +43,8 @@ function EducationInputs({ details, handleChange }: EducationInputsProps) {
                     label='Start Year'
                     name='start-year'
                     value={details.startYear}
-                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'startYear')}
+                    id={details.key}
+                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'startYear', details.key)}
                 />
             </div>
             <div className="input-row">
@@ -48,14 +52,15 @@ function EducationInputs({ details, handleChange }: EducationInputsProps) {
                     label='End Year'
                     name='end-year'
                     value={details.endYear}
-                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'endYear')}
+                    id={details.key}
+                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'endYear', details.key)}
                 />
             </div>
         </section>
     );
 }
 
-function CvEducation({ details }: CvEducationProps) {
+export function CvEducation({ details }: CvEducationProps) {
     return (
         <header>
             <h3>{details.school}</h3>
@@ -65,5 +70,3 @@ function CvEducation({ details }: CvEducationProps) {
         </header>
     );
 }
-
-export { EducationInputs, CvEducation }

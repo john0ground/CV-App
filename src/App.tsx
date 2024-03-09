@@ -1,33 +1,58 @@
 import { CvHeader, HeaderInputs } from './components/Header';
 import { CvContact, ContactInputs } from './components/Contact';
-import { CvEducation, EducationInputs } from './components/Education';
-import { WorkInputs, CvWork } from './components/Work';
+import { CvEducation, EducationInputs, Details as EducationDetails } from './components/Education';
+import { WorkInputs, CvWork, Details as WorkDetails } from './components/Work';
 import { ProjectInputs, CvProject, Details as ProjectDetails } from './components/Projects';
 
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import './style/style.scss';
 
+const headerData = {
+    fullName:'',
+    niche:'',
+    key: uuid()
+}
+
+const contactData = {
+    email:'', 
+    contactNumber:'', 
+    address:'',
+    key: uuid()
+}
+
+const projectData = { 
+    project:'', 
+    description:'', 
+    key: uuid() 
+}
+
+const workData = {
+    companyName: '',
+    positionTitle:'',
+    startDate:'',
+    endDate:'',
+    location: '',
+    description: '',
+    key: uuid()
+}
+
+const educationData = {
+    school: '',
+    field: '',
+    startYear: '',
+    endYear: '',
+    key: uuid()
+}
+
 export default function App() {
-    const [headerDetails, setHeaderDetails] = useState({fullName: '', niche: ''});
-    const [contactDetails, setContactDetails] = useState({email:'', contactNumber:'', address:''});
+    const [headerDetails, setHeaderDetails] = useState({...headerData});
+    const [contactDetails, setContactDetails] = useState({...contactData});
 
-    const [projectDetails, setProjectDetails] = useState<ProjectDetails[]>([{ project:'', description:'', key: uuid() }]);
-    const [workDetails, setWorkDetails] = useState({
-        companyName: '',
-        positionTitle:'',
-        startDate:'',
-        endDate:'',
-        location: '',
-        description: ''
-    });
-    const [educationDetails, setEducationDetails] = useState({
-        school: '',
-        field: '',
-        startYear: '',
-        endYear: ''
-    });
-
+    const [projectDetails, setProjectDetails] = useState<ProjectDetails[]>([{ ...projectData }]);
+    const [workDetails, setWorkDetails] = useState<WorkDetails[]>([{ ...workData }]);
+    const [educationDetails, setEducationDetails] = useState<EducationDetails[]>([{ ...educationData }]);
+    
     // function loadSampleDetails() {
     //     const newHeaderDetails = { ...headerDetails, fullName: 'Nathan Drake', niche: 'Frontend Dev' };
     //     const newContactDetails = {
@@ -49,20 +74,30 @@ export default function App() {
         setContactDetails(prevDetails => ({ ...prevDetails, [key]:value }));
     }
 
-    function handleWorkDetails(value:string, key:string) {
-        setWorkDetails(prevDetails => ({ ...prevDetails, [key]:value }));
+    function handleWorkDetails(value:string, property: keyof WorkDetails, key:string) {
+        const prevDetails = [...workDetails]
+        const workIndex = prevDetails.findIndex((work) => work.key === key);
+        prevDetails[workIndex][property] = value;
+        setWorkDetails(prevDetails);
     }
 
     function handleProjectDetails(value:string, property: keyof ProjectDetails, key:string) {
         const prevDetails = [...projectDetails]
         const projectIndex = prevDetails.findIndex((proj) => proj.key === key);
         prevDetails[projectIndex][property] = value;
-
         setProjectDetails(prevDetails);
     }
     
-    function handleEducationDetails(value:string, key:string) {
-        setEducationDetails(prevDetails => ({ ...prevDetails, [key]:value }));
+    function handleEducationDetails(value:string, property: keyof EducationDetails, key:string) {
+        const prevDetails = [...educationDetails]
+        const educationIndex = prevDetails.findIndex((education) => education.key === key);
+        prevDetails[educationIndex][property] = value;
+        setEducationDetails(prevDetails);
+    }
+
+    function addEducation() {
+        const newEducationDetails = [...educationDetails, {...educationData, key:uuid()}];
+        setEducationDetails(newEducationDetails);
     }
 
     return (
@@ -70,9 +105,15 @@ export default function App() {
             <div className='editor'>
                 <HeaderInputs details={headerDetails} handleChange={handleHeaderDetails} />
                 <ContactInputs details={contactDetails} handleChange={handleContactDetails} />
-                <EducationInputs details={educationDetails} handleChange={handleEducationDetails} />
-                <WorkInputs details={workDetails} handleChange={handleWorkDetails} />
-                <button>Add Project</button>
+
+                {educationDetails.map((education) => (
+                    <EducationInputs key={education.key} details={education} handleChange={handleEducationDetails} />
+                ))}
+
+                {workDetails.map((work) => (
+                    <WorkInputs key={work.key} details={work} handleChange={handleWorkDetails} />
+                ))}
+                <button onClick={addEducation}>Add Education</button>
 
                 {projectDetails.map((project) => (
                     <ProjectInputs key={project.key} details={project} handleChange={handleProjectDetails} />
@@ -84,11 +125,15 @@ export default function App() {
 
                 <div className="cv-aside">
                     <CvContact details={contactDetails} />
-                    <CvEducation details={educationDetails} />
+                    {educationDetails.map((education) => (
+                        <CvEducation key={education.key} details={education} />
+                    ))}
                 </div>
 
                 <div className="cv-main">
-                    <CvWork details={workDetails} />
+                    {workDetails.map((work) => (
+                        <CvWork key={work.key} details={work} />
+                    ))}
                     {projectDetails.map((project) => (
                         <CvProject key={project.key} details={project} />
                     ))}
@@ -107,5 +152,5 @@ export default function App() {
     );
 }
 
-//  project details mapping
-//  place key on every component from map
+// id for single data components
+// structure for load sample vs current edit
