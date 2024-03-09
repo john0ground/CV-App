@@ -3,47 +3,18 @@ import { CvContact, ContactInputs } from './components/Contact';
 import { CvEducation, EducationInputs, Details as EducationDetails } from './components/Education';
 import { WorkInputs, CvWork, Details as WorkDetails } from './components/Work';
 import { ProjectInputs, CvProject, Details as ProjectDetails } from './components/Projects';
+import {
+    headerData,
+    contactData,
+    projectData,
+    workData,
+    educationData
+} from './data/cvData';
 
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import './style/style.scss';
 
-const headerData = {
-    fullName:'',
-    niche:'',
-    key: uuid()
-}
-
-const contactData = {
-    email:'', 
-    contactNumber:'', 
-    address:'',
-    key: uuid()
-}
-
-const projectData = { 
-    project:'', 
-    description:'', 
-    key: uuid() 
-}
-
-const workData = {
-    companyName: '',
-    positionTitle:'',
-    startDate:'',
-    endDate:'',
-    location: '',
-    description: '',
-    key: uuid()
-}
-
-const educationData = {
-    school: '',
-    field: '',
-    startYear: '',
-    endYear: '',
-    key: uuid()
-}
 
 export default function App() {
     const [headerDetails, setHeaderDetails] = useState({...headerData});
@@ -152,5 +123,4 @@ export default function App() {
     );
 }
 
-// id for single data components
 // structure for load sample vs current edit
