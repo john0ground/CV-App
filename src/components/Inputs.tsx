@@ -2,17 +2,18 @@ interface InputProps {
     label: string;
     name: string;
     value: string;
+    id: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function TextInput({label, name, value, onChange}: InputProps) {
+function TextInput({label, name, value, id, onChange}: InputProps) {
     return (
         <>
-            <label htmlFor={'input-' + name}>{label}</label>
+            <label htmlFor={name + '-' + id}>{label}</label>
             <input 
                 type="text" 
                 name={name} 
-                id={'input-' + name}
+                id={name + '-' + id}
                 value={value} 
                 onChange={ onChange }
             />
@@ -21,5 +22,3 @@ function TextInput({label, name, value, onChange}: InputProps) {
 }
 
 export { TextInput }
-
-//  id for
