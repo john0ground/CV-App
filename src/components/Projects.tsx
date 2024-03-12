@@ -1,10 +1,10 @@
 import { TextInput } from "./Inputs";
-type ChangeHandler = (value:string, property: keyof Details, key:string) => void;
+export type ProjectHandler = (value:string, property: keyof Details, key:string) => void;
 export interface Details { project:string, description:string, key:string }
 
 interface ProjectInputsProps {
     details: Details;
-    handleChange: ChangeHandler;
+    handleChange: ProjectHandler;
 }
 
 interface CvProjectProps {

@@ -8,12 +8,12 @@
 
 body {
     background: #EEF3F6;
+    font-family: sans-serif;
 }
 
 section {
     border: 1px solid rgba(0, 0, 255, 0.459);
-    width: fit-content;
-    padding: 2rem;
+    padding: 1rem;
 }
 
 input {
@@ -26,6 +26,44 @@ input {
     margin: 0.3rem 0 1rem 0;
 }
 
-.content, .editor {
+.cv, .editor {
     border: 1px solid rgba(0, 128, 0, 0.452);
+}
+
+.cv {
+    display: grid;
+    grid-template-columns: 33% auto;
+
+    h2 {
+        font-size: 1rem;
+    }
+
+    span {
+        display: block;
+        overflow-wrap: break-word;
+    }
+
+    header {
+        background: #36383E;
+        width: 100%;
+        color: #fff;
+        min-height: 7rem;
+        grid-column: 1 / 3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .cv-aside {
+        background: #EEE8E3;
+        min-height: 30rem;
+        padding: 5px;
+        font-size: 0.8rem;
+    }
+}
+
+.playground {
+    background: burlywood;
 }

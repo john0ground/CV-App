@@ -1,17 +1,17 @@
 import { TextInput } from "./Inputs";
-type ChangeHandler = (value:string, key:string) => void;
-interface Details { email:string, contactNumber:string, address:string, key:string }
+export type ContactHandler = (value:string, key:string) => void;
+export interface Details { email:string, contactNumber:string, address:string, key:string }
 
 interface ContactInputsProps {
     details: Details;
-    handleChange: ChangeHandler;
+    handleChange: ContactHandler;
 }
 
 interface CvContactProps {
     details: Details
 }
 
-function ContactInputs({ details, handleChange }: ContactInputsProps) {
+export function ContactInputs({ details, handleChange }: ContactInputsProps) {
     return (
         <section className="contact-inputs">
             <div className="input-row">
@@ -46,7 +46,7 @@ function ContactInputs({ details, handleChange }: ContactInputsProps) {
 }
 
 
-function CvContact( { details }: CvContactProps) {
+export function CvContact( { details }: CvContactProps) {
     return(
         <section>
             <h2>Contact Details</h2>
@@ -56,5 +56,3 @@ function CvContact( { details }: CvContactProps) {
         </section>
     );
 }
-
-export { ContactInputs, CvContact }

@@ -1,5 +1,5 @@
 import { TextInput } from "./Inputs";
-type ChangeHandler = (value:string, property: keyof Details, key:string) => void;
+export type WorkHandler = (value:string, property: keyof Details, key:string) => void;
 export interface Details {
     companyName: string,
     positionTitle: string,
@@ -12,7 +12,7 @@ export interface Details {
 
 interface WorkInputsProps {
     details: Details;
-    handleChange: ChangeHandler;
+    handleChange: WorkHandler;
 }
 
 interface CvWorkProps {

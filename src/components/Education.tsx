@@ -1,5 +1,5 @@
 import { TextInput } from "./Inputs";
-type ChangeHandler = (value:string, property: keyof Details, key:string) => void;
+export type EducationHandler = (value:string, property: keyof Details, key:string) => void;
 export interface Details { 
     school: string,
     field: string,
@@ -10,7 +10,7 @@ export interface Details {
 
 interface EducationInputsProps {
     details: Details;
-    handleChange: ChangeHandler;
+    handleChange: EducationHandler;
 }
 
 interface CvEducationProps {

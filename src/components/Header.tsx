@@ -1,10 +1,10 @@
 import { TextInput } from "./Inputs";
-type ChangeHandler = (value:string, key:string) => void;
-interface Details { fullName:string, niche:string, key:string }
+export type HeaderHandler = (value:string, key:string) => void;
+export interface Details { fullName:string, niche:string, key:string }
 
 interface HeaderInputsProps {
     details: Details;
-    handleChange: ChangeHandler;
+    handleChange: HeaderHandler;
 }
 
 interface CvHeaderProps {
