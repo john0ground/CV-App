@@ -1,5 +1,3 @@
-import { Details as HeaderDetails } from './components/Header';
-import { Details as ContactDetails } from './components/Contact'
 import { Details as EducationDetails } from './components/Education';
 import { Details as WorkDetails } from './components/Work';
 import { Details as ProjectDetails } from './components/Projects';
@@ -14,30 +12,13 @@ import {
 
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
-// import './../style/style.scss';
 
 const userData = {
     header: { ...headerData },
     contact: { ...contactData },
     education: [{ ...educationData }],
     project: [{ ...projectData }],
-    work: [{ ...workData }],
-
-    updateHeader: function(newData: HeaderDetails) {
-        this.header = { ...newData }
-    },
-    updateContact: function(newData: ContactDetails) {
-        this.contact = { ...newData }
-    },
-    updateEducation: function(newData: EducationDetails[]) {
-        this.education = [ ...newData ]
-    },
-    updateProject: function(newData: ProjectDetails[]) {
-        this.project = [ ...newData ]
-    },
-    updateWork: function(newData: WorkDetails[]) {
-        this.work = [ ...newData ]
-    }
+    work: [{ ...workData }]
 }
 
 const sampleData = {}
@@ -58,49 +39,48 @@ const sampleData = {}
 export default function App() {
     const [currentCvData, setCurrentCvData] = useState(userData);
 
-    const [headerDetails, setHeaderDetails] = useState(userData.header);
-    const [contactDetails, setContactDetails] = useState(userData.contact);
-    const [educationDetails, setEducationDetails] = useState<EducationDetails[]>(userData.education);
-    const [projectDetails, setProjectDetails] = useState<ProjectDetails[]>(userData.project);
-    const [workDetails, setWorkDetails] = useState<WorkDetails[]>(userData.work);
-
     function handleHeaderDetails(value:string, key:string) {
-        const prevDetails = { ...headerDetails, [key]:value };
-        currentCvData.updateHeader(prevDetails);
-        setHeaderDetails(prevDetails);
+        const newHeaderDetails = { ...currentCvData.header, [key]:value };
+        setCurrentCvData(prevData => (
+            {...prevData, header:newHeaderDetails}
+        ));
     }
 
     function handleContactDetails(value:string, key:string) {
-        const prevDetails = { ...contactDetails, [key]:value };
-        currentCvData.updateContact(prevDetails);
-        setContactDetails(prevDetails);
+        const newContactDetails = { ...currentCvData.contact, [key]:value };
+        setCurrentCvData(prevData => (
+            {...prevData, contact:newContactDetails}
+        ));
     }
 
     function handleEducationDetails(value:string, property: keyof EducationDetails, key:string) {
-        const prevDetails = [...educationDetails]
-        const educationIndex = prevDetails.findIndex((education) => education.key === key);
-        prevDetails[educationIndex][property] = value;
+        const newEducationDetails = [...currentCvData.education];
+        const educationIndex = newEducationDetails.findIndex((education) => education.key === key);
+        newEducationDetails[educationIndex][property] = value;
 
-        currentCvData.updateEducation(prevDetails);
-        setEducationDetails(prevDetails);
+        setCurrentCvData(prevData => (
+            {...prevData, education:newEducationDetails}
+        ));
     }
 
     function handleProjectDetails(value:string, property: keyof ProjectDetails, key:string) {
-        const prevDetails = [...projectDetails]
-        const projectIndex = prevDetails.findIndex((proj) => proj.key === key);
-        prevDetails[projectIndex][property] = value;
+        const newProjectDetails = [...currentCvData.project];
+        const projectIndex = newProjectDetails.findIndex((proj) => proj.key === key);
+        newProjectDetails[projectIndex][property] = value;
 
-        currentCvData.updateProject(prevDetails);
-        setProjectDetails(prevDetails);
+       setCurrentCvData(prevData => (
+            {...prevData, project:newProjectDetails}
+       ));
     }
 
     function handleWorkDetails(value:string, property: keyof WorkDetails, key:string) {
-        const prevDetails = [...workDetails]
-        const workIndex = prevDetails.findIndex((work) => work.key === key);
-        prevDetails[workIndex][property] = value;
+        const newWorkDetails = [...currentCvData.work];
+        const workIndex = newWorkDetails.findIndex((work) => work.key === key);
+        newWorkDetails[workIndex][property] = value;
 
-        currentCvData.updateWork(prevDetails);
-        setWorkDetails(prevDetails);
+        setCurrentCvData(prevData => (
+            {...prevData, work:newWorkDetails}
+        ));
     }
 
     return (<Cv 
@@ -110,13 +90,13 @@ export default function App() {
                 handleProject = {handleProjectDetails}
                 handleWork = {handleWorkDetails}
 
-                headerDetails = {headerDetails}
-                contactDetails = {contactDetails}
-                educationDetails = {educationDetails}
-                projectDetails = {projectDetails} 
-                workDetails = {workDetails}
+                headerDetails = {currentCvData.header}
+                contactDetails = {currentCvData.contact}
+                educationDetails = {currentCvData.education}
+                projectDetails = {currentCvData.project} 
+                workDetails = {currentCvData.work}
             />)
 }
 
-// avoid state duplication
+// adding cv component
 // different input types
