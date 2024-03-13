@@ -1,5 +1,6 @@
 import { TextInput } from "./Inputs";
 export type ProjectHandler = (value:string, property: keyof Details, key:string) => void;
+export type AddProject = () => void;
 export interface Details { project:string, description:string, key:string }
 
 interface ProjectInputsProps {

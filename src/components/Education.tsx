@@ -1,5 +1,6 @@
 import { TextInput } from "./Inputs";
 export type EducationHandler = (value:string, property: keyof Details, key:string) => void;
+export type AddEducation = () => void;
 export interface Details { 
     school: string,
     field: string,

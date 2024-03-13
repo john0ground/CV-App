@@ -1,13 +1,9 @@
 import { CvHeader, HeaderInputs, HeaderHandler, Details as HeaderDetails } from './Header';
 import { CvContact, ContactInputs, ContactHandler, Details as ContactDetails } from './Contact';
-import { CvEducation, EducationInputs, EducationHandler, Details as EducationDetails } from './Education';
-import { WorkInputs, CvWork, WorkHandler, Details as WorkDetails } from './Work';
-import { ProjectInputs, CvProject, ProjectHandler, Details as ProjectDetails } from './Projects';
-import {
-    educationData
-} from '../data/cvData';
+import { CvEducation, EducationInputs, AddEducation, EducationHandler, Details as EducationDetails } from './Education';
+import { WorkInputs, CvWork, WorkHandler, AddWork, Details as WorkDetails } from './Work';
+import { ProjectInputs, CvProject, ProjectHandler, AddProject, Details as ProjectDetails } from './Projects';
 
-import { v4 as uuid } from 'uuid';
 import './../style/style.scss';
 
 interface CvProps {
@@ -21,6 +17,10 @@ interface CvProps {
     educationDetails: EducationDetails[];
     projectDetails: ProjectDetails[];
     workDetails: WorkDetails[];
+
+    addEducation: AddEducation;
+    addProject: AddProject;
+    addWork: AddWork;
 }
 
 export default function Cv({ 
@@ -33,13 +33,11 @@ export default function Cv({
         contactDetails,
         educationDetails,
         projectDetails,
-        workDetails
+        workDetails,
+        addEducation,
+        addProject,
+        addWork
     }: CvProps) {
-
-    function addEducation() {
-        const newEducationDetails = [...educationDetails, {...educationData, key:uuid()}];
-        setEducationDetails(newEducationDetails);
-    }
 
     return (
         <>
@@ -50,15 +48,17 @@ export default function Cv({
                 {educationDetails.map((education) => (
                     <EducationInputs key={education.key} details={education} handleChange={handleEducation} />
                 ))}
+                <button onClick={addEducation}>Add Education</button>
 
                 {workDetails.map((work) => (
                     <WorkInputs key={work.key} details={work} handleChange={handleWork} />
                 ))}
-                <button onClick={addEducation}>Add Education</button>
+                <button onClick={addWork}>Add Work</button>
 
                 {projectDetails.map((project) => (
                     <ProjectInputs key={project.key} details={project} handleChange={handleProject} />
                 ))}
+                <button onClick={addProject}>Add Project</button>
             </div>
 
             <div className='cv'>

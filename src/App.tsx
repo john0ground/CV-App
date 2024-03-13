@@ -83,6 +83,27 @@ export default function App() {
         ));
     }
 
+    function addEducation() {
+        const newEducationDetails = [...currentCvData.education, {...educationData, key:uuid()}];
+        setCurrentCvData(prevData => (
+            {...prevData, education:newEducationDetails}
+        ));
+    }
+
+    function addProject() {
+        const newProjectDetails = [...currentCvData.project, {...projectData, key:uuid()}];
+        setCurrentCvData(prevData => (
+            {...prevData, project:newProjectDetails}
+        ));
+    }
+
+    function addWork() {
+        const newWorkDetails = [...currentCvData.work, {...workData, key:uuid()}];
+        setCurrentCvData(prevData => (
+            {...prevData, work:newWorkDetails}
+        ));
+    }
+
     return (<Cv 
                 handleHeader= {handleHeaderDetails}
                 handleContact = {handleContactDetails}
@@ -95,8 +116,11 @@ export default function App() {
                 educationDetails = {currentCvData.education}
                 projectDetails = {currentCvData.project} 
                 workDetails = {currentCvData.work}
+
+                addEducation = {addEducation}
+                addProject = {addProject}
+                addWork = {addWork}
             />)
 }
 
-// adding cv component
 // different input types

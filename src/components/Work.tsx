@@ -1,5 +1,6 @@
 import { TextInput } from "./Inputs";
 export type WorkHandler = (value:string, property: keyof Details, key:string) => void;
+export type AddWork = () => void;
 export interface Details {
     companyName: string,
     positionTitle: string,
