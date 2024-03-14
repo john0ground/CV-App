@@ -1,5 +1,6 @@
 import { Details as HeaderDetails } from './components/Header';
 import { Details as ContactDetails } from './components/Contact';
+import { Details as SummaryDetails } from './components/Summary';
 import { Details as EducationDetails } from './components/Education';
 import { Details as WorkDetails } from './components/Work';
 import { Details as ProjectDetails } from './components/Projects';
@@ -8,6 +9,7 @@ import Cv from './components/CV';
 import {
     headerData,
     contactData,
+    summaryData,
     projectData,
     workData,
     educationData,
@@ -19,6 +21,7 @@ import { v4 as uuid } from 'uuid';
 interface CvData {
     header: HeaderDetails;
     contact: ContactDetails;
+    summary: SummaryDetails;
     education: EducationDetails[];
     project: ProjectDetails[];
     work: WorkDetails[];
@@ -27,6 +30,7 @@ interface CvData {
 
 const userData:CvData = {
     header: { ...headerData },
+    summary: { ...summaryData },
     contact: { ...contactData },
     education: [{ ...educationData }],
     project: [{ ...projectData }],
@@ -63,6 +67,13 @@ export default function App() {
         const newContactDetails = { ...currentCvData.contact, [key]:value };
         setCurrentCvData(prevData => (
             {...prevData, contact:newContactDetails}
+        ));
+    }
+
+    function handleSummary(value:string) {
+        const newSummary = { ...currentCvData.summary, summary:value };
+        setCurrentCvData(prevData => (
+            {...prevData, summary:newSummary}
         ));
     }
 
@@ -127,12 +138,14 @@ export default function App() {
     return (<Cv 
                 handleHeader= {handleHeaderDetails}
                 handleContact = {handleContactDetails}
+                handleSummary={handleSummary}
                 handleEducation = {handleEducationDetails}
                 handleProject = {handleProjectDetails}
                 handleWork = {handleWorkDetails}
 
                 headerDetails = {currentCvData.header}
                 contactDetails = {currentCvData.contact}
+                summaryDetails= {currentCvData.summary}
                 educationDetails = {currentCvData.education}
                 projectDetails = {currentCvData.project} 
                 workDetails = {currentCvData.work}

@@ -1,5 +1,6 @@
 import { CvHeader, HeaderInputs, HeaderHandler, Details as HeaderDetails } from './Header';
 import { CvContact, ContactInputs, ContactHandler, Details as ContactDetails } from './Contact';
+import { CvSummary, SummaryInput, SummaryHandler, Details as SummaryDetails } from './Summary';
 import { CvEducation, EducationInputs, AddEducation, EducationHandler, Details as EducationDetails } from './Education';
 import { WorkInputs, CvWork, WorkHandler, AddWork, Details as WorkDetails } from './Work';
 import { ProjectInputs, CvProject, ProjectHandler, AddProject, Details as ProjectDetails } from './Projects';
@@ -10,12 +11,14 @@ import './../style/style.scss';
 interface CvProps {
     handleHeader: HeaderHandler;
     handleContact: ContactHandler;
+    handleSummary: SummaryHandler;
     handleEducation: EducationHandler;
     handleProject: ProjectHandler;
     handleWork: WorkHandler;
 
     headerDetails: HeaderDetails;
     contactDetails: ContactDetails;
+    summaryDetails: SummaryDetails;
     educationDetails: EducationDetails[];
     projectDetails: ProjectDetails[];
     workDetails: WorkDetails[];
@@ -30,12 +33,14 @@ interface CvProps {
 export default function Cv({ 
         handleHeader,
         handleContact,
+        handleSummary,
         handleEducation,
         handleProject, 
         handleWork,
 
         headerDetails,
         contactDetails,
+        summaryDetails,
         educationDetails,
         projectDetails,
         workDetails,
@@ -51,6 +56,7 @@ export default function Cv({
         <>
             <div className='editor'>
                 <HeaderInputs details={headerDetails} handleChange={handleHeader} />
+                <SummaryInput details={summaryDetails} handleChange={handleSummary} />
                 <ContactInputs details={contactDetails} handleChange={handleContact} />
 
                 {educationDetails.map((education) => (
@@ -85,6 +91,7 @@ export default function Cv({
                 </div>
 
                 <div className="cv-main">
+                    <CvSummary details={summaryDetails} />
                     {workDetails.map((work) => (
                         <CvWork key={work.key} details={work} />
                     ))}

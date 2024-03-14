@@ -6,6 +6,11 @@ const headerData = {
     key: uuid()
 }
 
+const summaryData = {
+    summary:'',
+    key: uuid()
+}
+
 const contactData = {
     email:'', 
     contactNumber:'', 
@@ -45,6 +50,7 @@ const skillData = {
 export {
     headerData,
     contactData,
+    summaryData,
     projectData,
     workData,
     educationData,
