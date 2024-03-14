@@ -37,10 +37,16 @@ const educationData = {
     key: uuid()
 }
 
+const skillData = {
+    skill: '',
+    key: uuid()
+}
+
 export {
     headerData,
     contactData,
     projectData,
     workData,
-    educationData
+    educationData,
+    skillData
 }

@@ -1,24 +1,37 @@
+import { Details as HeaderDetails } from './components/Header';
+import { Details as ContactDetails } from './components/Contact';
 import { Details as EducationDetails } from './components/Education';
 import { Details as WorkDetails } from './components/Work';
 import { Details as ProjectDetails } from './components/Projects';
+import { Details as SkillDetails } from './components/Skills';
 import Cv from './components/CV';
 import {
     headerData,
     contactData,
     projectData,
     workData,
-    educationData
+    educationData,
 } from './data/cvData';
 
 import { useState } from 'react';
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from 'uuid';  
 
-const userData = {
+interface CvData {
+    header: HeaderDetails;
+    contact: ContactDetails;
+    education: EducationDetails[];
+    project: ProjectDetails[];
+    work: WorkDetails[];
+    skills: SkillDetails[];
+}
+
+const userData:CvData = {
     header: { ...headerData },
     contact: { ...contactData },
     education: [{ ...educationData }],
     project: [{ ...projectData }],
-    work: [{ ...workData }]
+    work: [{ ...workData }],
+    skills: []
 }
 
 const sampleData = {}
@@ -104,6 +117,13 @@ export default function App() {
         ));
     }
 
+    function addSkill(value:string) {
+        const newSkillDetails = [...currentCvData.skills, {skill:value, key:uuid()}];
+        setCurrentCvData(prevData => (
+            {...prevData, skills:newSkillDetails}
+        ));
+    }
+
     return (<Cv 
                 handleHeader= {handleHeaderDetails}
                 handleContact = {handleContactDetails}
@@ -116,10 +136,12 @@ export default function App() {
                 educationDetails = {currentCvData.education}
                 projectDetails = {currentCvData.project} 
                 workDetails = {currentCvData.work}
+                skillDetails={currentCvData.skills}
 
                 addEducation = {addEducation}
                 addProject = {addProject}
                 addWork = {addWork}
+                addSkill = {addSkill}
             />)
 }
 

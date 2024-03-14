@@ -3,6 +3,7 @@ import { CvContact, ContactInputs, ContactHandler, Details as ContactDetails } f
 import { CvEducation, EducationInputs, AddEducation, EducationHandler, Details as EducationDetails } from './Education';
 import { WorkInputs, CvWork, WorkHandler, AddWork, Details as WorkDetails } from './Work';
 import { ProjectInputs, CvProject, ProjectHandler, AddProject, Details as ProjectDetails } from './Projects';
+import { SkillInput, CvSkill, AddSkill, Details as SkillDetails } from './Skills';
 
 import './../style/style.scss';
 
@@ -12,15 +13,18 @@ interface CvProps {
     handleEducation: EducationHandler;
     handleProject: ProjectHandler;
     handleWork: WorkHandler;
+
     headerDetails: HeaderDetails;
     contactDetails: ContactDetails;
     educationDetails: EducationDetails[];
     projectDetails: ProjectDetails[];
     workDetails: WorkDetails[];
+    skillDetails: SkillDetails[];
 
     addEducation: AddEducation;
     addProject: AddProject;
     addWork: AddWork;
+    addSkill: AddSkill;
 }
 
 export default function Cv({ 
@@ -29,14 +33,18 @@ export default function Cv({
         handleEducation,
         handleProject, 
         handleWork,
+
         headerDetails,
         contactDetails,
         educationDetails,
         projectDetails,
         workDetails,
+        skillDetails,
+
         addEducation,
         addProject,
-        addWork
+        addWork,
+        addSkill
     }: CvProps) {
 
     return (
@@ -59,6 +67,8 @@ export default function Cv({
                     <ProjectInputs key={project.key} details={project} handleChange={handleProject} />
                 ))}
                 <button onClick={addProject}>Add Project</button>
+
+                <SkillInput addSkill={addSkill} />
             </div>
 
             <div className='cv'>
@@ -68,6 +78,9 @@ export default function Cv({
                     <CvContact details={contactDetails} />
                     {educationDetails.map((education) => (
                         <CvEducation key={education.key} details={education} />
+                    ))}
+                    {skillDetails.map(skill => (
+                        <CvSkill key={skill.key} details={skill} />
                     ))}
                 </div>
 
