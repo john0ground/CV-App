@@ -33,6 +33,7 @@ interface CvProps {
 export default function Cv({ 
         handleHeader,
         handleContact,
+        toggleActive,
         handleSummary,
         handleEducation,
         handleProject, 
@@ -55,26 +56,37 @@ export default function Cv({
     return (
         <>
             <div className='editor'>
-                <HeaderInputs details={headerDetails} handleChange={handleHeader} />
-                <SummaryInput details={summaryDetails} handleChange={handleSummary} />
-                <ContactInputs details={contactDetails} handleChange={handleContact} />
+                <div className="editor-header">
+                    <h2>Header</h2>
+                    <HeaderInputs details={headerDetails} handleChange={handleHeader} />
+                </div>
 
-                {educationDetails.map((education) => (
-                    <EducationInputs key={education.key} details={education} handleChange={handleEducation} />
-                ))}
-                <button onClick={addEducation}>Add Education</button>
+                <div className="editor-aside">
+                    <h2>Aside</h2>
+                    <ContactInputs details={contactDetails} handleChange={handleContact} toggleActive={toggleActive} />
 
-                {workDetails.map((work) => (
-                    <WorkInputs key={work.key} details={work} handleChange={handleWork} />
-                ))}
-                <button onClick={addWork}>Add Work</button>
+                    {educationDetails.map((education) => (
+                        <EducationInputs key={education.key} details={education} handleChange={handleEducation} />
+                    ))}
+                    <button onClick={addEducation}>Add Education</button>
 
-                {projectDetails.map((project) => (
-                    <ProjectInputs key={project.key} details={project} handleChange={handleProject} />
-                ))}
-                <button onClick={addProject}>Add Project</button>
+                    <SkillInput addSkill={addSkill} />
+                </div>
 
-                <SkillInput addSkill={addSkill} />
+                <div className="editor-main">
+                    <h2>Main</h2>
+                    <SummaryInput details={summaryDetails} handleChange={handleSummary} />
+
+                    {workDetails.map((work) => (
+                        <WorkInputs key={work.key} details={work} handleChange={handleWork} />
+                    ))}
+                    <button onClick={addWork}>Add Work</button>
+                    
+                    {projectDetails.map((project) => (
+                        <ProjectInputs key={project.key} details={project} handleChange={handleProject} />
+                    ))}
+                    <button onClick={addProject}>Add Project</button>
+                </div>
             </div>
 
             <div className='cv'>

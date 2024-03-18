@@ -15,6 +15,7 @@ const contactData = {
     email:'', 
     contactNumber:'', 
     address:'',
+    active:false,
     key: uuid()
 }
 

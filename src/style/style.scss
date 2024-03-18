@@ -30,6 +30,26 @@ input {
     border: 1px solid rgba(0, 128, 0, 0.452);
 }
 
+.editor {
+    h2 {
+        text-align: center;
+    }
+
+    .data-inputs {
+        margin-top: 1rem;
+        overflow: hidden;
+        max-height: 0;
+    }
+
+    section.input-section[data-active="true"] .data-inputs {
+        max-height: fit-content;
+    }
+
+    section.input-section[data-active="false"] .data-inputs {
+        max-height: 0;
+    }
+}
+
 .cv {
     display: grid;
     grid-template-columns: 33% auto;
