@@ -35,17 +35,28 @@ input {
         text-align: center;
     }
 
-    .data-inputs {
-        margin-top: 1rem;
+    .data-editors {
         overflow: hidden;
-        max-height: 0;
     }
 
-    section.input-section[data-active="true"] .data-inputs {
+    .data-editor-section[data-active="true"] .data-editors {
         max-height: fit-content;
     }
 
-    section.input-section[data-active="false"] .data-inputs {
+    .data-editor-section[data-active="false"] .data-editors {
+        max-height: 0;
+    }
+
+    .data-inputs {
+        margin-top: 1rem;
+        overflow: hidden;
+    }
+
+    .data-editor[data-active="true"] .data-inputs {
+        max-height: fit-content;
+    }
+
+    .data-editor[data-active="false"] .data-inputs {
         max-height: 0;
     }
 }

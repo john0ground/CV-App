@@ -2,7 +2,7 @@ import { CvHeader, HeaderInputs, HeaderHandler, Details as HeaderDetails } from 
 import { CvContact, ContactInputs, ContactHandler, Details as ContactDetails } from './Contact';
 import { CvSummary, SummaryInput, SummaryHandler, Details as SummaryDetails } from './Summary';
 import { CvEducation, EducationInputs, AddEducation, EducationHandler, Details as EducationDetails } from './Education';
-import { WorkInputs, CvWork, WorkHandler, AddWork, Details as WorkDetails } from './Work';
+import { WorkEditSection, CvWork, WorkHandler, AddWork, Details as WorkDetails } from './Work';
 import { ProjectInputs, CvProject, ProjectHandler, AddProject, Details as ProjectDetails } from './Projects';
 import { SkillInput, CvSkill, AddSkill, Details as SkillDetails } from './Skills';
 
@@ -33,7 +33,6 @@ interface CvProps {
 export default function Cv({ 
         handleHeader,
         handleContact,
-        toggleActive,
         handleSummary,
         handleEducation,
         handleProject, 
@@ -63,7 +62,7 @@ export default function Cv({
 
                 <div className="editor-aside">
                     <h2>Aside</h2>
-                    <ContactInputs details={contactDetails} handleChange={handleContact} toggleActive={toggleActive} />
+                    <ContactInputs details={contactDetails} handleChange={handleContact} />
 
                     {educationDetails.map((education) => (
                         <EducationInputs key={education.key} details={education} handleChange={handleEducation} />
@@ -77,9 +76,7 @@ export default function Cv({
                     <h2>Main</h2>
                     <SummaryInput details={summaryDetails} handleChange={handleSummary} />
 
-                    {workDetails.map((work) => (
-                        <WorkInputs key={work.key} details={work} handleChange={handleWork} />
-                    ))}
+                    <WorkEditSection workDetails={workDetails} handleChange={handleWork}/>
                     <button onClick={addWork}>Add Work</button>
                     
                     {projectDetails.map((project) => (

@@ -70,32 +70,24 @@ export default function App() {
         ));
     }
 
-    function toggleShowContact(key:string) {
-        function searchDataArray(arr) {
-            console.log(arr);
-        }
+    // function toggleShowContact(key:string) {
+    //     function searchDataArray(arr) {
+    //         console.log(arr);
+    //     }
 
-        for (const prop in currentCvData) {
-            const currentData = currentCvData[prop];
-            if (Array.isArray(currentData)) {
-                searchDataArray(currentData);
-            } else {
-                if (currentData.key === key) {
-                    const newActiveStatus = !currentData.active;
-                    const newData = { ...currentData, active: newActiveStatus }
-                    setCurrentCvData(prevData => (
-                        {...prevData, [prop]:newData}
-                    ));
-                    console.log(currentCvData.contact);
-                } else {
-                    // break;
-                }
-            }
-            // const data = currentCvData[prop].key === key;
-            // console.log(data);
-            // if (data) break;
-        }
-    }
+    //     for (const prop in currentCvData) {
+    //         const currentData = currentCvData[prop];
+    //         console.log(currentData.key);   
+    //         if (currentData.key === key) {
+    //             const newActiveStatus = !currentData.active;
+    //             const newData = { ...currentData, active: newActiveStatus }
+    //             setCurrentCvData(prevData => (
+    //                 {...prevData, [prop]:newData}
+    //             ));
+    //             break;
+    //         } else {}
+    //     }
+    // }
 
     function handleSummary(value:string) {
         const newSummary = { ...currentCvData.summary, summary:value };
@@ -165,7 +157,6 @@ export default function App() {
     return (<Cv 
                 handleHeader= {handleHeaderDetails}
                 handleContact = {handleContactDetails}
-                toggleActive = {toggleShowContact}
                 handleSummary={handleSummary}
                 handleEducation = {handleEducationDetails}
                 handleProject = {handleProjectDetails}
@@ -186,5 +177,7 @@ export default function App() {
             />)
 }
 
+// toggle parent components with separate state
 // object search for activeToggling with keys
+// sample data
 // different input types

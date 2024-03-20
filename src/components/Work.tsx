@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { TextInput } from "./Inputs";
 export type WorkHandler = (value:string, property: keyof Details, key:string) => void;
 export type AddWork = () => void;
@@ -11,8 +12,13 @@ export interface Details {
     key: string
 }
 
-interface WorkInputsProps {
+interface WorkEditorProps {
     details: Details;
+    handleChange: WorkHandler;
+}
+
+interface WorkEditSectionProps {
+    workDetails: Details[];
     handleChange: WorkHandler;
 }
 
@@ -20,54 +26,60 @@ interface CvWorkProps {
     details: Details
 }
 
-export function WorkInputs({ details, handleChange }: WorkInputsProps) {
+function WorkEditor({ details, handleChange }: WorkEditorProps) {
+    const [displayActive, setDisplayActive] = useState(true);
+
     return (
-        <section className="work-inputs">
-            <div className="input-row">
-                <TextInput
-                    label='Company Name'
-                    name='company-name'
-                    value={details.companyName}
-                    id = {details.key}
-                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'companyName', details.key)}
-                />
-            </div>
-            <div className="input-row">
-                <TextInput
-                    label='Position Title'
-                    name='position-title'
-                    value={details.positionTitle}
-                    id = {details.key}
-                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'positionTitle', details.key)}
-                />
-            </div>
-            <div className="input-row">
-                <TextInput
-                    label='Start Date'
-                    name='start-date'
-                    value={details.startDate}
-                    id={details.key}
-                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'startDate', details.key)}
-                />
-            </div>
-            <div className="input-row">
-                <TextInput
-                    label='End Date'
-                    name='end-date'
-                    value={details.endDate}
-                    id = {details.key}
-                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'endDate', details.key)}
-                />
-            </div>
-            <div className="input-row">
-                <TextInput
-                    label='Location'
-                    name='location'
-                    value={details.location}
-                    id = {details.key}
-                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'location', details.key)}
-                />
-            </div>
+        <section className="data-editor" data-active={displayActive}>
+            <button className="data-expand-btn" onClick={() => setDisplayActive(!displayActive)}>
+                <h3 onClick={() => setDisplayActive(!displayActive)}>{details.positionTitle}</h3>
+            </button>
+            <div className="data-inputs">
+                <div className="input-row">
+                    <TextInput
+                        label='Company Name'    
+                        name='company-name'
+                        value={details.companyName}
+                        id = {details.key}
+                        onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'companyName', details.key)}
+                    />
+                </div>
+                <div className="input-row">
+                    <TextInput
+                        label='Position Title'
+                        name='position-title'
+                        value={details.positionTitle}
+                        id = {details.key}
+                        onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'positionTitle', details.key)}
+                    />
+                </div>
+                <div className="input-row">
+                    <TextInput
+                        label='Start Date'
+                        name='start-date'
+                        value={details.startDate}
+                        id={details.key}
+                        onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'startDate', details.key)}
+                    />
+                </div>
+                <div className="input-row">
+                    <TextInput
+                        label='End Date'
+                        name='end-date'
+                        value={details.endDate}
+                        id = {details.key}
+                        onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'endDate', details.key)}
+                    />
+                </div>
+                <div className="input-row">
+                    <TextInput
+                        label='Location'
+                        name='location'
+                        value={details.location}
+                        id = {details.key}
+                        onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'location', details.key)}
+                    />
+                </div>
             <div className="input-row">
                 <TextInput
                     label='Description'
@@ -76,6 +88,24 @@ export function WorkInputs({ details, handleChange }: WorkInputsProps) {
                     id = {details.key}
                     onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'description', details.key)}
                 />
+            </div>
+            </div>
+        </section>
+    );
+}
+
+export function WorkEditSection({ workDetails, handleChange }: WorkEditSectionProps) {
+    const [displayActive, setDisplayActive] = useState(false);
+
+    return (
+        <section className="data-editor-section" data-active={displayActive}>
+            <button className="data-expand-btn" onClick={() => setDisplayActive(!displayActive)}>
+                <h3>Work Experience</h3>
+            </button>
+            <div className="data-editors">
+                {workDetails.map((work) => (
+                    <WorkEditor key={work.key} details={work} handleChange={handleChange} />
+                ))}
             </div>
         </section>
     );
