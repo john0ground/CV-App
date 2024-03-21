@@ -20,6 +20,7 @@ interface WorkEditorProps {
 interface WorkEditSectionProps {
     workDetails: Details[];
     handleChange: WorkHandler;
+    addData: AddWork;
 }
 
 interface CvWorkProps {
@@ -27,12 +28,12 @@ interface CvWorkProps {
 }
 
 function WorkEditor({ details, handleChange }: WorkEditorProps) {
-    const [displayActive, setDisplayActive] = useState(true);
+    const [displayActive, setDisplayActive] = useState(false);
 
     return (
         <section className="data-editor" data-active={displayActive}>
             <button className="data-expand-btn" onClick={() => setDisplayActive(!displayActive)}>
-                <h3 onClick={() => setDisplayActive(!displayActive)}>{details.positionTitle}</h3>
+                <h3>{details.positionTitle}</h3>
             </button>
             <div className="data-inputs">
                 <div className="input-row">
@@ -94,7 +95,7 @@ function WorkEditor({ details, handleChange }: WorkEditorProps) {
     );
 }
 
-export function WorkEditSection({ workDetails, handleChange }: WorkEditSectionProps) {
+export function WorkEditSection({ workDetails, handleChange, addData }: WorkEditSectionProps) {
     const [displayActive, setDisplayActive] = useState(false);
 
     return (
@@ -106,6 +107,7 @@ export function WorkEditSection({ workDetails, handleChange }: WorkEditSectionPr
                 {workDetails.map((work) => (
                     <WorkEditor key={work.key} details={work} handleChange={handleChange} />
                 ))}
+                <button onClick={addData}>Add Work</button>
             </div>
         </section>
     );

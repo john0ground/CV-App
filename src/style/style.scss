@@ -35,29 +35,33 @@ input {
         text-align: center;
     }
 
-    .data-editors {
-        overflow: hidden;
+    .data-editor-section {
+        .data-editors {
+            overflow: hidden;
+        }
+
+        &[data-active="true"] .data-editors {
+            max-height: fit-content;
+        }
+
+        &[data-active="false"] .data-editors {
+            max-height: 0;
+        }
     }
 
-    .data-editor-section[data-active="true"] .data-editors {
-        max-height: fit-content;
-    }
+    .data-editor {
+        .data-inputs {
+            margin-top: 1rem;
+            overflow: hidden;
+        }
 
-    .data-editor-section[data-active="false"] .data-editors {
-        max-height: 0;
-    }
+        &[data-active="true"] .data-inputs {
+            max-height: fit-content;
+        }
 
-    .data-inputs {
-        margin-top: 1rem;
-        overflow: hidden;
-    }
-
-    .data-editor[data-active="true"] .data-inputs {
-        max-height: fit-content;
-    }
-
-    .data-editor[data-active="false"] .data-inputs {
-        max-height: 0;
+        &[data-active="true"] .data-inputs {
+            max-height: 0;
+        }
     }
 }
 

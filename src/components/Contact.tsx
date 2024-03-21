@@ -3,8 +3,13 @@ import { TextInput } from "./Inputs";
 export type ContactHandler = (value:string, key:string) => void;
 export interface Details { email:string, contactNumber:string, address:string, active:boolean, key:string }
 
-interface ContactInputsProps {
+interface ContactEditorProps {
     details: Details;
+    handleChange: ContactHandler;
+}
+
+interface ContactEditSectionProps {
+    contactDetails: Details;
     handleChange: ContactHandler;
 }
 
@@ -12,12 +17,9 @@ interface CvContactProps {
     details: Details
 }
 
-export function ContactInputs({ details, handleChange }: ContactInputsProps) {
-    const [displayActive, setDisplayActive] = useState(false);
-
+function ContactEditor({ details, handleChange }: ContactEditorProps) {
     return (
-        <section className="data-editor" data-active={displayActive}>
-            <h3 onClick={() => setDisplayActive(!displayActive)}>Contact Details</h3>
+        <section className="data-editor">
             <div className="data-inputs">
                 <div className="input-row">
                     <TextInput
@@ -51,6 +53,20 @@ export function ContactInputs({ details, handleChange }: ContactInputsProps) {
     );
 }
 
+export function ContactEditSection({ contactDetails, handleChange }: ContactEditSectionProps) {
+    const [displayActive, setDisplayActive] = useState(false);
+
+    return (
+        <section className="data-editor-section" data-active={displayActive}>
+            <button className="data-expand-btn" onClick={() => setDisplayActive(!displayActive)}>
+                <h3>Contact Details</h3>
+            </button>
+            <div className="data-editors">
+                <ContactEditor key={contactDetails.key} details={contactDetails} handleChange={handleChange} />
+            </div>
+        </section>
+    );
+}
 
 export function CvContact( { details }: CvContactProps) {
     return(

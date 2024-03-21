@@ -8,15 +8,19 @@ export interface Details {
     key: string;
 }
 
-interface SkillInputProps {
+interface SkillEditorProps {
     addSkill: AddSkill;
+}
+
+interface SkillEditSectionProps {
+    addData: AddSkill;
 }
 
 interface CvSkillProps {
     details: Details;
 }
 
-export function SkillInput({ addSkill }:SkillInputProps) {
+function SkillEditor({ addSkill }: SkillEditorProps) {
     const [inputData, setInputData] = useState('');
 
     function handleAddSkill() {
@@ -26,15 +30,32 @@ export function SkillInput({ addSkill }:SkillInputProps) {
     }
 
     return (
-        <section className="skill-input">
-            <TextInput
-                label='Skill'
-                name='skill'
-                id={uuid()}
-                value={inputData}
-                onChange={(e: { target: { value: string; }; }) => setInputData(e.target.value)}
-            />
+        <section className="data-editor">
+            <div className="data-inputs">
+                <TextInput
+                    label='Skill'
+                    name='skill'
+                    id={uuid()}
+                    value={inputData}
+                    onChange={(e: { target: { value: string; }; }) => setInputData(e.target.value)}
+                />
+            </div>
             <button onClick={handleAddSkill}>Add Skill</button>
+        </section>
+    );
+}
+
+export function SkillEditSection({ addData }: SkillEditSectionProps) {
+    const [displayActive, setDisplayActive] = useState(false);
+
+    return (
+        <section className="data-editor-section" data-active={displayActive}>
+            <button className="data-expand-btn" onClick={() => setDisplayActive(!displayActive)}>
+                <h3>Skills</h3>
+            </button>
+            <div className="data-editors">
+                <SkillEditor addSkill={addData} />
+            </div>
         </section>
     );
 }
