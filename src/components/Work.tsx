@@ -104,9 +104,11 @@ export function WorkEditSection({ workDetails, handleChange, addData }: WorkEdit
                 <h3>Work Experience</h3>
             </button>
             <div className="data-editors">
-                {workDetails.map((work) => (
-                    <WorkEditor key={work.key} details={work} handleChange={handleChange} />
-                ))}
+                {
+                    workDetails.length > 0 && workDetails.map((work) => (
+                        <WorkEditor key={work.key} details={work} handleChange={handleChange} />
+                    ))
+                }
                 <button onClick={addData}>Add Work</button>
             </div>
         </section>

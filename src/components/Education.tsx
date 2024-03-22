@@ -84,9 +84,11 @@ export function EducationEditSection({ educationDetails, handleChange, addData }
                 <h3>Education</h3>
             </button>
             <div className="data-editors">
-                {educationDetails.map((work) => (
-                    <EducationEditor key={work.key} details={work} handleChange={handleChange} />
-                ))}
+                {
+                    educationDetails.length > 0 && educationDetails.map((work) => (
+                        <EducationEditor key={work.key} details={work} handleChange={handleChange} />
+                    ))
+                }
                 <button onClick={addData}>Add Education</button>
             </div>
         </section>

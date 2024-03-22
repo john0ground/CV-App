@@ -32,9 +32,9 @@ const userData:CvData = {
     header: { ...headerData },
     summary: { ...summaryData },
     contact: { ...contactData },
-    education: [{ ...educationData }],
-    project: [{ ...projectData }],
-    work: [{ ...workData }],
+    education: [],
+    project: [],
+    work: [],
     skills: []
 }
 

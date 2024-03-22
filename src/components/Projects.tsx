@@ -60,9 +60,11 @@ export function ProjectEditSection({ projectDetails, handleChange, addData }: Pr
                 <h3>Projects</h3>
             </button>
             <div className="data-editors">
-                {projectDetails.map((work) => (
-                    <ProjectEditor key={work.key} details={work} handleChange={handleChange} />
-                ))}
+                {
+                    projectDetails.length > 0 && projectDetails.map((work) => (
+                        <ProjectEditor key={work.key} details={work} handleChange={handleChange} />
+                    ))
+                }
                 <button onClick={addData}>Add Project</button>
             </div>
         </section>
