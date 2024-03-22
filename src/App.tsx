@@ -177,7 +177,5 @@ export default function App() {
             />)
 }
 
-// toggle parent components with separate state
-// object search for activeToggling with keys
 // sample data
 // different input types

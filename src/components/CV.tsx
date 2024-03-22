@@ -64,7 +64,7 @@ export default function Cv({
                     <h2>Aside</h2>
                     <ContactEditSection contactDetails={contactDetails} handleChange={handleContact} />
                     <EducationEditSection educationDetails={educationDetails} handleChange={handleEducation} addData={addEducation}/>
-                    <SkillEditSection addData={addSkill} />
+                    <SkillEditSection skillDetails={skillDetails} addData={addSkill} />
                 </div>
 
                 <div className="editor-main">

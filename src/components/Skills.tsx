@@ -14,6 +14,7 @@ interface SkillEditorProps {
 
 interface SkillEditSectionProps {
     addData: AddSkill;
+    skillDetails: Details[];
 }
 
 interface CvSkillProps {
@@ -45,7 +46,7 @@ function SkillEditor({ addSkill }: SkillEditorProps) {
     );
 }
 
-export function SkillEditSection({ addData }: SkillEditSectionProps) {
+export function SkillEditSection({ addData, skillDetails }: SkillEditSectionProps) {
     const [displayActive, setDisplayActive] = useState(false);
 
     return (
@@ -56,6 +57,11 @@ export function SkillEditSection({ addData }: SkillEditSectionProps) {
             <div className="data-editors">
                 <SkillEditor addSkill={addData} />
             </div>
+            <ul>
+                {skillDetails.map(data => (
+                    <li key={data.key}>{data.skill}</li>
+                ))}
+            </ul>
         </section>
     );
 }
