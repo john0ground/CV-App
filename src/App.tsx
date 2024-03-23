@@ -70,25 +70,6 @@ export default function App() {
         ));
     }
 
-    // function toggleShowContact(key:string) {
-    //     function searchDataArray(arr) {
-    //         console.log(arr);
-    //     }
-
-    //     for (const prop in currentCvData) {
-    //         const currentData = currentCvData[prop];
-    //         console.log(currentData.key);   
-    //         if (currentData.key === key) {
-    //             const newActiveStatus = !currentData.active;
-    //             const newData = { ...currentData, active: newActiveStatus }
-    //             setCurrentCvData(prevData => (
-    //                 {...prevData, [prop]:newData}
-    //             ));
-    //             break;
-    //         } else {}
-    //     }
-    // }
-
     function handleSummary(value:string) {
         const newSummary = { ...currentCvData.summary, summary:value };
         setCurrentCvData(prevData => (
@@ -154,6 +135,46 @@ export default function App() {
         ));
     }
 
+    function deleteProject(key:string) {
+        const projectIndex = currentCvData.project.findIndex(proj => proj.key === key);
+        const newProjectDetails = [...currentCvData.project];
+        newProjectDetails.splice(projectIndex, 1);
+
+        setCurrentCvData(prevData => (
+            {...prevData, project:newProjectDetails}
+        ));
+    }
+
+    function deleteEducation(key:string) {
+        const educationIndex = currentCvData.project.findIndex(education => education.key === key);
+        const newEducationDetails = [...currentCvData.education];
+        newEducationDetails.splice(educationIndex, 1);
+
+        setCurrentCvData(prevData => (
+            {...prevData, education: newEducationDetails}
+        ));
+    }
+
+    function deleteWork(key:string) {
+        const workIndex = currentCvData.work.findIndex(work => work.key === key);
+        const newWorkDetails = [...currentCvData.work];
+        newWorkDetails.splice(workIndex, 1);
+
+        setCurrentCvData(prevData => (
+            {...prevData, work:newWorkDetails}
+        ));
+    }
+
+    function deleteSkill(key:string) {
+        const skillIndex = currentCvData.skills.findIndex(skill => skill.key === key);
+        const newSkillDetails = [...currentCvData.skills];
+        newSkillDetails.splice(skillIndex, 1);
+
+        setCurrentCvData(prevData => (
+            {...prevData, skills:newSkillDetails}
+        ));
+    }
+
     return (<Cv 
                 handleHeader= {handleHeaderDetails}
                 handleContact = {handleContactDetails}
@@ -174,8 +195,15 @@ export default function App() {
                 addProject = {addProject}
                 addWork = {addWork}
                 addSkill = {addSkill}
+
+                deleteProject={deleteProject}
+                deleteEducation={deleteEducation}
+                deleteWork={deleteWork}
+                deleteSkill={deleteSkill}
             />)
 }
 
+// display data on delete modal
+// avoid duplicate empty editors
 // sample data
 // different input types

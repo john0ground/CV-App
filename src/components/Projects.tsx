@@ -2,24 +2,27 @@ import { useState } from "react";
 import { TextInput } from "./Inputs";
 export type ProjectHandler = (value:string, property: keyof Details, key:string) => void;
 export type AddProject = () => void;
+export type DeleteProject = (key:string) => void;
 export interface Details { project:string, description:string, key:string }
 
 interface ProjectEditorProps {
     details: Details;
     handleChange: ProjectHandler;
+    handleDelete: DeleteProject;
 }
 
 interface ProjectEditSectionProps {
     projectDetails: Details[];
     handleChange: ProjectHandler;
     addData: AddProject;
+    handleDelete: DeleteProject;
 }
 
 interface CvProjectProps {
     details: Details
 }
 
-function ProjectEditor({details, handleChange}: ProjectEditorProps) {
+function ProjectEditor({details, handleChange, handleDelete}: ProjectEditorProps) {
     const [displayActive, setDisplayActive] = useState(false);
 
     return (
@@ -27,6 +30,7 @@ function ProjectEditor({details, handleChange}: ProjectEditorProps) {
             <button className="data-expand-btn" onClick={() => setDisplayActive(!displayActive)}>
                 <h3>{details.project}</h3>
             </button>
+            <button onClick={() => handleDelete(details.key)}>Delete</button>
             <div className="data-inputs">
                 <div className="input-row">
                     <TextInput
@@ -51,7 +55,7 @@ function ProjectEditor({details, handleChange}: ProjectEditorProps) {
     );
 }
 
-export function ProjectEditSection({ projectDetails, handleChange, addData }: ProjectEditSectionProps) {
+export function ProjectEditSection({ projectDetails, handleChange, addData, handleDelete }: ProjectEditSectionProps) {
     const [displayActive, setDisplayActive] = useState(false);
 
     return (
@@ -62,7 +66,7 @@ export function ProjectEditSection({ projectDetails, handleChange, addData }: Pr
             <div className="data-editors">
                 {
                     projectDetails.length > 0 && projectDetails.map((work) => (
-                        <ProjectEditor key={work.key} details={work} handleChange={handleChange} />
+                        <ProjectEditor key={work.key} details={work} handleChange={handleChange} handleDelete={handleDelete} />
                     ))
                 }
                 <button onClick={addData}>Add Project</button>

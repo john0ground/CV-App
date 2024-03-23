@@ -1,11 +1,12 @@
 import { HeaderEditSection, CvHeader, HeaderHandler, Details as HeaderDetails } from './Header';
 import { ContactEditSection, CvContact, ContactHandler, Details as ContactDetails } from './Contact';
 import { SummaryEditSection, CvSummary, SummaryHandler, Details as SummaryDetails } from './Summary';
-import { EducationEditSection, CvEducation, AddEducation, EducationHandler, Details as EducationDetails } from './Education';
-import { WorkEditSection, CvWork, WorkHandler, AddWork, Details as WorkDetails } from './Work';
-import { ProjectEditSection, CvProject, ProjectHandler, AddProject, Details as ProjectDetails } from './Projects';
-import { SkillEditSection, CvSkill, AddSkill, Details as SkillDetails } from './Skills';
+import { EducationEditSection, CvEducation, AddEducation, EducationHandler, DeleteEducation, Details as EducationDetails } from './Education';
+import { WorkEditSection, CvWork, WorkHandler, AddWork, DeleteWork, Details as WorkDetails } from './Work';
+import { ProjectEditSection, CvProject, ProjectHandler, AddProject, DeleteProject, Details as ProjectDetails } from './Projects';
+import { SkillEditSection, CvSkill, AddSkill, DeleteSkill, Details as SkillDetails } from './Skills';
 
+import { useRef } from 'react';
 import './../style/style.scss';
 
 interface CvProps {
@@ -28,6 +29,11 @@ interface CvProps {
     addProject: AddProject;
     addWork: AddWork;
     addSkill: AddSkill;
+
+    deleteProject: DeleteProject;
+    deleteEducation: DeleteEducation;
+    deleteWork: DeleteWork;
+    deleteSkill: DeleteSkill;
 }
 
 export default function Cv({ 
@@ -49,8 +55,40 @@ export default function Cv({
         addEducation,
         addProject,
         addWork,
-        addSkill
+        addSkill,
+
+        deleteProject,
+        deleteEducation,
+        deleteWork,
+        deleteSkill
     }: CvProps) {
+
+    const deleteModalRef = useRef<HTMLDialogElement>(null);
+    const deleteDataRef = useRef<(() => void) | null>(null);
+
+    function openDeleteModal(deleteDataProp: (key: string) => void, key: string) {
+        const deleteData = () => {
+            deleteDataProp(key);
+        };
+        deleteDataRef.current = deleteData;
+
+        if (deleteModalRef.current) {
+            deleteModalRef.current.showModal();
+        }
+    }
+
+    function closeDeleteModal() {
+        if (deleteModalRef.current) {
+            deleteModalRef.current.close();
+        }
+    }
+
+    function handleDelete() {
+        if (deleteDataRef.current) {
+            deleteDataRef.current();
+        }
+        closeDeleteModal();
+    }
 
     return (
         <>
@@ -63,15 +101,34 @@ export default function Cv({
                 <div className="editor-aside">
                     <h2>Aside</h2>
                     <ContactEditSection contactDetails={contactDetails} handleChange={handleContact} />
-                    <EducationEditSection educationDetails={educationDetails} handleChange={handleEducation} addData={addEducation}/>
-                    <SkillEditSection skillDetails={skillDetails} addData={addSkill} />
+                    <EducationEditSection 
+                        educationDetails={educationDetails} 
+                        handleChange={handleEducation} 
+                        addData={addEducation}
+                        handleDelete={(key:string) => openDeleteModal(deleteEducation, key)}
+                    />
+                    <SkillEditSection 
+                        skillDetails={skillDetails} 
+                        addData={addSkill} 
+                        handleDelete={(key:string) => openDeleteModal(deleteSkill, key)} 
+                    />
                 </div>
 
                 <div className="editor-main">
                     <h2>Main</h2>
                     <SummaryEditSection summaryDetails={summaryDetails} handleChange={handleSummary} />
-                    <WorkEditSection workDetails={workDetails} handleChange={handleWork} addData={addWork}/>                    
-                    <ProjectEditSection projectDetails={projectDetails} handleChange={handleProject} addData={addProject} />
+                    <WorkEditSection 
+                        workDetails={workDetails} 
+                        handleChange={handleWork} 
+                        addData={addWork}
+                        handleDelete={(key:string) => openDeleteModal(deleteWork, key)}
+                    />                    
+                    <ProjectEditSection 
+                        projectDetails={projectDetails} 
+                        handleChange={handleProject} 
+                        addData={addProject} 
+                        handleDelete={(key:string) => openDeleteModal(deleteProject, key)} 
+                    />
                 </div>
             </div>
 
@@ -98,6 +155,12 @@ export default function Cv({
                     ))}
                 </div>
             </div>
+
+            <dialog ref={deleteModalRef}>   
+                <p>Delete this project?</p>
+                <button onClick={handleDelete}>Delete</button>
+                <button onClick={closeDeleteModal}>Cancel</button>
+            </dialog>
         </>
     );
 }

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { TextInput } from "./Inputs";
 export type WorkHandler = (value:string, property: keyof Details, key:string) => void;
 export type AddWork = () => void;
+export type DeleteWork = (key:string) => void;
+
 export interface Details {
     companyName: string,
     positionTitle: string,
@@ -15,19 +17,21 @@ export interface Details {
 interface WorkEditorProps {
     details: Details;
     handleChange: WorkHandler;
+    handleDelete: DeleteWork;
 }
 
 interface WorkEditSectionProps {
     workDetails: Details[];
     handleChange: WorkHandler;
     addData: AddWork;
+    handleDelete: DeleteWork;
 }
 
 interface CvWorkProps {
     details: Details
 }
 
-function WorkEditor({ details, handleChange }: WorkEditorProps) {
+function WorkEditor({ details, handleChange, handleDelete }: WorkEditorProps) {
     const [displayActive, setDisplayActive] = useState(false);
 
     return (
@@ -35,6 +39,7 @@ function WorkEditor({ details, handleChange }: WorkEditorProps) {
             <button className="data-expand-btn" onClick={() => setDisplayActive(!displayActive)}>
                 <h3>{details.positionTitle}</h3>
             </button>
+            <button onClick={() => handleDelete(details.key)}>Delete</button>
             <div className="data-inputs">
                 <div className="input-row">
                     <TextInput
@@ -95,7 +100,7 @@ function WorkEditor({ details, handleChange }: WorkEditorProps) {
     );
 }
 
-export function WorkEditSection({ workDetails, handleChange, addData }: WorkEditSectionProps) {
+export function WorkEditSection({ workDetails, handleChange, addData, handleDelete }: WorkEditSectionProps) {
     const [displayActive, setDisplayActive] = useState(false);
 
     return (
@@ -106,7 +111,7 @@ export function WorkEditSection({ workDetails, handleChange, addData }: WorkEdit
             <div className="data-editors">
                 {
                     workDetails.length > 0 && workDetails.map((work) => (
-                        <WorkEditor key={work.key} details={work} handleChange={handleChange} />
+                        <WorkEditor key={work.key} details={work} handleChange={handleChange} handleDelete={handleDelete} />
                     ))
                 }
                 <button onClick={addData}>Add Work</button>

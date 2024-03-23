@@ -3,6 +3,8 @@ import {v4 as uuid} from "uuid";
 
 import { TextInput } from "./Inputs";
 export type AddSkill = (inputData:string) => void;
+export type DeleteSkill = (key:string) => void;
+
 export interface Details {
     skill:string;
     key: string;
@@ -10,11 +12,13 @@ export interface Details {
 
 interface SkillEditorProps {
     addSkill: AddSkill;
+    // handleDelete: DeleteProject;
 }
 
 interface SkillEditSectionProps {
     addData: AddSkill;
     skillDetails: Details[];
+    handleDelete: DeleteSkill;
 }
 
 interface CvSkillProps {
@@ -46,7 +50,7 @@ function SkillEditor({ addSkill }: SkillEditorProps) {
     );
 }
 
-export function SkillEditSection({ addData, skillDetails }: SkillEditSectionProps) {
+export function SkillEditSection({ addData, skillDetails, handleDelete }: SkillEditSectionProps) {
     const [displayActive, setDisplayActive] = useState(false);
 
     return (
@@ -59,7 +63,10 @@ export function SkillEditSection({ addData, skillDetails }: SkillEditSectionProp
             </div>
             <ul>
                 {skillDetails.map(data => (
-                    <li key={data.key}>{data.skill}</li>
+                    <li key={data.key}>
+                        <span>{data.skill}</span>
+                        <button onClick={() => handleDelete(data.key)}>Delete</button>
+                    </li>
                 ))}
             </ul>
         </section>

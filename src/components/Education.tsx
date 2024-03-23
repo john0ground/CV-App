@@ -2,6 +2,7 @@ import { useState } from "react";
 import { TextInput } from "./Inputs";
 export type EducationHandler = (value:string, property: keyof Details, key:string) => void;
 export type AddEducation = () => void;
+export type DeleteEducation = (key:string) => void;
 export interface Details { 
     school: string,
     field: string,
@@ -13,19 +14,21 @@ export interface Details {
 interface EducationEditorProps {
     details: Details;
     handleChange: EducationHandler;
+    handleDelete: DeleteEducation;
 }
 
 interface EducationEditSectionProps {
     educationDetails: Details[];
     handleChange: EducationHandler;
     addData: AddEducation;
+    handleDelete: DeleteEducation;
 }
 
 interface CvEducationProps {
     details: Details
 }
 
-function EducationEditor({ details, handleChange }: EducationEditorProps) {
+function EducationEditor({ details, handleChange, handleDelete }: EducationEditorProps) {
     const [displayActive, setDisplayActive] = useState(false);
 
     return (
@@ -33,6 +36,7 @@ function EducationEditor({ details, handleChange }: EducationEditorProps) {
             <button className="data-expand-btn" onClick={() => setDisplayActive(!displayActive)}>
                 <h3>{details.school}</h3>
             </button>
+            <button onClick={() => handleDelete(details.key)}>Delete</button>
             <div className="data-inputs">
                 <div className="input-row">
                     <TextInput
@@ -75,7 +79,7 @@ function EducationEditor({ details, handleChange }: EducationEditorProps) {
     );
 }
 
-export function EducationEditSection({ educationDetails, handleChange, addData }: EducationEditSectionProps) {
+export function EducationEditSection({ educationDetails, handleChange, addData, handleDelete }: EducationEditSectionProps) {
     const [displayActive, setDisplayActive] = useState(false);
 
     return (
@@ -86,7 +90,7 @@ export function EducationEditSection({ educationDetails, handleChange, addData }
             <div className="data-editors">
                 {
                     educationDetails.length > 0 && educationDetails.map((work) => (
-                        <EducationEditor key={work.key} details={work} handleChange={handleChange} />
+                        <EducationEditor key={work.key} details={work} handleChange={handleChange} handleDelete={handleDelete} />
                     ))
                 }
                 <button onClick={addData}>Add Education</button>
