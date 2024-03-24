@@ -26,35 +26,51 @@ interface CvData {
     project: ProjectDetails[];
     work: WorkDetails[];
     skills: SkillDetails[];
+    key: string;
+    title:string;
 }
 
-const userData:CvData = {
+let userData:CvData = {
     header: { ...headerData },
     summary: { ...summaryData },
     contact: { ...contactData },
     education: [],
     project: [],
     work: [],
-    skills: []
+    skills: [],
+    key: uuid(),
+    title: 'user-data'
 }
 
-const sampleData = {}
-
-// function loadSampleDetails() {
-    //     const newHeaderDetails = { ...headerDetails, fullName: 'Nathan Drake', niche: 'Frontend Dev' };
-    //     const newContactDetails = {
-    //         ...contactDetails,
-    //         email: 'nate.drake@gmail.com',
-    //         contact: '(123) 456 7890',
-    //         address: '123 Main Street Apartment 4B Springfield, IL 62701'
-    //     }
-
-    //     setHeaderDetails(newHeaderDetails);
-    //     setContactDetails(newContactDetails);
-    // }
+let sampleData:CvData = {
+    header: { ...headerData, fullName: 'Nathan Drake', niche: 'Frontend Dev' },
+    summary: { ...summaryData },
+    contact: {
+        ...contactData,
+        email: 'nate.drake@gmail.com',
+        contactNumber: '(123) 456 7890',
+        address: '123 Main Street Apartment 4B Springfield, IL 62701'
+    },
+    education: [],
+    project: [],
+    work: [],
+    skills: [],
+    key: uuid(),
+    title: 'sample-data'
+}
 
 export default function App() {
     const [currentCvData, setCurrentCvData] = useState(userData);
+
+    function toggleCurrentData() {
+        if (currentCvData.key === userData.key) {
+            userData = {...currentCvData}
+            setCurrentCvData(sampleData);
+        } else {
+            sampleData = {...currentCvData}
+            setCurrentCvData(userData)
+        }
+    }
 
     function handleHeaderDetails(value:string, key:string) {
         const newHeaderDetails = { ...currentCvData.header, [key]:value };
@@ -200,12 +216,12 @@ export default function App() {
                 deleteEducation={deleteEducation}
                 deleteWork={deleteWork}
                 deleteSkill={deleteSkill}
+
+                toggleCvData={toggleCurrentData}
+                title={currentCvData.title}
             />)
 }
 
-// manage types
-// classes for recurring objects
-// display data on delete modal
 // avoid duplicate empty editors
 // sample data
 // different input types

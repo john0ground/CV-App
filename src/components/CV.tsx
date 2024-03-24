@@ -3,8 +3,8 @@ import { ContactEditSection, CvContact, ContactHandler, Details as ContactDetail
 import { SummaryEditSection, CvSummary, SummaryHandler, Details as SummaryDetails } from './Summary';
 import { EducationEditSection, CvEducation, AddEducation, EducationHandler, Details as EducationDetails } from './Education';
 import { WorkEditSection, CvWork, WorkHandler, AddWork, Details as WorkDetails } from './Work';
-import { ProjectEditSection, CvProject, ProjectHandler, AddProject, DeleteProps, Details as ProjectDetails } from './Projects';
-import { SkillEditSection, CvSkill, AddSkill, DeleteSkill, Details as SkillDetails } from './Skills';
+import { ProjectEditSection, CvProject, ProjectHandler, AddProject, Details as ProjectDetails } from './Projects';
+import { SkillEditSection, CvSkill, AddSkill, Details as SkillDetails } from './Skills';
 
 import { useRef } from 'react';
 import './../style/style.scss';
@@ -33,7 +33,10 @@ interface CvProps {
     deleteProject: (key:string) => void;
     deleteEducation: (key:string) => void;
     deleteWork: (key:string) => void;
-    deleteSkill: DeleteSkill;
+    deleteSkill: (key:string) => void;
+
+    toggleCvData: () => void;
+    title: string
 }
 
 export default function Cv({ 
@@ -60,11 +63,16 @@ export default function Cv({
         deleteProject,
         deleteEducation,
         deleteWork,
-        deleteSkill
+        deleteSkill,
+
+        toggleCvData,
+        title
     }: CvProps) {
 
     const deleteModalRef = useRef<HTMLDialogElement>(null);
     const deleteDataRef = useRef<(() => void) | null>(null);
+
+    interface DeleteProps { key:string, section:string, data:string }
 
     function openDeleteModal(deleteDataProp: (key: string) => void, details:DeleteProps) {
         const deleteData = () => {
@@ -96,6 +104,10 @@ export default function Cv({
     return (
         <>
             <div className='editor'>
+                <button onClick={toggleCvData}>
+                    {title === 'sample-data'? 'Undo Sample': 'Load Sample'}
+                </button>
+
                 <div className="editor-header">
                     <h2>Header</h2>
                     <HeaderEditSection headerDetails={headerDetails} handleChange={handleHeader} />
