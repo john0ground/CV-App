@@ -2,7 +2,8 @@ import { useState } from "react";
 import { TextInput } from "./Inputs";
 export type WorkHandler = (value:string, property: keyof Details, key:string) => void;
 export type AddWork = () => void;
-export type DeleteWork = (key:string) => void;
+export interface DeleteProps { key:string, section:string, data:string }
+type DeleteWork = (details:DeleteProps) => void;
 
 export interface Details {
     companyName: string,
@@ -33,13 +34,18 @@ interface CvWorkProps {
 
 function WorkEditor({ details, handleChange, handleDelete }: WorkEditorProps) {
     const [displayActive, setDisplayActive] = useState(false);
+    const deleteDetails = {
+        key: details.key,
+        section: 'Work Experience',
+        data: details.positionTitle
+    }
 
     return (
         <section className="data-editor" data-active={displayActive}>
             <button className="data-expand-btn" onClick={() => setDisplayActive(!displayActive)}>
                 <h3>{details.positionTitle}</h3>
             </button>
-            <button onClick={() => handleDelete(details.key)}>Delete</button>
+            <button onClick={() => handleDelete(deleteDetails)}>Delete</button>
             <div className="data-inputs">
                 <div className="input-row">
                     <TextInput

@@ -2,7 +2,8 @@ import { useState } from "react";
 import { TextInput } from "./Inputs";
 export type EducationHandler = (value:string, property: keyof Details, key:string) => void;
 export type AddEducation = () => void;
-export type DeleteEducation = (key:string) => void;
+export interface DeleteProps { key:string, section:string, data:string }
+type DeleteEducation = (details:DeleteProps) => void;
 export interface Details { 
     school: string,
     field: string,
@@ -30,13 +31,18 @@ interface CvEducationProps {
 
 function EducationEditor({ details, handleChange, handleDelete }: EducationEditorProps) {
     const [displayActive, setDisplayActive] = useState(false);
+    const deleteDetails = {
+        key: details.key,
+        section: 'Education',
+        data: details.school
+    }
 
     return (
         <section className="data-editor" data-active={displayActive}>
             <button className="data-expand-btn" onClick={() => setDisplayActive(!displayActive)}>
                 <h3>{details.school}</h3>
             </button>
-            <button onClick={() => handleDelete(details.key)}>Delete</button>
+            <button onClick={() => handleDelete(deleteDetails)}>Delete</button>
             <div className="data-inputs">
                 <div className="input-row">
                     <TextInput

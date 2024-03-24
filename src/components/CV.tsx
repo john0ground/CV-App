@@ -1,8 +1,8 @@
 import { HeaderEditSection, CvHeader, HeaderHandler, Details as HeaderDetails } from './Header';
 import { ContactEditSection, CvContact, ContactHandler, Details as ContactDetails } from './Contact';
 import { SummaryEditSection, CvSummary, SummaryHandler, Details as SummaryDetails } from './Summary';
-import { EducationEditSection, CvEducation, AddEducation, EducationHandler, DeleteEducation, Details as EducationDetails } from './Education';
-import { WorkEditSection, CvWork, WorkHandler, AddWork, DeleteWork, Details as WorkDetails } from './Work';
+import { EducationEditSection, CvEducation, AddEducation, EducationHandler, Details as EducationDetails } from './Education';
+import { WorkEditSection, CvWork, WorkHandler, AddWork, Details as WorkDetails } from './Work';
 import { ProjectEditSection, CvProject, ProjectHandler, AddProject, DeleteProps, Details as ProjectDetails } from './Projects';
 import { SkillEditSection, CvSkill, AddSkill, DeleteSkill, Details as SkillDetails } from './Skills';
 
@@ -31,8 +31,8 @@ interface CvProps {
     addSkill: AddSkill;
 
     deleteProject: (key:string) => void;
-    deleteEducation: DeleteEducation;
-    deleteWork: DeleteWork;
+    deleteEducation: (key:string) => void;
+    deleteWork: (key:string) => void;
     deleteSkill: DeleteSkill;
 }
 
@@ -66,18 +66,7 @@ export default function Cv({
     const deleteModalRef = useRef<HTMLDialogElement>(null);
     const deleteDataRef = useRef<(() => void) | null>(null);
 
-    function openDeleteModal(deleteDataProp: (key: string) => void, key: string) {
-        const deleteData = () => {
-            deleteDataProp(key);
-        };
-        deleteDataRef.current = deleteData;
-
-        if (deleteModalRef.current) {
-            deleteModalRef.current.showModal();
-        }
-    }
-
-    function openDeleteMod(deleteDataProp: (key: string) => void, details:DeleteProps) {
+    function openDeleteModal(deleteDataProp: (key: string) => void, details:DeleteProps) {
         const deleteData = () => {
             deleteDataProp(details.key);
         };
@@ -119,12 +108,12 @@ export default function Cv({
                         educationDetails={educationDetails} 
                         handleChange={handleEducation} 
                         addData={addEducation}
-                        handleDelete={(key:string) => openDeleteModal(deleteEducation, key)}
+                        handleDelete={(details) => openDeleteModal(deleteEducation, details)}
                     />
                     <SkillEditSection 
                         skillDetails={skillDetails} 
                         addData={addSkill} 
-                        handleDelete={(key:string) => openDeleteModal(deleteSkill, key)} 
+                        handleDelete={(key:string) => deleteSkill(key)} 
                     />
                 </div>
 
@@ -135,13 +124,13 @@ export default function Cv({
                         workDetails={workDetails} 
                         handleChange={handleWork} 
                         addData={addWork}
-                        handleDelete={(key:string) => openDeleteModal(deleteWork, key)}
+                        handleDelete={(details) => openDeleteModal(deleteWork, details)}
                     />                    
                     <ProjectEditSection 
                         projectDetails={projectDetails} 
                         handleChange={handleProject} 
                         addData={addProject} 
-                        handleDelete={(details) => openDeleteMod(deleteProject, details)} 
+                        handleDelete={(details) => openDeleteModal(deleteProject, details)} 
                     />
                 </div>
             </div>

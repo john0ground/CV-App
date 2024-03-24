@@ -203,6 +203,8 @@ export default function App() {
             />)
 }
 
+// manage types
+// classes for recurring objects
 // display data on delete modal
 // avoid duplicate empty editors
 // sample data
