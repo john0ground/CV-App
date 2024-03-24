@@ -3,7 +3,7 @@ import { ContactEditSection, CvContact, ContactHandler, Details as ContactDetail
 import { SummaryEditSection, CvSummary, SummaryHandler, Details as SummaryDetails } from './Summary';
 import { EducationEditSection, CvEducation, AddEducation, EducationHandler, DeleteEducation, Details as EducationDetails } from './Education';
 import { WorkEditSection, CvWork, WorkHandler, AddWork, DeleteWork, Details as WorkDetails } from './Work';
-import { ProjectEditSection, CvProject, ProjectHandler, AddProject, DeleteProject, Details as ProjectDetails } from './Projects';
+import { ProjectEditSection, CvProject, ProjectHandler, AddProject, DeleteProps, Details as ProjectDetails } from './Projects';
 import { SkillEditSection, CvSkill, AddSkill, DeleteSkill, Details as SkillDetails } from './Skills';
 
 import { useRef } from 'react';
@@ -30,7 +30,7 @@ interface CvProps {
     addWork: AddWork;
     addSkill: AddSkill;
 
-    deleteProject: DeleteProject;
+    deleteProject: (key:string) => void;
     deleteEducation: DeleteEducation;
     deleteWork: DeleteWork;
     deleteSkill: DeleteSkill;
@@ -75,6 +75,20 @@ export default function Cv({
         if (deleteModalRef.current) {
             deleteModalRef.current.showModal();
         }
+    }
+
+    function openDeleteMod(deleteDataProp: (key: string) => void, details:DeleteProps) {
+        const deleteData = () => {
+            deleteDataProp(details.key);
+        };
+        deleteDataRef.current = deleteData;
+
+        if (deleteModalRef.current) {
+            console.log(deleteModalRef.current);
+            deleteModalRef.current.showModal();
+        }
+
+        console.log(details);
     }
 
     function closeDeleteModal() {
@@ -127,7 +141,7 @@ export default function Cv({
                         projectDetails={projectDetails} 
                         handleChange={handleProject} 
                         addData={addProject} 
-                        handleDelete={(key:string) => openDeleteModal(deleteProject, key)} 
+                        handleDelete={(details) => openDeleteMod(deleteProject, details)} 
                     />
                 </div>
             </div>

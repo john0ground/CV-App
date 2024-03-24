@@ -2,7 +2,8 @@ import { useState } from "react";
 import { TextInput } from "./Inputs";
 export type ProjectHandler = (value:string, property: keyof Details, key:string) => void;
 export type AddProject = () => void;
-export type DeleteProject = (key:string) => void;
+export interface DeleteProps { key:string, section:string, data:string }
+type DeleteProject = (details:DeleteProps) => void;
 export interface Details { project:string, description:string, key:string }
 
 interface ProjectEditorProps {
@@ -24,13 +25,18 @@ interface CvProjectProps {
 
 function ProjectEditor({details, handleChange, handleDelete}: ProjectEditorProps) {
     const [displayActive, setDisplayActive] = useState(false);
+    const deleteDetails = {
+        key: details.key,
+        section: 'Project',
+        data: details.project
+    }
 
     return (
         <section className="data-editor" data-active={displayActive}>
             <button className="data-expand-btn" onClick={() => setDisplayActive(!displayActive)}>
                 <h3>{details.project}</h3>
             </button>
-            <button onClick={() => handleDelete(details.key)}>Delete</button>
+            <button onClick={() => handleDelete(deleteDetails)}>Delete</button>
             <div className="data-inputs">
                 <div className="input-row">
                     <TextInput
