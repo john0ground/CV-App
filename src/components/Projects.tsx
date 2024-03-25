@@ -10,6 +10,7 @@ interface ProjectEditorProps {
     details: Details;
     handleChange: ProjectHandler;
     handleDelete: DeleteProject;
+    isComplete: boolean;
 }
 
 interface ProjectEditSectionProps {
@@ -23,7 +24,16 @@ interface CvProjectProps {
     details: Details
 }
 
-function ProjectEditor({details, handleChange, handleDelete}: ProjectEditorProps) {
+function checkIncompleteDetails(details:Details) {
+    let incomplete = false;
+    Object.values(details).forEach(value => {
+        if (value.length === 0) incomplete = true;
+    });
+
+    return incomplete;
+}
+
+function ProjectEditor({details, handleChange, handleDelete, isComplete}: ProjectEditorProps) {
     const [displayActive, setDisplayActive] = useState(false);
     const deleteDetails = {
         key: details.key,
@@ -31,8 +41,10 @@ function ProjectEditor({details, handleChange, handleDelete}: ProjectEditorProps
         data: details.project
     }
 
+    if (!checkIncompleteDetails(details)) isComplete = true;
+
     return (
-        <section className="data-editor" data-active={displayActive}>
+        <section className="data-editor" data-active={displayActive} data-complete={isComplete}>
             <button className="data-expand-btn" onClick={() => setDisplayActive(!displayActive)}>
                 <h3>{details.project}</h3>
             </button>
@@ -57,12 +69,21 @@ function ProjectEditor({details, handleChange, handleDelete}: ProjectEditorProps
                     />
                 </div>
             </div>
+            {!isComplete && <span>Please fill incomplete data</span>}
         </section>
     );
 }
 
 export function ProjectEditSection({ projectDetails, handleChange, addData, handleDelete }: ProjectEditSectionProps) {
     const [displayActive, setDisplayActive] = useState(false);
+    const [incompleteDataIndex, setIncompleteDataIndex] = useState(-1);
+
+    function handleAddData() {
+        if (projectDetails.length === 0) return addData();
+
+        const incompleteProjectIndex = projectDetails.findIndex(checkIncompleteDetails);
+        incompleteProjectIndex > -1? setIncompleteDataIndex(incompleteProjectIndex): addData();
+    }
 
     return (
         <section className="data-editor-section" data-active={displayActive}>
@@ -71,11 +92,17 @@ export function ProjectEditSection({ projectDetails, handleChange, addData, hand
             </button>
             <div className="data-editors">
                 {
-                    projectDetails.length > 0 && projectDetails.map((work) => (
-                        <ProjectEditor key={work.key} details={work} handleChange={handleChange} handleDelete={handleDelete} />
+                    projectDetails.length > 0 && projectDetails.map((proj, index) => (
+                        <ProjectEditor 
+                            key={proj.key} 
+                            details={proj} 
+                            handleChange={handleChange} 
+                            handleDelete={handleDelete}
+                            isComplete={incompleteDataIndex !== index}
+                        />
                     ))
                 }
-                <button onClick={addData}>Add Project</button>
+                <button onClick={handleAddData}>Add Project</button>
             </div>
         </section>
     );

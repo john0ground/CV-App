@@ -222,6 +222,5 @@ export default function App() {
             />)
 }
 
-// avoid duplicate empty editors
-// sample data
+// set focus to incomplete data
 // different input types

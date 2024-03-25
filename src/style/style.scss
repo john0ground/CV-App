@@ -62,6 +62,14 @@ input {
         &[data-active="true"] .data-inputs {
             max-height: 0;
         }
+
+        &[data-complete="true"] {
+            border: 1px solid skyblue;
+        }
+
+        &[data-complete="false"] {
+            border: 1px solid red;
+        }
     }
 }
 
