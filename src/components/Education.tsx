@@ -16,6 +16,7 @@ interface EducationEditorProps {
     details: Details;
     handleChange: EducationHandler;
     handleDelete: DeleteEducation;
+    isComplete: boolean;
 }
 
 interface EducationEditSectionProps {
@@ -29,7 +30,16 @@ interface CvEducationProps {
     details: Details
 }
 
-function EducationEditor({ details, handleChange, handleDelete }: EducationEditorProps) {
+function checkIncompleteDetails(details:Details) {
+    let incomplete = false;
+    Object.values(details).forEach(value => {
+        if (value.length === 0) incomplete = true;
+    });
+
+    return incomplete;
+}
+
+function EducationEditor({ details, handleChange, handleDelete, isComplete }: EducationEditorProps) {
     const [displayActive, setDisplayActive] = useState(false);
     const deleteDetails = {
         key: details.key,
@@ -37,8 +47,10 @@ function EducationEditor({ details, handleChange, handleDelete }: EducationEdito
         data: details.school
     }
 
+    if (!checkIncompleteDetails(details)) isComplete = true;
+
     return (
-        <section className="data-editor" data-active={displayActive}>
+        <section className="data-editor" data-active={displayActive} data-complete={isComplete}>
             <button className="data-expand-btn" onClick={() => setDisplayActive(!displayActive)}>
                 <h3>{details.school}</h3>
             </button>
@@ -81,12 +93,21 @@ function EducationEditor({ details, handleChange, handleDelete }: EducationEdito
                     />
                 </div>
             </div>
+            {!isComplete && <span>Please fill incomplete data</span>}
         </section>
     );
 }
 
 export function EducationEditSection({ educationDetails, handleChange, addData, handleDelete }: EducationEditSectionProps) {
     const [displayActive, setDisplayActive] = useState(false);
+    const [incompleteDataIndex, setIncompleteDataIndex] = useState(-1);
+
+    function handleAddData() {
+        if (educationDetails.length === 0) return addData();
+
+        const incompleteProjectIndex = educationDetails.findIndex(checkIncompleteDetails);
+        incompleteProjectIndex > -1? setIncompleteDataIndex(incompleteProjectIndex): addData();
+    }
 
     return (
         <section className="data-editor-section" data-active={displayActive}>
@@ -95,11 +116,17 @@ export function EducationEditSection({ educationDetails, handleChange, addData, 
             </button>
             <div className="data-editors">
                 {
-                    educationDetails.length > 0 && educationDetails.map((work) => (
-                        <EducationEditor key={work.key} details={work} handleChange={handleChange} handleDelete={handleDelete} />
+                    educationDetails.length > 0 && educationDetails.map((education, index) => (
+                        <EducationEditor 
+                            key={education.key} 
+                            details={education} 
+                            handleChange={handleChange} 
+                            handleDelete={handleDelete} 
+                            isComplete={incompleteDataIndex !== index}
+                        />
                     ))
                 }
-                <button onClick={addData}>Add Education</button>
+                <button onClick={handleAddData}>Add Project</button>
             </div>
         </section>
     );

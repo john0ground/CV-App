@@ -19,6 +19,7 @@ interface WorkEditorProps {
     details: Details;
     handleChange: WorkHandler;
     handleDelete: DeleteWork;
+    isComplete: boolean;
 }
 
 interface WorkEditSectionProps {
@@ -32,7 +33,16 @@ interface CvWorkProps {
     details: Details
 }
 
-function WorkEditor({ details, handleChange, handleDelete }: WorkEditorProps) {
+function checkIncompleteDetails(details:Details) {
+    let incomplete = false;
+    Object.values(details).forEach(value => {
+        if (value.length === 0) incomplete = true;
+    });
+
+    return incomplete;
+}
+
+function WorkEditor({ details, handleChange, handleDelete, isComplete }: WorkEditorProps) {
     const [displayActive, setDisplayActive] = useState(false);
     const deleteDetails = {
         key: details.key,
@@ -40,8 +50,10 @@ function WorkEditor({ details, handleChange, handleDelete }: WorkEditorProps) {
         data: details.positionTitle
     }
 
+    if (!checkIncompleteDetails(details)) isComplete = true;
+
     return (
-        <section className="data-editor" data-active={displayActive}>
+        <section className="data-editor" data-active={displayActive} data-complete={isComplete}>
             <button className="data-expand-btn" onClick={() => setDisplayActive(!displayActive)}>
                 <h3>{details.positionTitle}</h3>
             </button>
@@ -92,22 +104,31 @@ function WorkEditor({ details, handleChange, handleDelete }: WorkEditorProps) {
                         onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'location', details.key)}
                     />
                 </div>
-            <div className="input-row">
-                <TextInput
-                    label='Description'
-                    name='description'
-                    value={details.description}
-                    id = {details.key}
-                    onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'description', details.key)}
-                />
+                <div className="input-row">
+                    <TextInput
+                        label='Description'
+                        name='description'
+                        value={details.description}
+                        id = {details.key}
+                        onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'description', details.key)}
+                    />
+                </div>
             </div>
-            </div>
+            {!isComplete && <span>Please fill incomplete data</span>}
         </section>
     );
 }
 
 export function WorkEditSection({ workDetails, handleChange, addData, handleDelete }: WorkEditSectionProps) {
     const [displayActive, setDisplayActive] = useState(false);
+    const [incompleteDataIndex, setIncompleteDataIndex] = useState(-1);
+
+    function handleAddData() {
+        if (workDetails.length === 0) return addData();
+
+        const incompleteProjectIndex = workDetails.findIndex(checkIncompleteDetails);
+        incompleteProjectIndex > -1? setIncompleteDataIndex(incompleteProjectIndex): addData();
+    }
 
     return (
         <section className="data-editor-section" data-active={displayActive}>
@@ -116,11 +137,17 @@ export function WorkEditSection({ workDetails, handleChange, addData, handleDele
             </button>
             <div className="data-editors">
                 {
-                    workDetails.length > 0 && workDetails.map((work) => (
-                        <WorkEditor key={work.key} details={work} handleChange={handleChange} handleDelete={handleDelete} />
+                    workDetails.length > 0 && workDetails.map((work, index) => (
+                        <WorkEditor 
+                            key={work.key} 
+                            details={work} 
+                            handleChange={handleChange} 
+                            handleDelete={handleDelete} 
+                            isComplete={incompleteDataIndex !== index}
+                        />
                     ))
                 }
-                <button onClick={addData}>Add Work</button>
+                <button onClick={handleAddData}>Add Work</button>
             </div>
         </section>
     );
