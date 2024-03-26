@@ -21,4 +21,19 @@ function TextInput({label, name, value, id, onChange}: InputProps) {
     );
 }
 
-export { TextInput }
+function NumberInput({label, name, value, id, onChange}: InputProps) {
+    return (
+        <>
+            <label htmlFor={name + '-' + id}>{label}</label>
+            <input 
+                type="number" 
+                name={name} 
+                id={name + '-' + id}
+                value={value} 
+                onChange={ onChange }
+            />
+        </>
+    );
+}
+
+export { TextInput, NumberInput }

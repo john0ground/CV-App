@@ -221,6 +221,3 @@ export default function App() {
                 title={currentCvData.title}
             />)
 }
-
-// set focus to incomplete data
-// different input types

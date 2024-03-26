@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextInput } from "./Inputs";
+import { TextInput, NumberInput } from "./Inputs";
 export type WorkHandler = (value:string, property: keyof Details, key:string) => void;
 export type AddWork = () => void;
 export interface DeleteProps { key:string, section:string, data:string }
@@ -78,7 +78,7 @@ function WorkEditor({ details, handleChange, handleDelete, isComplete }: WorkEdi
                     />
                 </div>
                 <div className="input-row">
-                    <TextInput
+                    <NumberInput
                         label='Start Date'
                         name='start-date'
                         value={details.startDate}
@@ -87,7 +87,7 @@ function WorkEditor({ details, handleChange, handleDelete, isComplete }: WorkEdi
                     />
                 </div>
                 <div className="input-row">
-                    <TextInput
+                    <NumberInput
                         label='End Date'
                         name='end-date'
                         value={details.endDate}
