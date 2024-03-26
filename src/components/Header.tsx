@@ -61,9 +61,9 @@ export function HeaderEditSection({ headerDetails, handleChange }: HeaderEditSec
 
 export function CvHeader({ details }: CvHeaderProps) {
     return (
-        <header>
+        <section>
             <h1>{details.fullName}</h1>
             <span>{details.niche}</span>
-        </header>
+        </section>
     );
 }

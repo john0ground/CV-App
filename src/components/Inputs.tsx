@@ -21,12 +21,26 @@ function TextInput({label, name, value, id, onChange}: InputProps) {
     );
 }
 
-function NumberInput({label, name, value, id, onChange}: InputProps) {
+function NumberInput({label, name, id, onChange}: InputProps) {
     return (
         <>
             <label htmlFor={name + '-' + id}>{label}</label>
             <input 
                 type="number" 
+                name={name} 
+                id={name + '-' + id}
+                onChange={ onChange }
+            />
+        </>
+    );
+}
+
+function FileInput({label, name, value, id, onChange}: InputProps) {
+    return (
+        <>
+            <label htmlFor={name + '-' + id}>{label}</label>
+            <input 
+                type="file"
                 name={name} 
                 id={name + '-' + id}
                 value={value} 
@@ -36,4 +50,4 @@ function NumberInput({label, name, value, id, onChange}: InputProps) {
     );
 }
 
-export { TextInput, NumberInput }
+export { TextInput, NumberInput, FileInput }

@@ -61,6 +61,7 @@ let sampleData:CvData = {
 
 export default function App() {
     const [currentCvData, setCurrentCvData] = useState(userData);
+    const [profileImage, setProfileImage] = useState();
 
     function toggleCurrentData() {
         if (currentCvData.key === userData.key) {
@@ -70,6 +71,10 @@ export default function App() {
             sampleData = {...currentCvData}
             setCurrentCvData(userData)
         }
+    }
+
+    function addProfileImage(imgFile) {
+        setProfileImage(URL.createObjectURL(imgFile));
     }
 
     function handleHeaderDetails(value:string, key:string) {
@@ -192,6 +197,7 @@ export default function App() {
     }
 
     return (<Cv 
+                handleProfileImage = {addProfileImage}
                 handleHeader= {handleHeaderDetails}
                 handleContact = {handleContactDetails}
                 handleSummary={handleSummary}
@@ -199,6 +205,7 @@ export default function App() {
                 handleProject = {handleProjectDetails}
                 handleWork = {handleWorkDetails}
 
+                profileImage = {profileImage}
                 headerDetails = {currentCvData.header}
                 contactDetails = {currentCvData.contact}
                 summaryDetails= {currentCvData.summary}
@@ -221,3 +228,5 @@ export default function App() {
                 title={currentCvData.title}
             />)
 }
+
+// numberInput => yearInput

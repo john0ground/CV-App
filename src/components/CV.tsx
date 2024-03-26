@@ -1,3 +1,4 @@
+import { ProfileImageEditSection, CvProfileImage } from './ProfileImage';
 import { HeaderEditSection, CvHeader, HeaderHandler, Details as HeaderDetails } from './Header';
 import { ContactEditSection, CvContact, ContactHandler, Details as ContactDetails } from './Contact';
 import { SummaryEditSection, CvSummary, SummaryHandler, Details as SummaryDetails } from './Summary';
@@ -40,6 +41,7 @@ interface CvProps {
 }
 
 export default function Cv({ 
+        handleProfileImage,
         handleHeader,
         handleContact,
         handleSummary,
@@ -47,6 +49,7 @@ export default function Cv({
         handleProject, 
         handleWork,
 
+        profileImage,
         headerDetails,
         contactDetails,
         summaryDetails,
@@ -81,11 +84,8 @@ export default function Cv({
         deleteDataRef.current = deleteData;
 
         if (deleteModalRef.current) {
-            console.log(deleteModalRef.current);
             deleteModalRef.current.showModal();
         }
-
-        console.log(details);
     }
 
     function closeDeleteModal() {
@@ -110,6 +110,7 @@ export default function Cv({
 
                 <div className="editor-header">
                     <h2>Header</h2>
+                    <ProfileImageEditSection handleChange={handleProfileImage}/>
                     <HeaderEditSection headerDetails={headerDetails} handleChange={handleHeader} />
                 </div>
 
@@ -148,7 +149,10 @@ export default function Cv({
             </div>
 
             <div className='cv'>
-                <CvHeader details={headerDetails} />
+                <div className="cv-header">
+                    <CvProfileImage imgSrc={profileImage} />
+                    <CvHeader details={headerDetails} />
+                </div>
 
                 <div className="cv-aside">
                     <CvContact details={contactDetails} />
