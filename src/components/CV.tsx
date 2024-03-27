@@ -1,4 +1,4 @@
-import { ProfileImageEditSection, CvProfileImage } from './ProfileImage';
+import { ProfileImageEditSection, CvProfileImage, AddProfileImage } from './ProfileImage';
 import { HeaderEditSection, CvHeader, HeaderHandler, Details as HeaderDetails } from './Header';
 import { ContactEditSection, CvContact, ContactHandler, Details as ContactDetails } from './Contact';
 import { SummaryEditSection, CvSummary, SummaryHandler, Details as SummaryDetails } from './Summary';
@@ -18,6 +18,7 @@ interface CvProps {
     handleProject: ProjectHandler;
     handleWork: WorkHandler;
 
+    profileImageSrc: string;
     headerDetails: HeaderDetails;
     contactDetails: ContactDetails;
     summaryDetails: SummaryDetails;
@@ -26,6 +27,7 @@ interface CvProps {
     workDetails: WorkDetails[];
     skillDetails: SkillDetails[];
 
+    addProfileImage: AddProfileImage
     addEducation: AddEducation;
     addProject: AddProject;
     addWork: AddWork;
@@ -41,7 +43,7 @@ interface CvProps {
 }
 
 export default function Cv({ 
-        handleProfileImage,
+        addProfileImage,
         handleHeader,
         handleContact,
         handleSummary,
@@ -49,7 +51,7 @@ export default function Cv({
         handleProject, 
         handleWork,
 
-        profileImage,
+        profileImageSrc,
         headerDetails,
         contactDetails,
         summaryDetails,
@@ -110,7 +112,7 @@ export default function Cv({
 
                 <div className="editor-header">
                     <h2>Header</h2>
-                    <ProfileImageEditSection handleChange={handleProfileImage}/>
+                    <ProfileImageEditSection addPhoto={addProfileImage} imgSrc={profileImageSrc} />
                     <HeaderEditSection headerDetails={headerDetails} handleChange={handleHeader} />
                 </div>
 
@@ -150,7 +152,7 @@ export default function Cv({
 
             <div className='cv'>
                 <div className="cv-header">
-                    <CvProfileImage imgSrc={profileImage} />
+                    <CvProfileImage imgSrc={profileImageSrc} />
                     <CvHeader details={headerDetails} />
                 </div>
 

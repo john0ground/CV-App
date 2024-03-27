@@ -6,6 +6,13 @@ interface InputProps {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+interface FileInputProps {
+    label: string;
+    name: string;
+    id: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
 function TextInput({label, name, value, id, onChange}: InputProps) {
     return (
         <>
@@ -35,7 +42,7 @@ function NumberInput({label, name, id, onChange}: InputProps) {
     );
 }
 
-function FileInput({label, name, value, id, onChange}: InputProps) {
+function FileInput({label, name, id, onChange}: FileInputProps) {
     return (
         <>
             <label htmlFor={name + '-' + id}>{label}</label>
@@ -43,7 +50,6 @@ function FileInput({label, name, value, id, onChange}: InputProps) {
                 type="file"
                 name={name} 
                 id={name + '-' + id}
-                value={value} 
                 onChange={ onChange }
             />
         </>
