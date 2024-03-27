@@ -157,6 +157,10 @@ export default function App() {
         ));
     }
 
+    function deleteProfileImage(key:string) {
+        setProfileImageSrc(key);
+    }
+
     function deleteProject(key:string) {
         const projectIndex = currentCvData.project.findIndex(proj => proj.key === key);
         const newProjectDetails = [...currentCvData.project];
@@ -220,6 +224,7 @@ export default function App() {
                 addWork = {addWork}
                 addSkill = {addSkill}
 
+                deleteProfileImage={deleteProfileImage}
                 deleteProject={deleteProject}
                 deleteEducation={deleteEducation}
                 deleteWork={deleteWork}
@@ -231,3 +236,4 @@ export default function App() {
 }
 
 // numberInput => yearInput
+// modal delete data

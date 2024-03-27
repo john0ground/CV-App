@@ -33,6 +33,7 @@ interface CvProps {
     addWork: AddWork;
     addSkill: AddSkill;
 
+    deleteProfileImage: (key:string) => void;
     deleteProject: (key:string) => void;
     deleteEducation: (key:string) => void;
     deleteWork: (key:string) => void;
@@ -65,6 +66,7 @@ export default function Cv({
         addWork,
         addSkill,
 
+        deleteProfileImage,
         deleteProject,
         deleteEducation,
         deleteWork,
@@ -112,7 +114,10 @@ export default function Cv({
 
                 <div className="editor-header">
                     <h2>Header</h2>
-                    <ProfileImageEditSection addPhoto={addProfileImage} imgSrc={profileImageSrc} />
+                    <ProfileImageEditSection 
+                        addPhoto={addProfileImage} 
+                        imgSrc={profileImageSrc} 
+                        handleDelete={(details) => openDeleteModal(deleteProfileImage, details)} />
                     <HeaderEditSection headerDetails={headerDetails} handleChange={handleHeader} />
                 </div>
 
