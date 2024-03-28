@@ -7,6 +7,7 @@ import { WorkEditSection, CvWork, WorkHandler, AddWork, Details as WorkDetails }
 import { ProjectEditSection, CvProject, ProjectHandler, AddProject, Details as ProjectDetails } from './Projects';
 import { SkillEditSection, CvSkill, AddSkill, Details as SkillDetails } from './Skills';
 
+import { useState } from 'react';
 import { useRef } from 'react';
 import './../style/style.scss';
 
@@ -76,9 +77,10 @@ export default function Cv({
         title
     }: CvProps) {
 
+    const [modalDeleteDetails, setModalDeleteDetails] = useState<DeleteProps | null>(null);
+
     const deleteModalRef = useRef<HTMLDialogElement>(null);
     const deleteDataRef = useRef<(() => void) | null>(null);
-
     interface DeleteProps { key:string, section:string, data:string }
 
     function openDeleteModal(deleteDataProp: (key: string) => void, details:DeleteProps) {
@@ -86,6 +88,8 @@ export default function Cv({
             deleteDataProp(details.key);
         };
         deleteDataRef.current = deleteData;
+
+        setModalDeleteDetails(details);
 
         if (deleteModalRef.current) {
             deleteModalRef.current.showModal();
@@ -183,7 +187,13 @@ export default function Cv({
             </div>
 
             <dialog ref={deleteModalRef}>   
-                <p>Delete this project?</p>
+                <p>Delete this data?</p>
+                {modalDeleteDetails && 
+                    <>
+                        <p>{modalDeleteDetails.section}</p>
+                        <p>{modalDeleteDetails.data}</p>
+                    </>
+                }
                 <button onClick={handleDelete}>Delete</button>
                 <button onClick={closeDeleteModal}>Cancel</button>
             </dialog>
