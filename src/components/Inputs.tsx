@@ -1,3 +1,5 @@
+import { ChangeEvent } from "react";
+
 interface InputProps {
     label: string;
     name: string;
@@ -28,7 +30,13 @@ function TextInput({label, name, value, id, onChange}: InputProps) {
     );
 }
 
-function NumberInput({label, name, id, onChange}: InputProps) {
+function YearInput({label, name, value, id, onChange}: InputProps) {
+    function handleChange(e: ChangeEvent<HTMLInputElement>) {
+        const value = e.target.value;
+        if (value.length > 4) return;
+        onChange(e);
+    }
+
     return (
         <>
             <label htmlFor={name + '-' + id}>{label}</label>
@@ -36,7 +44,8 @@ function NumberInput({label, name, id, onChange}: InputProps) {
                 type="number" 
                 name={name} 
                 id={name + '-' + id}
-                onChange={ onChange }
+                value={value}
+                onChange={ (e) => handleChange(e) }
             />
         </>
     );
@@ -56,4 +65,4 @@ function FileInput({label, name, id, onChange}: FileInputProps) {
     );
 }
 
-export { TextInput, NumberInput, FileInput }
+export { TextInput, YearInput, FileInput }

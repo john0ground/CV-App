@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextInput, NumberInput } from "./Inputs";
+import { TextInput, YearInput } from "./Inputs";
 export type EducationHandler = (value:string, property: keyof Details, key:string) => void;
 export type AddEducation = () => void;
 export interface DeleteProps { key:string, section:string, data:string }
@@ -75,7 +75,7 @@ function EducationEditor({ details, handleChange, handleDelete, isComplete }: Ed
                     />
                 </div>
                 <div className="input-row">
-                    <NumberInput
+                    <YearInput
                         label='Start Year'
                         name='start-year'
                         value={details.startYear}
@@ -84,7 +84,7 @@ function EducationEditor({ details, handleChange, handleDelete, isComplete }: Ed
                     />
                 </div>
                 <div className="input-row">
-                    <NumberInput
+                    <YearInput
                         label='End Year'
                         name='end-year'
                         value={details.endYear}
@@ -126,7 +126,7 @@ export function EducationEditSection({ educationDetails, handleChange, addData, 
                         />
                     ))
                 }
-                <button onClick={handleAddData}>Add Project</button>
+                <button onClick={handleAddData}>Add Education</button>
             </div>
         </section>
     );

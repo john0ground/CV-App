@@ -235,5 +235,4 @@ export default function App() {
             />)
 }
 
-// numberInput => yearInput
-// modal delete data
+//  modal data
