@@ -1,3 +1,6 @@
+$background-primary: #EFF4F7;
+$background-secondary: #FFFFFF;
+
 *, 
 *::before,
 *::after {
@@ -9,11 +12,6 @@
 body {
     background: #EEF3F6;
     font-family: sans-serif;
-}
-
-section {
-    border: 1px solid rgba(0, 0, 255, 0.459);
-    padding: 1rem;
 }
 
 input {
@@ -31,17 +29,56 @@ input {
 }
 
 .editor {
+    padding: 1rem;
+    background: $background-primary;
+
+    & > div {
+        margin-top: 1.5rem;
+    }
+
     h2 {
         text-align: center;
     }
 
     .data-editor-section {
+        margin-top: 15px;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+
+        .data-expand-btn {
+            width: 100%;
+            height: 100%;
+            height: 3rem;
+            background: $background-secondary;
+            border-radius: 10px;
+            padding: 10px;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            h3 {
+                text-align: left;
+            }
+
+            .expand-icon {
+                width: 35px;
+                transition: transform 0.3s ease;
+
+                &[data-active="true"] {
+                    transform: rotate(90deg);
+                }
+            }
+        }
+
         .data-editors {
             overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            padding: 0 1rem;
         }
 
         &[data-active="true"] .data-editors {
-            max-height: fit-content;
+            max-height: 500px;
         }
 
         &[data-active="false"] .data-editors {
@@ -53,13 +90,14 @@ input {
         .data-inputs {
             margin-top: 1rem;
             overflow: hidden;
+            transition: max-height 0.5s ease-out;
         }
 
         &[data-active="true"] .data-inputs {
-            max-height: fit-content;
+            max-height: 500px;
         }
 
-        &[data-active="true"] .data-inputs {
+        &[data-active="false"] .data-inputs {
             max-height: 0;
         }
 

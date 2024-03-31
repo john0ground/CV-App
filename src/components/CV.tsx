@@ -188,7 +188,7 @@ export default function Cv({
 
             <dialog ref={deleteModalRef}>   
                 <p>Delete this data?</p>
-                {modalDeleteDetails && 
+                {modalDeleteDetails &&
                     <>
                         <p>{modalDeleteDetails.section}</p>
                         <p>{modalDeleteDetails.data}</p>

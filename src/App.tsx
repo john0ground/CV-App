@@ -235,4 +235,5 @@ export default function App() {
             />)
 }
 
-//  modal data
+//  incomplete data after deletion prob
+//  see cv / editor btn

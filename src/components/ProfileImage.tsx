@@ -31,8 +31,8 @@ function ProfileImageEditor({ addPhoto, handleDelete, imgSrc }: ProfileImageEdit
 
     return (
         <section className="data-editor">
-            <img width="80px" height="80px" src={imgSrc} alt="profile-image" />
-            {imgSrc && <button onClick={() => handleDelete(deleteDetails)}>Remove Image</button>}
+            { imgSrc && <img width="80px" height="80px" src={imgSrc} alt="profile-image" /> }
+            { imgSrc && <button onClick={() => handleDelete(deleteDetails)}>Remove Image</button> }
             <div className="data-inputs">
                 <div className="input-row">
                     <FileInput
@@ -56,6 +56,9 @@ export function ProfileImageEditSection({ addPhoto, imgSrc, handleDelete }: Prof
         <section className="data-editor-section" data-active={displayActive}>
             <button className="data-expand-btn" onClick={() => setDisplayActive(!displayActive)}>
                 <h3>Profile Image</h3>
+                <svg className="expand-icon" data-active={displayActive} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                    <path d="m10 7 5 5-5 5" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
             </button>
             <div className="data-editors">
                 <ProfileImageEditor handleDelete={handleDelete} addPhoto={addPhoto} imgSrc={imgSrc}/>
