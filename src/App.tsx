@@ -61,6 +61,7 @@ let sampleData:CvData = {
 
 export default function App() {
     const [currentCvData, setCurrentCvData] = useState(userData);
+    const [darkMode, setDarkMode] = useState(false);
     const [profileImageSrc, setProfileImageSrc] = useState('');
 
     function toggleCurrentData() {
@@ -71,6 +72,10 @@ export default function App() {
             sampleData = {...currentCvData}
             setCurrentCvData(userData)
         }
+    }
+
+    function toggleTheme() {
+        setDarkMode(!darkMode);
     }
 
     function addProfileImage(imgFile: File) {
@@ -201,7 +206,9 @@ export default function App() {
         ));
     }
 
-    return (<Cv 
+    return (
+        <div id="app" data-theme={darkMode? 'dark': 'light'}>
+            <Cv 
                 handleHeader= {handleHeaderDetails}
                 handleContact = {handleContactDetails}
                 handleSummary={handleSummary}
@@ -231,8 +238,11 @@ export default function App() {
                 deleteSkill={deleteSkill}
 
                 toggleCvData={toggleCurrentData}
+                toggleTheme={toggleTheme}
                 title={currentCvData.title}
-            />)
+            />
+        </div>
+    )
 }
 
 //  assign night mode variables to icon svgs 

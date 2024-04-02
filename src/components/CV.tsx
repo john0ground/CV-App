@@ -41,7 +41,8 @@ interface CvProps {
     deleteSkill: (key:string) => void;
 
     toggleCvData: () => void;
-    title: string
+    toggleTheme: () => void;
+    title: string;
 }
 
 export default function Cv({ 
@@ -74,6 +75,7 @@ export default function Cv({
         deleteSkill,
 
         toggleCvData,
+        toggleTheme,
         title
     }: CvProps) {
 
@@ -115,6 +117,7 @@ export default function Cv({
                 <button onClick={toggleCvData}>
                     {title === 'sample-data'? 'Undo Sample': 'Load Sample'}
                 </button>
+                <button onClick={toggleTheme}>Theme</button>
 
                 <div className="editor-header">
                     <h2>Header</h2>

@@ -41,22 +41,17 @@
 
 $font-stack: 'Montserrat', sans-serif;
 
-$background-primary: #EFF4F7;
-$background-secondary: #FFFFFF;
+$background-primary-light: #EFF4F7;
+$background-secondary-light: #FFFFFF;
+$color-primary-light: #000000e8;
+$color-secondary-light: #00000096;
+$box-shadow-light: 1px 1px 5px rgba(0, 0, 0, 0.3);
 
-$text-primary: #000000e8;
-$text-secondary: #00000096;
-
-%data-expand-button {
-    width: 100%;
-    height: 3rem;
-    background: $background-secondary;
-    border-radius: 10px;
-    padding: 10px;
-    border: none;
-    display: flex;
-    align-items: center;
-}
+$background-primary-dark: #1E2029;
+$background-secondary-dark: #454051;
+$color-primary-dark: #fff;
+$color-secondary-dark: #fff;
+$box-shadow-dark: 1px 1px 5px rgba(255, 255, 255, 0.747);
 
 *, 
 *::before,
@@ -67,9 +62,36 @@ $text-secondary: #00000096;
 }
 
 body {
-    background: #EEF3F6;
-    font-family: sans-serif;
-    font-family: $font-stack;    
+    font-family: $font-stack;
+}
+
+#app {
+    &[data-theme="light"] {
+        --bg-primary: #{$background-primary-light};
+        --bg-secondary: #{$background-secondary-light};
+        --color-primary: #{$color-primary-light};
+        --color-secondary: #{$color-secondary-light};
+        --box-shadow: #{$box-shadow-light};
+    }
+
+    &[data-theme="dark"] {
+        --bg-primary: #{$background-primary-dark};
+        --bg-secondary: #{$background-secondary-dark};
+        --color-primary: #{$color-primary-dark};
+        --color-secondary: #{$color-secondary-dark};
+        --box-shadow: #{$box-shadow-dark};
+    }
+}
+
+%data-expand-button {
+    width: 100%;
+    height: 3rem;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    padding: 10px;
+    border: none;
+    display: flex;
+    align-items: center;
 }
 
 input {
@@ -88,7 +110,8 @@ input {
 
 .editor {
     padding: 1rem;
-    background: $background-primary;
+    background: var(--bg-primary);
+    transition: background-color 0.3s ease;
 
     & > div {
         margin-top: 1.5rem;
@@ -99,10 +122,12 @@ input {
         font-size: 20px;
         margin-top: 2.5rem;
         font-weight: 600;
+        color: var(--color-primary);
     }
 
     h3 {
         font-weight: 600;
+        color: var(--color-primary);
     }
 
     h4 {
@@ -115,7 +140,7 @@ input {
 
     .data-editor-section {
         margin-top: 15px;
-        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        box-shadow: var(--box-shadow);
         border-radius: 10px;
 
         & > .data-expand-btn {
