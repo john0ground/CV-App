@@ -55,7 +55,7 @@ function WorkEditor({ details, handleChange, handleDelete, isComplete }: WorkEdi
     return (
         <section className="data-editor" data-active={displayActive} data-complete={isComplete}>
             <button className="data-expand-btn" onClick={() => setDisplayActive(!displayActive)}>
-                <h3>{details.positionTitle? details.positionTitle: 'No Work Title'}</h3>
+                <h4>{details.positionTitle? details.positionTitle: 'No Work Title'}</h4>
                 <svg className="expand-icon" data-active={displayActive} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
                     <path d="m10 7 5 5-5 5" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>

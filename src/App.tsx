@@ -235,7 +235,8 @@ export default function App() {
             />)
 }
 
-//  add button for save data
-//  assign night mode variables to icon svgs
+//  assign night mode variables to icon svgs 
 //  incomplete data after deletion prob
 //  see cv / editor btn
+
+// manage fonts
