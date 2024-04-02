@@ -142,14 +142,22 @@ input {
                 margin-top: 15px;
             }
 
-            .delete-data-btn {
-                padding: 0.3rem 0.7rem;
+            .data-buttons {
                 display: flex;
-                align-items: center;
+                margin-bottom: 15px;
+                gap: 0.5rem;
 
-                svg {
-                    width: 25px;
-                    height: 25px;
+                button {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 2.2rem;
+                    width: 5rem;
+
+                    svg {
+                        width: 25px;
+                        height: 25px;
+                    }
                 }
             }
         }
@@ -169,11 +177,8 @@ input {
         &[data-complete="false"] {
             border: 1px solid red;
         }
-
-        .delete-data-btn {
-            margin-bottom: 15px;
-        }
     }
+
     .single-data-editor {
         box-shadow: none;
     }
