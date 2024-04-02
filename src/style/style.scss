@@ -49,8 +49,8 @@ $box-shadow-light: 1px 1px 5px rgba(0, 0, 0, 0.3);
 
 $background-primary-dark: #1E2029;
 $background-secondary-dark: #454051;
-$color-primary-dark: #fff;
-$color-secondary-dark: #fff;
+$color-primary-dark: #ffffffd0;
+$color-secondary-dark: #ffffffbd;
 $box-shadow-dark: 1px 1px 5px rgba(255, 255, 255, 0.747);
 
 *, 
@@ -152,6 +152,20 @@ input {
                 margin-right: 0.5rem;
             }
 
+            #icon-1,
+            #icon-2,
+            #icon-3,
+            #icon-4,
+            #icon-5,
+            #icon-6 {
+                path { stroke: var(--color-secondary); }
+            }
+            
+            #icon-2 { stroke: var(--color-secondary); }
+            #icon-5 {circle { fill: var(--color-secondary); }}
+            #icon-7 {path { fill: var(--color-secondary); }}
+            #icon-8 { fill: var(--color-secondary); }
+
             h3 {
                 text-align: left;
             }
@@ -163,6 +177,10 @@ input {
 
                 &[data-active="true"] {
                     transform: rotate(90deg);
+                }
+
+                path {
+                    stroke: var(--color-primary);
                 }
             }
         }

@@ -65,7 +65,7 @@ export function SkillEditSection({ addData, skillDetails, handleDelete }: SkillE
     return (
         <section className="data-editor-section" data-active={displayActive}>
             <button className="data-expand-btn" onClick={() => setDisplayActive(!displayActive)}>
-                <svg className="section-icon" xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none">
+                <svg className="section-icon" id="icon-5" xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none">
                   <path d="M9 5H7C5.89543 5 5 5.89543 5 7V19C5 20.1046 5.89543 21 7 21H17C18.1046 21 19 20.1046 19 19V7C19 5.89543 18.1046 5 17 5H15" stroke="#000000" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M12 12H15" stroke="#000000" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M12 16H15" stroke="#000000" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
