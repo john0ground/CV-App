@@ -41,17 +41,22 @@
 
 $font-stack: 'Montserrat', sans-serif;
 
+$header-background-light: #484b54;
+$header-background-dark: #d1cae3;
+
 $background-primary-light: #EFF4F7;
 $background-secondary-light: #FFFFFF;
 $color-primary-light: #000000e8;
 $color-secondary-light: #00000096;
+$color-tertiary-light: #0000006c;
 $box-shadow-light: 1px 1px 5px rgba(0, 0, 0, 0.3);
 
 $background-primary-dark: #1E2029;
 $background-secondary-dark: #454051;
 $color-primary-dark: #ffffffd0;
 $color-secondary-dark: #ffffffbd;
-$box-shadow-dark: 1px 1px 5px rgba(255, 255, 255, 0.747);
+$color-tertiary-dark: #ffffff96;
+$box-shadow-dark: 1px 1px 2px rgba(255, 255, 255, 0.3);
 
 *, 
 *::before,
@@ -67,18 +72,22 @@ body {
 
 #app {
     &[data-theme="light"] {
+        --bg-header: #{$header-background-light};
         --bg-primary: #{$background-primary-light};
         --bg-secondary: #{$background-secondary-light};
         --color-primary: #{$color-primary-light};
         --color-secondary: #{$color-secondary-light};
+        --color-tertiary: #{$color-tertiary-light};
         --box-shadow: #{$box-shadow-light};
     }
 
     &[data-theme="dark"] {
+        --bg-header: #{$header-background-dark};
         --bg-primary: #{$background-primary-dark};
         --bg-secondary: #{$background-secondary-dark};
         --color-primary: #{$color-primary-dark};
         --color-secondary: #{$color-secondary-dark};
+        --color-tertiary: #{$color-tertiary-dark};
         --box-shadow: #{$box-shadow-dark};
     }
 }
@@ -94,24 +103,45 @@ body {
     align-items: center;
 }
 
-input {
-    background: #fff;
-    border:none;
-    box-shadow: 1px 1px 2px #0000002d;
-    border-radius: 10px;
-    height: 2.5rem;
-    width: 100%;
-    margin: 0.3rem 0 1rem 0;
-}
+%expand-icon {
+    width: 35px;
+    transition: transform 0.3s ease;
+    margin-left: auto;
 
-.cv, .editor {
-    border: 1px solid rgba(0, 128, 0, 0.452);
+    &[data-active="true"] {
+        transform: rotate(90deg);
+    }
+
+    path {
+        stroke: var(--color-primary);
+    }
 }
 
 .editor {
     padding: 1rem;
     background: var(--bg-primary);
     transition: background-color 0.3s ease;
+    margin-top: 3rem;
+
+    header {
+        background: var(--bg-header);
+        position: absolute;
+        width: 100%;
+        min-height: 4rem;
+        left: 0;
+        top: 0;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        padding: 0 1rem;
+
+        #theme-btn {
+            background: none;
+            height: fit-content;
+            border: none;
+            margin-left: 1rem;
+        }
+    }
 
     & > div {
         margin-top: 1.5rem;
@@ -158,30 +188,20 @@ input {
             #icon-4,
             #icon-5,
             #icon-6 {
-                path { stroke: var(--color-secondary); }
+                path { stroke: var(--color-tertiary); }
             }
             
-            #icon-2 { stroke: var(--color-secondary); }
-            #icon-5 {circle { fill: var(--color-secondary); }}
-            #icon-7 {path { fill: var(--color-secondary); }}
-            #icon-8 { fill: var(--color-secondary); }
+            #icon-2 { stroke: var(--color-tertiary); }
+            #icon-5 {circle { fill: var(--color-tertiary); }}
+            #icon-7 {path { fill: var(--color-tertiary); }}
+            #icon-8 { fill: var(--color-tertiary); }
 
             h3 {
                 text-align: left;
             }
 
             .expand-icon {
-                width: 35px;
-                transition: transform 0.3s ease;
-                margin-left: auto;
-
-                &[data-active="true"] {
-                    transform: rotate(90deg);
-                }
-
-                path {
-                    stroke: var(--color-primary);
-                }
+                @extend %expand-icon;
             }
         }
 
@@ -227,14 +247,11 @@ input {
         & > .data-expand-btn {
             @extend %data-expand-button;
             justify-content: space-between;
+            color: var(--color-primary);
 
             .expand-icon {
+                @extend %expand-icon;
                 width: 28px;
-                transition: transform 0.3s ease;
-
-                &[data-active="true"] {
-                    transform: rotate(90deg);
-                }
             }
         }
 
@@ -247,8 +264,25 @@ input {
                 margin-top: 15px;
             }
 
+            label {
+                color: var(--color-primary);
+            }
+
+            input {
+                background: var(--bg-secondary);
+                color: var(--color-primary);
+                border:none;
+                outline: none;
+                box-shadow: var(--box-shadow);
+                border-radius: 10px;
+                height: 2.5rem;
+                width: 100%;
+                margin: 0.3rem 0 1rem 0;
+            }
+
             .data-buttons {
                 display: flex;
+                justify-content: right;
                 margin-bottom: 15px;
                 gap: 0.5rem;
 

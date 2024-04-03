@@ -6,6 +6,7 @@ import { EducationEditSection, CvEducation, AddEducation, EducationHandler, Deta
 import { WorkEditSection, CvWork, WorkHandler, AddWork, Details as WorkDetails } from './Work';
 import { ProjectEditSection, CvProject, ProjectHandler, AddProject, Details as ProjectDetails } from './Projects';
 import { SkillEditSection, CvSkill, AddSkill, Details as SkillDetails } from './Skills';
+import ThemeButton from './ThemeButton';
 
 import { useState } from 'react';
 import { useRef } from 'react';
@@ -42,6 +43,7 @@ interface CvProps {
 
     toggleCvData: () => void;
     toggleTheme: () => void;
+    darkMode: boolean;
     title: string;
 }
 
@@ -76,6 +78,7 @@ export default function Cv({
 
         toggleCvData,
         toggleTheme,
+        darkMode,
         title
     }: CvProps) {
 
@@ -114,11 +117,12 @@ export default function Cv({
     return (
         <>
             <div className='editor'>
-                <button onClick={toggleCvData}>
-                    {title === 'sample-data'? 'Undo Sample': 'Load Sample'}
-                </button>
-                <button onClick={toggleTheme}>Theme</button>
-
+                <header>
+                    <button onClick={toggleCvData}>
+                        {title === 'sample-data'? 'Undo Sample': 'Load Sample'}
+                    </button>
+                    <ThemeButton darkMode={darkMode} toggleTheme={toggleTheme}/>
+                </header>
                 <div className="editor-header">
                     <h2>Header</h2>
                     <ProfileImageEditSection 
@@ -131,7 +135,7 @@ export default function Cv({
                 <div className="editor-aside">
                     <h2>Aside</h2>
                     <ContactEditSection contactDetails={contactDetails} handleChange={handleContact} />
-                    <EducationEditSection 
+                    <EducationEditSection
                         educationDetails={educationDetails} 
                         handleChange={handleEducation} 
                         addData={addEducation}

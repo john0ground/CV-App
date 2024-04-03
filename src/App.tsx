@@ -239,13 +239,14 @@ export default function App() {
 
                 toggleCvData={toggleCurrentData}
                 toggleTheme={toggleTheme}
+                darkMode = {darkMode}
                 title={currentCvData.title}
             />
         </div>
     )
 }
 
-//  assign night mode variables to icon svgs 
+//  assign night mode variables to icon svgs
 //  incomplete data after deletion prob
 //  see cv / editor btn
 

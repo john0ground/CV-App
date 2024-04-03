@@ -71,17 +71,17 @@ function ProjectEditor({details, handleChange, handleDelete, isComplete}: Projec
                     />
                 </div>
                 <div className="data-buttons">
-                    <button onClick={() => setDisplayActive(false)}>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-                          <path d="m8 12 4-4m0 0 4 4m-4-4v12M4 4h16" stroke="#000" strokeWidth="0.9" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                        <span>Save</span>
-                    </button>
                     <button onClick={() => handleDelete(deleteDetails)}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
                           <path d="M6 5h12M9 5v0c1.5769-1.83974 4.4231-1.83974 6 0v0M9 20h6c1.1046 0 2-.8954 2-2V9c0-.55228-.4477-1-1-1H8c-.55228 0-1 .44772-1 1v9c0 1.1046.89543 2 2 2Z" stroke="#000" strokeWidth=".888" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                         <span>Delete</span>
+                    </button>
+                    <button onClick={() => setDisplayActive(false)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                          <path d="m8 12 4-4m0 0 4 4m-4-4v12M4 4h16" stroke="#000" strokeWidth="0.9" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>Save</span>
                     </button>
                 </div>
             </div>
