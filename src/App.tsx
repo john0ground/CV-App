@@ -247,7 +247,7 @@ export default function App() {
 }
 
 //  clear cv
-//  incomplete data after deletion prob
+//  skills style
 //  see cv / editor btn
 
 // manage fonts

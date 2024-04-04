@@ -121,7 +121,10 @@ export function ProjectEditSection({ projectDetails, handleChange, addData, hand
                             key={proj.key} 
                             details={proj} 
                             handleChange={handleChange} 
-                            handleDelete={handleDelete}
+                            handleDelete={(deleteDetails) => {
+                                setIncompleteDataIndex(-1);
+                                handleDelete(deleteDetails);
+                            }}
                             isComplete={incompleteDataIndex !== index}
                         />
                     ))

@@ -171,7 +171,10 @@ export function WorkEditSection({ workDetails, handleChange, addData, handleDele
                             key={work.key} 
                             details={work} 
                             handleChange={handleChange} 
-                            handleDelete={handleDelete} 
+                            handleDelete={(deleteDetails) => {
+                                setIncompleteDataIndex(-1);
+                                handleDelete(deleteDetails);
+                            }}
                             isComplete={incompleteDataIndex !== index}
                         />
                     ))

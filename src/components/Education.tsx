@@ -143,7 +143,10 @@ export function EducationEditSection({ educationDetails, handleChange, addData, 
                             key={education.key} 
                             details={education} 
                             handleChange={handleChange} 
-                            handleDelete={handleDelete} 
+                            handleDelete={(deleteDetails) => {
+                                setIncompleteDataIndex(-1);
+                                handleDelete(deleteDetails);
+                            }}
                             isComplete={incompleteDataIndex !== index}
                         />
                     ))
