@@ -246,7 +246,6 @@ export default function App() {
     )
 }
 
-//  menu icon
 //  clear cv
 //  incomplete data after deletion prob
 //  see cv / editor btn

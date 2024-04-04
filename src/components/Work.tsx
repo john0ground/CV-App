@@ -130,7 +130,7 @@ function WorkEditor({ details, handleChange, handleDelete, isComplete }: WorkEdi
                     </button>
                 </div>
             </div>
-            {!isComplete && <span>Please fill incomplete data</span>}
+            {!isComplete && <span className="alert-incomplete">Please fill incomplete data.</span>}
         </section>
     );
 }
