@@ -30,9 +30,22 @@ function ProfileImageEditor({ addPhoto, handleDelete, imgSrc }: ProfileImageEdit
     }
 
     return (
-        <section className="data-editor single-data-editor">
-            { imgSrc && <img width="80px" height="80px" src={imgSrc} alt="profile-image" /> }
-            { imgSrc && <button onClick={() => handleDelete(deleteDetails)}>Remove Image</button> }
+        <section className="data-editor single-data-editor" id="data-editor-image">
+            <div className="image-container">
+                <div className="image-wrapper">
+                    { imgSrc && <img src={imgSrc} alt="profile-image" /> }
+                </div>
+                { imgSrc && <button id='remove-image-btn' onClick={() => handleDelete(deleteDetails)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M22 12c0 5.5228-4.4772 10-10 10-5.52285 0-10-4.4772-10-10C2 6.47715 6.47715 2 12 2c5.5228 0 10 4.47715 10 10ZM8.96963 8.96965c.29289-.29289.76776-.29289 1.06067 0L12 10.9393l1.9696-1.96963c.2929-.29289.7678-.29289 1.0607 0 .2929.29289.2929.76777 0 1.06063L13.0606 12l1.9697 1.9696c.2929.2929.2929.7678 0 1.0607-.2929.2929-.7678.2929-1.0607 0L12 13.0607l-1.9697 1.9696c-.29288.2929-.76776.2929-1.06065 0-.29289-.2929-.29289-.7678 0-1.0606L10.9393 12l-1.96967-1.9697c-.2929-.29288-.2929-.76776 0-1.06065Z"
+                        fill="#b23535"
+                      />
+                    </svg>
+                </button> }
+            </div>
             <div className="data-inputs">
                 <div className="input-row">
                     <FileInput

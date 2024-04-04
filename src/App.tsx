@@ -246,7 +246,8 @@ export default function App() {
     )
 }
 
-//  assign night mode variables to icon svgs
+//  menu icon
+//  clear cv
 //  incomplete data after deletion prob
 //  see cv / editor btn
 
