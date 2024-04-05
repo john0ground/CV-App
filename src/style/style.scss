@@ -393,6 +393,30 @@ body {
             }
         }
     }
+
+    #data-editor-skills {
+        ul {
+            list-style-type: none;
+            padding: 0 10px;
+            margin-bottom: 1rem;
+
+            li {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: var(--bg-secondary);
+                padding: 5px 10px;
+                margin-top: 0.6rem;
+                box-shadow: var(--box-shadow);
+                color: var(--color-primary);
+
+                button svg {
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+        }
+    }
 }
 
 .cv {

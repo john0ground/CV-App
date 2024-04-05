@@ -12,7 +12,8 @@ export interface Details {
 
 interface SkillEditorProps {
     addSkill: AddSkill;
-    // handleDelete: DeleteProject;
+    skillDetails: Details[];
+    handleDelete: DeleteSkill;
 }
 
 interface SkillEditSectionProps {
@@ -25,7 +26,7 @@ interface CvSkillProps {
     details: Details;
 }
 
-function SkillEditor({ addSkill }: SkillEditorProps) {
+function SkillEditor({ addSkill, skillDetails, handleDelete }: SkillEditorProps) {
     const [inputData, setInputData] = useState('');
 
     function handleAddSkill() {
@@ -35,7 +36,7 @@ function SkillEditor({ addSkill }: SkillEditorProps) {
     }
 
     return (
-        <section className="data-editor single-data-editor">
+        <section className="data-editor single-data-editor" id="data-editor-skills">
             <div className="data-inputs">
                 <TextInput
                     label='Skill'
@@ -46,15 +47,27 @@ function SkillEditor({ addSkill }: SkillEditorProps) {
                 />
             </div>
             <button className="add-data-btn" onClick={handleAddSkill}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-                      <path
-                        d="M16 30C8.268 30 2 23.73 2 16S8.268 2 16 2s14 6.27 14 14-6.268 14-14 14Zm0-30C7.163 0 0 7.16 0 16s7.163 16 16 16 16-7.16 16-16S24.837 0 16 0Zm6 15h-5v-5c0-.55-.447-1-1-1-.553 0-1 .45-1 1v5h-5c-.553 0-1 .45-1 1s.447 1 1 1h5v5c0 .55.447 1 1 1 .553 0 1-.45 1-1v-5h5c.553 0 1-.45 1-1s-.447-1-1-1Z"
-                        fill="#000"
-                        fillRule="evenodd"
-                      />
-                    </svg>
-                    <span>Add Skill</span>
-                </button>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                  <path
+                    d="M16 30C8.268 30 2 23.73 2 16S8.268 2 16 2s14 6.27 14 14-6.268 14-14 14Zm0-30C7.163 0 0 7.16 0 16s7.163 16 16 16 16-7.16 16-16S24.837 0 16 0Zm6 15h-5v-5c0-.55-.447-1-1-1-.553 0-1 .45-1 1v5h-5c-.553 0-1 .45-1 1s.447 1 1 1h5v5c0 .55.447 1 1 1 .553 0 1-.45 1-1v-5h5c.553 0 1-.45 1-1s-.447-1-1-1Z"
+                    fill="#000"
+                    fillRule="evenodd"
+                  />
+                </svg>
+                <span>Add Skill</span>
+            </button>
+            <ul>
+                {skillDetails.map(data => (
+                    <li key={data.key}>
+                        <span>{data.skill}</span>
+                        <button onClick={() => handleDelete(data.key)}>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                              <path d="M6 5h12M9 5v0c1.5769-1.83974 4.4231-1.83974 6 0v0M9 20h6c1.1046 0 2-.8954 2-2V9c0-.55228-.4477-1-1-1H8c-.55228 0-1 .44772-1 1v9c0 1.1046.89543 2 2 2Z" stroke="#000" strokeWidth=".888" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </button>
+                    </li>
+                ))}
+            </ul>
         </section>
     );
 }
@@ -79,16 +92,8 @@ export function SkillEditSection({ addData, skillDetails, handleDelete }: SkillE
                 </svg>
             </button>
             <div className="data-editors">
-                <SkillEditor addSkill={addData} />
+                <SkillEditor addSkill={addData} skillDetails={skillDetails} handleDelete={handleDelete} />
             </div>
-            <ul>
-                {skillDetails.map(data => (
-                    <li key={data.key}>
-                        <span>{data.skill}</span>
-                        <button onClick={() => handleDelete(data.key)}>Delete</button>
-                    </li>
-                ))}
-            </ul>
         </section>
     );
 }
