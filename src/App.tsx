@@ -246,8 +246,7 @@ export default function App() {
     )
 }
 
-//  clear cv
-//  skills style
+//  sample data, map on their own component
+//  manage sizes on cv, list sizes hierarchy
 //  see cv / editor btn
-
 // manage fonts

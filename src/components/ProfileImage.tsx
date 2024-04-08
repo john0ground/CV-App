@@ -90,6 +90,8 @@ export function ProfileImageEditSection({ addPhoto, imgSrc, handleDelete }: Prof
 
 export function CvProfileImage({ imgSrc }: CvProfileImageProps) {
     return (
-            <img width="80px" height="80px" src={imgSrc} alt="profile-image" />
+        <div className="img-container">
+            <img src={imgSrc} alt="profile-image" />
+        </div>
     );
 }

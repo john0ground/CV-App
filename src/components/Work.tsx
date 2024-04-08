@@ -30,7 +30,7 @@ interface WorkEditSectionProps {
 }
 
 interface CvWorkProps {
-    details: Details
+    details: Details[];
 }
 
 function checkIncompleteDetails(details:Details) {
@@ -195,14 +195,19 @@ export function WorkEditSection({ workDetails, handleChange, addData, handleDele
 }
 
 export function CvWork({ details }: CvWorkProps) {
-    return (
-        <section>
-            <span>{ details.companyName }</span>
-            <span>{ details.positionTitle }</span>
-            <span>{ details.startDate }</span>
-            <span>{ details.endDate }</span>
-            <span>{ details.location }</span>
-            <span>{ details.description }</span>
+    if (details.length > 0) return (
+        <section id="cv-work">
+            <h2>Work Experience</h2>
+            {details.map(work => (
+                <div className="work-data cv-data" key={work.key}>
+                    <span>{ work.companyName }</span>
+                    <span>{ work.positionTitle }</span>
+                    <span>{ work.startDate }</span>
+                    <span>{ work.endDate }</span>
+                    <span>{ work.location }</span>
+                    <span>{ work.description }</span>
+                </div>
+            ))}
         </section>
     );
 }

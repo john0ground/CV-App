@@ -23,7 +23,7 @@ interface SkillEditSectionProps {
 }
 
 interface CvSkillProps {
-    details: Details;
+    details: Details[];
 }
 
 function SkillEditor({ addSkill, skillDetails, handleDelete }: SkillEditorProps) {
@@ -99,9 +99,14 @@ export function SkillEditSection({ addData, skillDetails, handleDelete }: SkillE
 }
 
 export function CvSkill({details}: CvSkillProps) {
-    return (
-        <section>
-            <span>{ details.skill }</span>
+    if (details.length > 0) return (
+        <section id="cv-skills">
+            <h2>Skills</h2>
+            {details.map(skill => (
+                <div className="skills-data cv-data" key={skill.key}>
+                    <span>{ skill.skill }</span>
+                </div>
+            ))}
         </section>
     );
 }

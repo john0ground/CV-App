@@ -74,13 +74,49 @@ export function ContactEditSection({ contactDetails, handleChange }: ContactEdit
     );
 }
 
+function dataIsEmpty(data:Details) {
+    const values = Object.values(data);
+
+    for(let i = 0; i < 3; i++) {
+        if (values[i].length > 0) return false;
+    }
+    return true;
+}
+
 export function CvContact( { details }: CvContactProps) {
     return(
-        <section>
-            <h2>Contact Details</h2>
-            <span>{details.email}</span>
-            <span>{details.contactNumber}</span>
-            <span>{details.address}</span>
+        <section id="cv-contact">
+            {!dataIsEmpty(details) && <h2>Contact Details</h2>}
+            {details.email && (
+                <div className="contact-row email">
+                    <div className="contact-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#fff">
+                            <path d="m42.686667 114.039333 213.333914 192.00134 213.333086-192.00034.000248 312.632608H42.68724794L42.686667 114.039333Zm394.776-28.7L256.020581 248.624941 74.576667 85.339333h362.886Z" fill="#ffffffd0" strokeWidth=".00512" fillRule="evenodd"/>
+                        </svg>
+                    </div>
+                    <span>{details.email}</span>
+                </div>
+            )}
+            {details.contactNumber && (
+                <div className="contact-row contact-number">
+                    <div className="contact-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="#fff" stroke="#fff">
+                            <path d="m31.073 4.433-2.878-2.87c-.794-.793-2.083-.793-2.878 0L21 7.303c-.659.971-.794 2.077 0 2.87l1.762 1.757c-1.306 1.75-2.874 3.658-4.639 5.418-1.996 1.99-4.216 3.799-6.212 5.285l-1.703-1.697c-.794-.793-1.903-.659-2.878 0l-5.756 4.305c-.965.665-.795 2.077 0 2.87l2.878 2.869c1.59 1.586 3.657 1.078 5.756 0 0 0 6.353-3.556 11.792-8.98 5.116-5.102 9.073-11.827 9.073-11.827.825-2.263 1.59-4.155 0-5.74" fill="#ffffffd0" stroke="none" fillRule="evenodd"/>
+                        </svg>
+                    </div>
+                    <span>{details.contactNumber}</span>
+                </div>
+            )}
+            {details.address && (
+                <div className="contact-row address">
+                    <div className="contact-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" xmlSpace="preserve" fill="#fff">
+                            <path fill="#ffffffd0" d="M32 0C18.746 0 8 10.746 8 24c0 5.219 1.711 10.008 4.555 13.93.051.094.059.199.117.289l16 24C29.414 63.332 30.664 64 32 64s2.586-.668 3.328-1.781l16-24c.059-.09.066-.195.117-.289C54.289 34.008 56 29.219 56 24 56 10.746 45.254 0 32 0zm0 32c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z"/>
+                        </svg>
+                    </div>
+                    <span>{details.address}</span>
+                </div>
+            )}
         </section>
     );
 }

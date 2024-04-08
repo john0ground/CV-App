@@ -171,28 +171,18 @@ export default function Cv({
 
             <div className='cv'>
                 <div className="cv-header">
-                    <CvProfileImage imgSrc={profileImageSrc} />
+                    { profileImageSrc.length > 0 && <CvProfileImage imgSrc={profileImageSrc} /> }
                     <CvHeader details={headerDetails} />
                 </div>
-
                 <div className="cv-aside">
                     <CvContact details={contactDetails} />
-                    {educationDetails.map((education) => (
-                        <CvEducation key={education.key} details={education} />
-                    ))}
-                    {skillDetails.map(skill => (
-                        <CvSkill key={skill.key} details={skill} />
-                    ))}
+                    <CvEducation details={educationDetails}/>
+                    <CvSkill details={skillDetails}/>
                 </div>
-
                 <div className="cv-main">
                     <CvSummary details={summaryDetails} />
-                    {workDetails.map((work) => (
-                        <CvWork key={work.key} details={work} />
-                    ))}
-                    {projectDetails.map((project) => (
-                        <CvProject key={project.key} details={project} />
-                    ))}
+                    <CvWork details={workDetails}/>
+                    <CvProject details={projectDetails}/>
                 </div>
             </div>
 

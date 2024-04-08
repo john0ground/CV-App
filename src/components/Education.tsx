@@ -27,7 +27,7 @@ interface EducationEditSectionProps {
 }
 
 interface CvEducationProps {
-    details: Details
+    details: Details[];
 }
 
 function checkIncompleteDetails(details:Details) {
@@ -166,13 +166,18 @@ export function EducationEditSection({ educationDetails, handleChange, addData, 
     );
 }
 
-export function CvEducation({ details }: CvEducationProps) {
-    return (
-        <header>
-            <h3>{details.school}</h3>
-            <span>{details.field}</span>
-            <span>{details.startYear}</span>
-            <span>{details.endYear}</span>            
-        </header>
+export function CvEducation({details}:CvEducationProps) {
+    if (details.length > 0) return (
+            <section id="cv-education">
+                <h2>Education</h2>
+                {details.map(education => (
+                    <div className="education-data cv-data" key={education.key}>
+                        <h3>{education.school}</h3>
+                        <span>{education.field}</span>
+                        <span>{education.startYear}</span>
+                        <span>{education.endYear}</span>  
+                    </div>   
+                ))}
+            </section>
     );
 }

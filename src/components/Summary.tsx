@@ -58,7 +58,8 @@ export function SummaryEditSection({ summaryDetails, handleChange }: SummaryEdit
 
 export function CvSummary({details}: CvSummaryProps) {
     return (
-        <section>
+        <section id="cv-summary">
+            {details.summary.length > 0 && <h2>Summary</h2>}
             <p>{details.summary}</p>
         </section>
     );

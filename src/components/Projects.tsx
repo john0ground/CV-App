@@ -21,7 +21,7 @@ interface ProjectEditSectionProps {
 }
 
 interface CvProjectProps {
-    details: Details
+    details: Details[];
 }
 
 function checkIncompleteDetails(details:Details) {
@@ -145,10 +145,15 @@ export function ProjectEditSection({ projectDetails, handleChange, addData, hand
 }
 
 export function CvProject({ details }: CvProjectProps) {
-    return (
-        <section>
-            <h3>{details.project}</h3>
-            <p>{details.description}</p>
+    if (details.length > 0) return (
+        <section id="cv-projects">
+            <h2>Projects</h2>
+            {details.map(proj => (
+                <div className="project-data cv-data" key={proj.key}>
+                    <h3>{proj.project}</h3>
+                    <p>{proj.description}</p>
+                </div>
+            ))}
         </section>
     );
 }
