@@ -10,7 +10,6 @@ export interface Details {
     positionTitle: string,
     startDate: string,
     endDate: string,
-    location: string,
     description: string,
     key: string
 }
@@ -95,15 +94,6 @@ function WorkEditor({ details, handleChange, handleDelete, isComplete }: WorkEdi
                         value={details.endDate}
                         id = {details.key}
                         onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'endDate', details.key)}
-                    />
-                </div>
-                <div className="input-row">
-                    <TextInput
-                        label='Location'
-                        name='location'
-                        value={details.location}
-                        id = {details.key}
-                        onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'location', details.key)}
                     />
                 </div>
                 <div className="input-row">
@@ -204,7 +194,6 @@ export function CvWork({ details }: CvWorkProps) {
                     <span>{ work.positionTitle }</span>
                     <span>{ work.startDate }</span>
                     <span>{ work.endDate }</span>
-                    <span>{ work.location }</span>
                     <span>{ work.description }</span>
                 </div>
             ))}

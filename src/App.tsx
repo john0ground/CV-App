@@ -1,63 +1,20 @@
-import { Details as HeaderDetails } from './components/Header';
-import { Details as ContactDetails } from './components/Contact';
-import { Details as SummaryDetails } from './components/Summary';
 import { Details as EducationDetails } from './components/Education';
 import { Details as WorkDetails } from './components/Work';
 import { Details as ProjectDetails } from './components/Projects';
-import { Details as SkillDetails } from './components/Skills';
 import Cv from './components/CV';
 import {
-    headerData,
-    contactData,
-    summaryData,
     projectData,
     workData,
     educationData,
+    cvUserData,
+    cvSampleData
 } from './data/cvData';
 
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';  
 
-interface CvData {
-    header: HeaderDetails;
-    contact: ContactDetails;
-    summary: SummaryDetails;
-    education: EducationDetails[];
-    project: ProjectDetails[];
-    work: WorkDetails[];
-    skills: SkillDetails[];
-    key: string;
-    title:string;
-}
-
-let userData:CvData = {
-    header: { ...headerData },
-    summary: { ...summaryData },
-    contact: { ...contactData },
-    education: [],
-    project: [],
-    work: [],
-    skills: [],
-    key: uuid(),
-    title: 'user-data'
-}
-
-let sampleData:CvData = {
-    header: { ...headerData, fullName: 'Nathan Drake', niche: 'Frontend Dev' },
-    summary: { ...summaryData },
-    contact: {
-        ...contactData,
-        email: 'nate.drake@gmail.com',
-        contactNumber: '(123) 456 7890',
-        address: '123 Main Street Apartment 4B Springfield, IL 62701'
-    },
-    education: [],
-    project: [],
-    work: [],
-    skills: [],
-    key: uuid(),
-    title: 'sample-data'
-}
+let userData = {...cvUserData}
+let sampleData = {...cvSampleData}
 
 export default function App() {
     const [currentCvData, setCurrentCvData] = useState(userData);
@@ -246,7 +203,7 @@ export default function App() {
     )
 }
 
-//  sample data, map on their own component
+//  sample data
 //  manage sizes on cv, list sizes hierarchy
 //  see cv / editor btn
 // manage fonts
