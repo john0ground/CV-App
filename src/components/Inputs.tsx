@@ -43,6 +43,7 @@ function YearInput({label, name, value, id, onChange}: InputProps) {
             <input 
                 type="number" 
                 name={name} 
+                placeholder="yyyy"
                 id={name + '-' + id}
                 value={value}
                 onChange={ (e) => handleChange(e) }
@@ -81,6 +82,7 @@ function DateInput({label, name, value, id, onChange}: InputProps) {
             <input 
                 type="text" 
                 maxLength={7}
+                placeholder="mm/yyyy"
                 name={name}
                 id={name + '-' + id}
                 value={value}
