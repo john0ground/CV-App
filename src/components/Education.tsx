@@ -52,7 +52,7 @@ function EducationEditor({ details, handleChange, handleDelete, isComplete }: Ed
     return (
         <section className="data-editor" data-active={displayActive} data-complete={isComplete}>
             <button className="data-expand-btn" onClick={() => setDisplayActive(!displayActive)}>
-                <h4>{details.school? details.school: 'No Education Title'}</h4>
+                <h4>{details.school? details.school: 'No School Title'}</h4>
                 <svg className="expand-icon" data-active={displayActive} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
                     <path d="m10 7 5 5-5 5" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
