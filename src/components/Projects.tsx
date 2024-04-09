@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextInput } from "./Inputs";
+import { TextInput, TextArea } from "./Inputs";
 export type ProjectHandler = (value:string, property: keyof Details, key:string) => void;
 export type AddProject = () => void;
 export interface DeleteProps { key:string, section:string, data:string }
@@ -62,7 +62,7 @@ function ProjectEditor({details, handleChange, handleDelete, isComplete}: Projec
                     />
                 </div>
                 <div className="input-row">
-                    <TextInput
+                    <TextArea
                         label='Description'
                         name='project-description'
                         value = { details.description } 

@@ -102,6 +102,21 @@ body {
     }
 }
 
+%input {
+    background: var(--bg-secondary);
+    color: var(--color-primary);
+    border: 2px solid rgba(0, 0, 0, 0);
+    outline: none;
+    box-shadow: var(--box-shadow);
+    border-radius: 10px;
+    height: 2.5rem;
+    width: 100%;
+    margin: 0.3rem 0 1rem 0;
+    font-size: 1rem;
+    padding: 0 10px;
+    transition: border 0.3s ease;
+}
+
 %data-expand-button {
     width: 100%;
     height: 3rem;
@@ -288,17 +303,20 @@ body {
             }
 
             input {
-                background: var(--bg-secondary);
-                color: var(--color-primary);
-                border:none;
-                outline: none;
-                box-shadow: var(--box-shadow);
-                border-radius: 10px;
-                height: 2.5rem;
-                width: 100%;
-                margin: 0.3rem 0 1rem 0;
-                font-size: 1rem;
-                padding: 0 10px;
+                @extend %input;
+                &:focus {
+                    border: 2px solid var(--bg-header);
+                }
+            }
+
+            textarea {
+                @extend %input;
+                height: 9rem;
+                font-family: $font-stack;
+
+                &:focus {
+                    border: 2px solid var(--bg-header);
+                }
             }
 
             .data-buttons {
@@ -431,6 +449,7 @@ body {
 .cv {
     --cv-h1: 16px;
     --cv-h2: 12px;
+    --cv-h3: 10px;
     --cv-span: 0.7rem;
 
     display: grid;
@@ -440,6 +459,10 @@ body {
     margin: 2rem 0;
     color: $color-primary-light;
 
+    section {
+        margin-top: 2rem
+    }
+
     h1 {
         font-size: var(--cv-h1);
         font-weight: 600;
@@ -448,10 +471,17 @@ body {
     h2 {
         font-size: var(--cv-h2);
         font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    h3 {
+        font-size: var(--cv-h3);
+        font-weight: 600;
     }
 
     span {
         font-size: var(--cv-span);
+        display: inline-block;
     }
 
     .cv-header {

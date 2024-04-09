@@ -8,6 +8,14 @@ interface InputProps {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+interface TextAreaProps {
+    label: string;
+    name: string;
+    value: string;
+    id: string;
+    onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+}
+
 interface FileInputProps {
     label: string;
     name: string;
@@ -107,4 +115,18 @@ function FileInput({label, name, id, onChange}: FileInputProps) {
     );
 }
 
-export { TextInput, YearInput, DateInput, FileInput }
+function TextArea({label, name, value, id, onChange}: TextAreaProps) {
+    return (
+        <>
+            <label htmlFor={name + '-' + id}>{label}</label>
+            <textarea
+                name={name} 
+                id={name + '-' + id}
+                value={value}
+                onChange={ onChange }
+            ></textarea>
+        </>
+    );
+}
+
+export { TextInput, YearInput, DateInput, FileInput, TextArea }
