@@ -51,6 +51,46 @@ function YearInput({label, name, value, id, onChange}: InputProps) {
     );
 }
 
+
+function DateInput({label, name, value, id, onChange}: InputProps) {
+    const getLastChar = (value:string) => value.charAt(value.length - 1);
+
+    function handleChange(e: ChangeEvent<HTMLInputElement>) {
+        const value = e.target.value;
+
+        const lastChar = getLastChar(value);
+        const pattern = /^[0-9/]*$/;
+        if (!pattern.test(lastChar)) return;
+
+        if (value.length === 2) e.target.value += '/';
+        onChange(e);
+    }
+
+    function handleDelete(e) {
+        if (e.keyCode !== 8) return;
+
+        const value = e.target.value;
+        if (getLastChar(value) === '/') e.target.value = '';
+
+        onChange(e);
+    }
+
+    return (
+        <>
+            <label htmlFor={name + '-' + id}>{label}</label>
+            <input 
+                type="text" 
+                maxLength={7}
+                name={name}
+                id={name + '-' + id}
+                value={value}
+                onChange={ (e) => handleChange(e) }
+                onKeyDown={(e) => handleDelete(e) }
+            />
+        </>
+    );
+}
+
 function FileInput({label, name, id, onChange}: FileInputProps) {
     return (
         <>
@@ -65,4 +105,4 @@ function FileInput({label, name, id, onChange}: FileInputProps) {
     );
 }
 
-export { TextInput, YearInput, FileInput }
+export { TextInput, YearInput, DateInput, FileInput }
