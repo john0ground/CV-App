@@ -188,13 +188,13 @@ export function CvWork({ details }: CvWorkProps) {
     if (details.length > 0) return (
         <section id="cv-work">
             <h2>Work Experience</h2>
+            <div className="line-row"></div>
             {details.map(work => (
                 <div className="work-data cv-data" key={work.key}>
-                    <span>{ work.companyName }</span>
-                    <span>{ work.positionTitle }</span>
-                    <span>{ work.startDate }</span>
-                    <span>{ work.endDate }</span>
-                    <span>{ work.description }</span>
+                    <h3>{ work.companyName }</h3>
+                    <h4>{ work.positionTitle }</h4>
+                    <span>{ work.startDate + ' - ' + work.endDate }</span>
+                    <p>{ work.description }</p>
                 </div>
             ))}
         </section>

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { TextInput } from "./Inputs";
 export type SummaryHandler = (value:string) => void;
-export interface Details { summary:string, key:string }
+export interface Details {
+    length: number; summary:string, key:string 
+}
 
 interface SummaryEditorProps {
     details: Details;
@@ -59,8 +61,13 @@ export function SummaryEditSection({ summaryDetails, handleChange }: SummaryEdit
 export function CvSummary({details}: CvSummaryProps) {
     return (
         <section id="cv-summary">
-            {details.summary.length > 0 && <h2>Summary</h2>}
-            <p>{details.summary}</p>
+            {details.summary && (
+                <>
+                    <h2>Summary</h2>
+                    <div className="line-row"></div>
+                    <p>{details.summary}</p>
+                </>
+            )}
         </section>
     );
 }

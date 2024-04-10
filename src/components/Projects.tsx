@@ -148,6 +148,7 @@ export function CvProject({ details }: CvProjectProps) {
     if (details.length > 0) return (
         <section id="cv-projects">
             <h2>Projects</h2>
+            <div className="line-row"></div>
             {details.map(proj => (
                 <div className="project-data cv-data" key={proj.key}>
                     <h3>{proj.project}</h3>
