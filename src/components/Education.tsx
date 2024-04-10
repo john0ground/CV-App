@@ -170,12 +170,12 @@ export function CvEducation({details}:CvEducationProps) {
     if (details.length > 0) return (
             <section id="cv-education">
                 <h2>Education</h2>
+                <div className="line-column"></div>
                 {details.map(education => (
                     <div className="education-data cv-data" key={education.key}>
-                        <h3>{education.school}</h3>
-                        <span>{education.field}</span>
-                        <span>{education.startYear}</span>
-                        <span>{education.endYear}</span>  
+                        <h3>{education.field}</h3>
+                        <span>{education.school}</span>
+                        <span>{education.startYear + ' - ' + education.endYear}</span>
                     </div>   
                 ))}
             </section>
