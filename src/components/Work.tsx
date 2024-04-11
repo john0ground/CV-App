@@ -84,16 +84,18 @@ function WorkEditor({ details, handleChange, handleDelete, isComplete }: WorkEdi
                         name='start-date'
                         value={details.startDate}
                         id={details.key}
-                        onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'startDate', details.key)}
+                        endDate={false}
+                        onChange={(value:string) => handleChange(value, 'startDate', details.key)}
                     />
                 </div>
-                <div className="input-row">
+                <div className="input-row end-date-input">
                     <DateInput
                         label='End Date'
                         name='end-date'
                         value={details.endDate}
                         id = {details.key}
-                        onChange={(e: { target: { value: string; }; }) => handleChange(e.target.value, 'endDate', details.key)}
+                        endDate={true}
+                        onChange={(value:string) => handleChange(value, 'endDate', details.key)}
                     />
                 </div>
                 <div className="input-row">

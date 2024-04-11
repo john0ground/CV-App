@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 
 interface InputProps {
     label: string;
@@ -14,6 +14,15 @@ interface TextAreaProps {
     value: string;
     id: string;
     onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+}
+
+interface DateInputProps {
+    label: string;
+    name: string;
+    value: string;
+    id: string;
+    endDate: boolean;
+    onChange: (value:string) => void;
 }
 
 interface FileInputProps {
@@ -61,27 +70,38 @@ function YearInput({label, name, value, id, onChange}: InputProps) {
 }
 
 
-function DateInput({label, name, value, id, onChange}: InputProps) {
+function DateInput({label, name, value, id, endDate, onChange}: DateInputProps) {
+    const [presentDateStatus, setPresentDateStatus] = useState(false);
+
     const getLastChar = (value:string) => value.charAt(value.length - 1);
 
-    function handleChange(e: ChangeEvent<HTMLInputElement>) {
-        const value = e.target.value;
+    function handleChange(value:string) {
+        let newValue = value;
 
-        const lastChar = getLastChar(value);
-        const pattern = /^[0-9/]*$/;
-        if (!pattern.test(lastChar)) return;
+        if (presentDateStatus) {
+            newValue = 'present';
+        } else {
+            const lastChar = getLastChar(newValue);
+            const pattern = /^[0-9/]*$/;
+            if (!pattern.test(lastChar)) return;
 
-        if (value.length === 2) e.target.value += '/';
-        onChange(e);
+            if (newValue.length === 2) newValue += '/';
+        }
+        
+        onChange(newValue);
     }
 
     function handleDelete(e) {
-        if (e.keyCode !== 8) return;
+        if (e.keyCode !== 8 || presentDateStatus) return;
 
-        const value = e.target.value;
-        if (getLastChar(value) === '/') e.target.value = '';
+        let value = e.target.value;
+        if (getLastChar(value) === '/') value = '';
+        onChange(value);
+    }
 
-        onChange(e);
+    function togglePresentDateStatus() {
+        setPresentDateStatus(!presentDateStatus);
+        presentDateStatus? onChange(''): onChange('present');
     }
 
     return (
@@ -94,9 +114,12 @@ function DateInput({label, name, value, id, onChange}: InputProps) {
                 name={name}
                 id={name + '-' + id}
                 value={value}
-                onChange={ (e) => handleChange(e) }
+                onChange={ (e) => handleChange(e.target.value) }
                 onKeyDown={(e) => handleDelete(e) }
             />
+            {endDate && (
+                <button onClick={togglePresentDateStatus}>{presentDateStatus? 'input date': 'set present'}</button>
+            )}
         </>
     );
 }
