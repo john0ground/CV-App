@@ -251,7 +251,7 @@ body {
         }
 
         &[data-active="true"] .data-editors {
-            max-height: calc(fit-content + 20px);
+            max-height: calc(2500px);
         }
 
         &[data-active="false"] .data-editors {
@@ -469,7 +469,7 @@ body {
 }
 
 .cv {
-    --cv-h1: 16px;
+    --cv-h1: 19px;
     --cv-h2: 12px;
     --cv-h3: 0.7rem;
     --cv-h4: 0.7rem;
@@ -484,12 +484,12 @@ body {
     color: $color-primary-light;
 
     section {
-        margin-top: 2rem
+        margin-top: 2rem;
     }
 
     h1 {
         font-size: var(--cv-h1);
-        font-weight: 700;
+        font-weight: 500;
     }
 
     h2 {
@@ -538,6 +538,14 @@ body {
                 height: 100%;
                 width: 100%;
                 object-fit: cover;
+            }
+        }
+
+        section {
+            margin: 0;
+            
+            h1 {
+                margin-bottom: 5px;
             }
         }
 
