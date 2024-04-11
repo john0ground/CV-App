@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextInput } from "./Inputs";
+import { TextArea } from "./Inputs";
 export type SummaryHandler = (value:string) => void;
 export interface Details {
     length: number; summary:string, key:string 
@@ -23,7 +23,7 @@ function SummaryEditor({ details, handleChange }: SummaryEditorProps) {
     return (
         <section className="data-editor single-data-editor">
             <div className="data-inputs">
-                <TextInput
+                <TextArea
                     label='Summary'
                     name='summary'
                     id={details.key}
