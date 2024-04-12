@@ -186,16 +186,18 @@ export default function Cv({
                 </div>
             </div>
 
-            <dialog ref={deleteModalRef}>   
-                <p>Delete this data?</p>
+            <dialog ref={deleteModalRef} id="remove-data-modal">   
+                <h2>Delete this data?</h2>
                 {modalDeleteDetails &&
                     <>
+                        <h3>{modalDeleteDetails.data}</h3>
                         <p>{modalDeleteDetails.section}</p>
-                        <p>{modalDeleteDetails.data}</p>
                     </>
                 }
-                <button onClick={handleDelete}>Delete</button>
-                <button onClick={closeDeleteModal}>Cancel</button>
+                <div className="dialog-buttons">
+                    <button onClick={closeDeleteModal}>Cancel</button>
+                    <button className='dialog-delete-btn' onClick={handleDelete}>Delete</button>
+                </div>
             </dialog>
         </>
     );

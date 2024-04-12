@@ -676,6 +676,51 @@ body {
     }
 }
 
+#remove-data-modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(90vw, 400px);
+    padding: 1rem;
+    background: var(--bg-primary);
+    color: var(--color-primary);
+    border: none;
+    border-radius: 10px;
+
+    &::backdrop {
+        background: rgba(0, 0, 0, 0.6);
+    }
+
+    h2 {
+        margin-bottom: 1rem;
+    }
+
+    p {
+        margin-bottom: 1rem;
+    }
+
+    .dialog-buttons {
+        width: fit-content;
+        margin-left: auto;
+
+        button {
+            height: 2.2rem;
+            width: 5rem;
+            margin-left: 12px;
+            font-family: $font-stack;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid #000;
+            border-radius: 5px;
+        }
+
+        .dialog-delete-btn {
+            background: #fdd7d7;
+        }
+    }
+}
+
 @media screen and (min-width: 575px) {
     .editor header {
         padding: 0 2rem;

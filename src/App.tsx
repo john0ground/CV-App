@@ -203,5 +203,4 @@ export default function App() {
     )
 }
 
-//  delete modal
 //  fonts, theme
