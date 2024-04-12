@@ -46,7 +46,7 @@ function WorkEditor({ details, handleChange, handleDelete, isComplete }: WorkEdi
     const deleteDetails = {
         key: details.key,
         section: 'Work Experience',
-        data: details.positionTitle
+        data: details.companyName
     }
 
     if (!checkIncompleteDetails(details)) isComplete = true;

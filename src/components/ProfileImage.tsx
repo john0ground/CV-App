@@ -26,7 +26,12 @@ function ProfileImageEditor({ addPhoto, handleDelete, imgSrc }: ProfileImageEdit
     const deleteDetails = {
         key: '',
         section: 'Profile Image',
-        data: imgSrc
+        data: ''
+    }
+
+    function handleAddPhoto(file: File) {
+        deleteDetails.data = file.name;
+        addPhoto(file);
     }
 
     return (
@@ -53,7 +58,7 @@ function ProfileImageEditor({ addPhoto, handleDelete, imgSrc }: ProfileImageEdit
                         name='profile-image'
                         id={uuid()}
                         onChange={(e) => {
-                            if (e.target.files) addPhoto(e.target.files[0]);
+                            if (e.target.files) handleAddPhoto(e.target.files[0]);
                         }}
                     />
                 </div>
