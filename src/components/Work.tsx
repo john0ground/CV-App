@@ -195,7 +195,7 @@ export function CvWork({ details }: CvWorkProps) {
                 <div className="work-data cv-data" key={work.key}>
                     <h3>{ work.companyName }</h3>
                     <h4>{ work.positionTitle }</h4>
-                    <span>{ work.startDate + ' - ' + work.endDate }</span>
+                    <h5>{ work.startDate + ' - ' + work.endDate }</h5>
                     <p>{ work.description }</p>
                 </div>
             ))}
