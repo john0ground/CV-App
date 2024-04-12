@@ -203,6 +203,5 @@ export default function App() {
     )
 }
 
-//  night mode background
 //  delete modal
 //  fonts, theme

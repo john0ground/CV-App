@@ -42,7 +42,7 @@
 $font-stack: 'Montserrat', sans-serif;
 
 $header-background-light: #484b54;
-$header-background-dark: #d1cae3;
+$header-background-dark: #36383E;
 
 $background-primary-light: #EFF4F7;
 $background-secondary-light: #FFFFFF;
@@ -82,6 +82,8 @@ body {
     gap: 2rem;
 
     &[data-theme="light"] {
+        background: #fff;
+
         --bg-header: #{$header-background-light};
         --bg-primary: #{$background-primary-light};
         --bg-secondary: #{$background-secondary-light};
@@ -94,6 +96,8 @@ body {
     }
 
     &[data-theme="dark"] {
+        background: #514c5b;
+
         --bg-header: #{$header-background-dark};
         --bg-primary: #{$background-primary-dark};
         --bg-secondary: #{$background-secondary-dark};
@@ -646,6 +650,7 @@ body {
     .cv-main {
         padding: 0 1.5rem 1.5rem 1.5rem;
         height: 100%;
+        background: #fff;
 
         .line-row {
             width: 100%;
