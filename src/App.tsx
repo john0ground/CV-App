@@ -203,7 +203,9 @@ export default function App() {
     )
 }
 
-//  sample data
 //  manage sizes on cv, list sizes hierarchy
-//  see cv / editor btn
-// manage fonts
+//  style editor
+//  night mode background
+//  hover styles
+//  delete modal
+//  fonts, theme
