@@ -22,6 +22,7 @@ export default function App() {
     const [currentCvData, setCurrentCvData] = useState(userData);
     const [customizeBarActive, setCustomizeBarActive] = useState(false);
     const [darkMode, setDarkMode] = useState(false);
+    const [layoutIndex, setLayoutIndex] = useState(0);
     const [profileImageSrc, setProfileImageSrc] = useState('');
 
     function toggleCurrentData() {
@@ -180,7 +181,12 @@ export default function App() {
                 darkMode={darkMode} 
                 customizeActive={customizeBarActive}
             />
-            <CustomizeSidebar active={customizeBarActive} toggleCustomizeBar={toggleCustomizeBar} />
+            <CustomizeSidebar 
+                active={customizeBarActive}
+                layoutIndex={layoutIndex} 
+                toggleCustomizeBar={toggleCustomizeBar} 
+                changeLayout={(index) => setLayoutIndex(index)} 
+            />
             <Cv 
                 handleHeader= {handleHeaderDetails}
                 handleContact = {handleContactDetails}
@@ -209,6 +215,8 @@ export default function App() {
                 deleteEducation={deleteEducation}
                 deleteWork={deleteWork}
                 deleteSkill={deleteSkill}
+
+                layoutIndex={layoutIndex}
             />
         </div>
     )

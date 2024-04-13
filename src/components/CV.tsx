@@ -39,6 +39,8 @@ interface CvProps {
     deleteEducation: (key:string) => void;
     deleteWork: (key:string) => void;
     deleteSkill: (key:string) => void;
+
+    layoutIndex: number;
 }
 
 export default function Cv({ 
@@ -69,6 +71,8 @@ export default function Cv({
         deleteEducation,
         deleteWork,
         deleteSkill,
+
+        layoutIndex
     }: CvProps) {
 
     const [modalDeleteDetails, setModalDeleteDetails] = useState<DeleteProps | null>(null);
@@ -149,7 +153,7 @@ export default function Cv({
                 </div>
             </div>
 
-            <div className='cv'>
+            <div className='cv' data-layout={layoutIndex}>
                 <div className="cv-header">
                     { profileImageSrc.length > 0 && <CvProfileImage imgSrc={profileImageSrc} /> }
                     <CvHeader details={headerDetails} />
