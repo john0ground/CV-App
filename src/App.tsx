@@ -1,7 +1,8 @@
 import { Details as EducationDetails } from './components/Education';
 import { Details as WorkDetails } from './components/Work';
 import { Details as ProjectDetails } from './components/Projects';
-import Header from './components/Header'
+import Header from './components/Header';
+import CustomizeSidebar from './components/CustomizeSidebar';
 import Cv from './components/CV';
 import {
     projectData,
@@ -19,6 +20,7 @@ let sampleData = {...cvSampleData}
 
 export default function App() {
     const [currentCvData, setCurrentCvData] = useState(userData);
+    const [customizeBarActive, setCustomizeBarActive] = useState(false);
     const [darkMode, setDarkMode] = useState(false);
     const [profileImageSrc, setProfileImageSrc] = useState('');
 
@@ -30,6 +32,10 @@ export default function App() {
             sampleData = {...currentCvData}
             setCurrentCvData(userData)
         }
+    }
+
+    function toggleCustomizeBar() {
+        setCustomizeBarActive(!customizeBarActive);
     }
 
     function toggleTheme() {
@@ -169,12 +175,12 @@ export default function App() {
             <Header 
                 title={currentCvData.title} 
                 toggleCvData={toggleCurrentData} 
-                toggleTheme={toggleTheme} 
+                toggleTheme={toggleTheme}
+                toggleCustomizeBar={toggleCustomizeBar} 
                 darkMode={darkMode} 
+                customizeActive={customizeBarActive}
             />
-            <div className="customize-bar">
-                hello
-            </div>
+            <CustomizeSidebar active={customizeBarActive} toggleCustomizeBar={toggleCustomizeBar} />
             <Cv 
                 handleHeader= {handleHeaderDetails}
                 handleContact = {handleContactDetails}

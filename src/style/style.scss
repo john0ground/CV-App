@@ -175,9 +175,14 @@ header {
     box-shadow: var(--box-shadow);
     z-index: 2;
 
-    & > svg {
-        width: 30px;
+    #customize-btn {
         margin-right: auto;
+        background: none;
+        border: none;
+
+        svg {
+            width: 30px;
+        }
     }
 
     #load-sample-btn {
@@ -192,15 +197,27 @@ header {
     }
 }
 
-.customize-bar {
-    width: 280px;
+.side-bar {
+    min-width: 100vw;
     min-height: 100vh;
     position: fixed;
-    background: burlywood;
-    left: 0;
     top: 0;
+    transition: left 0.5s ease-in-out;
     z-index: 1;
-    display: none;
+
+    &[data-active="false"] {
+        left: -110%;
+    }
+
+    &[data-active="true"] {
+        left: 0;
+    }
+
+    .customize-bar {
+        width: 280px;
+        min-height: 100vh;
+        background: burlywood;
+    }
 }
 
 .editor {
