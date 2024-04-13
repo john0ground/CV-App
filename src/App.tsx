@@ -1,6 +1,7 @@
 import { Details as EducationDetails } from './components/Education';
 import { Details as WorkDetails } from './components/Work';
 import { Details as ProjectDetails } from './components/Projects';
+import Header from './components/Header'
 import Cv from './components/CV';
 import {
     projectData,
@@ -165,6 +166,12 @@ export default function App() {
 
     return (
         <div id="app" data-theme={darkMode? 'dark': 'light'}>
+            <Header 
+                title={currentCvData.title} 
+                toggleCvData={toggleCurrentData} 
+                toggleTheme={toggleTheme} 
+                darkMode={darkMode} 
+            />
             <div className="customize-bar">
                 hello
             </div>
@@ -196,11 +203,6 @@ export default function App() {
                 deleteEducation={deleteEducation}
                 deleteWork={deleteWork}
                 deleteSkill={deleteSkill}
-
-                toggleCvData={toggleCurrentData}
-                toggleTheme={toggleTheme}
-                darkMode = {darkMode}
-                title={currentCvData.title}
             />
         </div>
     )

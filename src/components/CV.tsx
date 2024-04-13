@@ -6,7 +6,6 @@ import { EducationEditSection, CvEducation, AddEducation, EducationHandler, Deta
 import { WorkEditSection, CvWork, WorkHandler, AddWork, Details as WorkDetails } from './Work';
 import { ProjectEditSection, CvProject, ProjectHandler, AddProject, Details as ProjectDetails } from './Projects';
 import { SkillEditSection, CvSkill, AddSkill, Details as SkillDetails } from './Skills';
-import ThemeButton from './ThemeButton';
 
 import { useState } from 'react';
 import { useRef } from 'react';
@@ -40,11 +39,6 @@ interface CvProps {
     deleteEducation: (key:string) => void;
     deleteWork: (key:string) => void;
     deleteSkill: (key:string) => void;
-
-    toggleCvData: () => void;
-    toggleTheme: () => void;
-    darkMode: boolean;
-    title: string;
 }
 
 export default function Cv({ 
@@ -75,11 +69,6 @@ export default function Cv({
         deleteEducation,
         deleteWork,
         deleteSkill,
-
-        toggleCvData,
-        toggleTheme,
-        darkMode,
-        title
     }: CvProps) {
 
     const [modalDeleteDetails, setModalDeleteDetails] = useState<DeleteProps | null>(null);
@@ -117,15 +106,6 @@ export default function Cv({
     return (
         <>  
             <div className='editor'>
-                <header>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#fff">
-                      <path d="M4 6h16M4 12h10M4 18h5" stroke="#ffffffd0" strokeWidth="1.56" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                    <button id='load-sample-btn' onClick={toggleCvData}>
-                        {title === 'sample-data'? 'Undo Sample': 'Load Sample'}
-                    </button>
-                    <ThemeButton darkMode={darkMode} toggleTheme={toggleTheme}/>
-                </header>
                 <div className="editor-header">
                     <h2>Header</h2>
                     <ProfileImageEditSection 
