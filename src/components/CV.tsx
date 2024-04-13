@@ -1,5 +1,5 @@
 import { ProfileImageEditSection, CvProfileImage, AddProfileImage } from './ProfileImage';
-import { HeaderEditSection, CvHeader, HeaderHandler, Details as HeaderDetails } from './Header';
+import { HeaderEditSection, CvHeader, HeaderHandler, Details as HeaderDetails } from './PersonalDetails';
 import { ContactEditSection, CvContact, ContactHandler, Details as ContactDetails } from './Contact';
 import { SummaryEditSection, CvSummary, SummaryHandler, Details as SummaryDetails } from './Summary';
 import { EducationEditSection, CvEducation, AddEducation, EducationHandler, Details as EducationDetails } from './Education';
@@ -115,7 +115,7 @@ export default function Cv({
     }
 
     return (
-        <>
+        <>  
             <div className='editor'>
                 <header>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#fff">

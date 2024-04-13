@@ -165,6 +165,9 @@ export default function App() {
 
     return (
         <div id="app" data-theme={darkMode? 'dark': 'light'}>
+            <div className="customize-bar">
+                hello
+            </div>
             <Cv 
                 handleHeader= {handleHeaderDetails}
                 handleContact = {handleContactDetails}

@@ -1,4 +1,4 @@
-import { Details as HeaderDetails } from '../components/Header';
+import { Details as HeaderDetails } from '../components/PersonalDetails';
 import { Details as ContactDetails } from '../components/Contact';
 import { Details as SummaryDetails } from '../components/Summary';
 import { Details as EducationDetails } from '../components/Education';
