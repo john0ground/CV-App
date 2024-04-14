@@ -23,6 +23,7 @@ export default function App() {
     const [customizeBarActive, setCustomizeBarActive] = useState(false);
     const [darkMode, setDarkMode] = useState(false);
     const [layoutIndex, setLayoutIndex] = useState(0);
+    const [cvThemeIndex, setCvThemeIndex] = useState(0);
     const [profileImageSrc, setProfileImageSrc] = useState('');
 
     function toggleCurrentData() {
@@ -183,9 +184,11 @@ export default function App() {
             />
             <CustomizeSidebar 
                 active={customizeBarActive}
-                layoutIndex={layoutIndex} 
+                layoutIndex={layoutIndex}
+                themeIndex={cvThemeIndex} 
                 toggleCustomizeBar={toggleCustomizeBar} 
                 changeLayout={(index) => setLayoutIndex(index)} 
+                changeTheme={(index) => setCvThemeIndex(index)}
             />
             <Cv 
                 handleHeader= {handleHeaderDetails}
@@ -217,9 +220,11 @@ export default function App() {
                 deleteSkill={deleteSkill}
 
                 layoutIndex={layoutIndex}
+                themeIndex={cvThemeIndex}
             />
         </div>
     )
 }
 
+//  themes +40 hue
 //  fonts, theme

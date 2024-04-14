@@ -218,12 +218,82 @@ header {
         min-height: 100vh;
         background: burlywood;
 
-        button {
-            margin-top: 70px;
-            height: 30px;
+        section.layout-options {
+            button {
+                margin-top: 70px;
+                height: 30px;
+    
+                &[data-active="true"] {
+                    border: 1px solid #000;
+                }
+            }
+        }
 
-            &[data-active="true"] {
-                border: 1px solid #000;
+        section.theme-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            button {
+                width: 50px;
+                height: 50px;
+                display: flex;
+                border-radius: 10px;
+                border: none;
+                overflow: hidden;
+
+                &[data-active="true"] {
+                    border: 1px solid #000;
+                }
+
+                div {
+                    width: 50%;
+                    height: 100%;
+                }
+            }
+
+            button:nth-child(1) {
+                div:first-child { background: hsl(225deg 6.9% 22.75%); }
+                div:nth-child(2) { background: hsl(27deg 24.44% 91.18%); }
+            }
+
+            button:nth-child(2) {
+                div:first-child { background: hsl(265deg 6.9% 22.75%); }
+                div:nth-child(2) { background: hsl(67deg 24.44% 91.18%); }
+            }
+
+            button:nth-child(3) {
+                div:first-child { background: hsl(305deg 6.9% 22.75%); }
+                div:nth-child(2) { background: hsl(107deg 24.44% 91.18%); }
+            }
+
+            button:nth-child(4) {
+                div:first-child { background: hsl(345deg 6.9% 22.75%); }
+                div:nth-child(2) { background: hsl(147deg 24.44% 91.18%); }
+            }
+
+            button:nth-child(5) {
+                div:first-child { background: hsl(27deg 6.9% 22.75%); }
+                div:nth-child(2) { background: hsl(187deg 24.44% 91.18%); }
+            }
+
+            button:nth-child(6) {
+                div:first-child { background: hsl(67deg 6.9% 22.75%); }
+                div:nth-child(2) { background: hsl(227deg 24.44% 91.18%); }
+            }
+
+            button:nth-child(7) {
+                div:first-child { background: hsl(107deg 6.9% 22.75%); }
+                div:nth-child(2) { background: hsl(267deg 24.44% 91.18%); }
+            }
+
+            button:nth-child(8) {
+                div:first-child { background: hsl(147deg 6.9% 22.75%); }
+                div:nth-child(2) { background: hsl(307deg 24.44% 91.18%); }
+            }
+
+            button:nth-child(9) {
+                div:first-child { background: hsl(187deg 6.9% 22.75%); }
+                div:nth-child(2) { background: hsl(347deg 24.44% 91.18%); }
             }
         }
     }
@@ -533,7 +603,6 @@ header {
     --cv-p: 0.7rem;
 
     display: grid;
-    // grid-template-columns: 33% auto;
     align-content: flex-start;
     width: min(90vw, 800px);
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
@@ -550,6 +619,51 @@ header {
         grid-template-columns: auto 33%;
         .cv-aside { grid-area: 2 / 2 / 3 / 3; }
         .cv-main { grid-area: 2 / 1 / 3 / 2; }
+    }
+
+    &[data-theme="0"] {
+        .cv-header { background: hsl(225deg 6.9% 22.75%); }
+        .cv-aside { background: hsl(27deg 24.44% 91.18%); }
+    }
+
+    &[data-theme="1"] {
+        .cv-header { background: hsl(265deg 6.9% 22.75%); }
+        .cv-aside { background: hsl(67deg 24.44% 91.18%); }
+    }
+
+    &[data-theme="2"] {
+        .cv-header { background: hsl(305deg 6.9% 22.75%); }
+        .cv-aside { background: hsl(107deg 24.44% 91.18%); }
+    }
+
+    &[data-theme="3"] {
+        .cv-header { background: hsl(345deg 6.9% 22.75%); }
+        .cv-aside { background: hsl(147deg 24.44% 91.18%); }
+    }
+
+    &[data-theme="4"] {
+        .cv-header { background: hsl(27deg 6.9% 22.75%); }
+        .cv-aside { background: hsl(187deg 24.44% 91.18%); }
+    }
+
+    &[data-theme="5"] {
+        .cv-header { background: hsl(67deg 6.9% 22.75%); }
+        .cv-aside { background: hsl(227deg 24.44% 91.18%); }
+    }
+
+    &[data-theme="6"] {
+        .cv-header { background: hsl(107deg 6.9% 22.75%); }
+        .cv-aside { background: hsl(267deg 24.44% 91.18%); }
+    }
+
+    &[data-theme="7"] {
+        .cv-header { background: hsl(147deg 6.9% 22.75%); }
+        .cv-aside { background: hsl(307deg 24.44% 91.18%); }
+    }
+
+    &[data-theme="8"] {
+        .cv-header { background: hsl(187deg 6.9% 22.75%); }
+        .cv-aside { background: hsl(347deg 24.44% 91.18%); }
     }
 
     section {
