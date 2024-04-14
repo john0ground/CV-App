@@ -10,13 +10,20 @@ interface ThemesSectionProps {
     changeTheme: (index:number) => void;
 }
 
+interface FontsSectionProps {
+    fontIndex: number;
+    changeFont: (index:number) => void;
+}
+
 interface CustomizeSideBarProps {
     active: boolean;
     layoutIndex: number;
     themeIndex: number;
+    fontIndex: number;
     toggleCustomizeBar: () => void;
     changeLayout: (index:number) => void;
     changeTheme: (index:number) => void;
+    changeFont: (index:number) => void;
 }
 
 function LayoutsSection({layoutIndex, changeLayout}: LayoutsSectionProps) {
@@ -71,7 +78,28 @@ function ThemesSection({themeIndex, changeTheme}: ThemesSectionProps) {
     );
 }
 
-export default function CustomizeSideBar({active, layoutIndex, themeIndex, toggleCustomizeBar, changeLayout, changeTheme}:CustomizeSideBarProps) {
+function FontsSection({fontIndex, changeFont}: FontsSectionProps) {
+    return (
+        <section className="font-options">
+            <button data-active={fontIndex === 0} onClick={() => changeFont(0)}>Montserrat</button>
+            <button data-active={fontIndex === 1} onClick={() => changeFont(1)}>Open Sans</button>
+            <button data-active={fontIndex === 2} onClick={() => changeFont(2)}>Poppins</button>
+            <button data-active={fontIndex === 3} onClick={() => changeFont(3)}>Noto Sans</button>
+        </section>
+    );
+}
+
+export default function CustomizeSideBar({
+        active, 
+        layoutIndex, 
+        themeIndex,
+        fontIndex, 
+        toggleCustomizeBar, 
+        changeLayout, 
+        changeTheme,
+        changeFont
+    }:CustomizeSideBarProps) {
+        
     const sideBarRef = useRef<HTMLDivElement>(null);
 
     function handleToggleBar(e) {
@@ -84,6 +112,7 @@ export default function CustomizeSideBar({active, layoutIndex, themeIndex, toggl
             <div className="customize-bar">
                 <LayoutsSection layoutIndex={layoutIndex} changeLayout={changeLayout} />
                 <ThemesSection themeIndex={themeIndex} changeTheme={changeTheme} />
+                <FontsSection fontIndex={fontIndex} changeFont={changeFont} />
             </div>
         </div>
     );

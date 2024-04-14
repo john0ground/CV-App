@@ -24,6 +24,7 @@ export default function App() {
     const [darkMode, setDarkMode] = useState(false);
     const [layoutIndex, setLayoutIndex] = useState(0);
     const [cvThemeIndex, setCvThemeIndex] = useState(0);
+    const [cvFontIndex, setCvFontIndex] = useState(0);
     const [profileImageSrc, setProfileImageSrc] = useState('');
 
     function toggleCurrentData() {
@@ -186,9 +187,11 @@ export default function App() {
                 active={customizeBarActive}
                 layoutIndex={layoutIndex}
                 themeIndex={cvThemeIndex} 
+                fontIndex={cvFontIndex}
                 toggleCustomizeBar={toggleCustomizeBar} 
                 changeLayout={(index) => setLayoutIndex(index)} 
                 changeTheme={(index) => setCvThemeIndex(index)}
+                changeFont={(index) => setCvFontIndex(index)}
             />
             <Cv 
                 handleHeader= {handleHeaderDetails}
@@ -221,10 +224,8 @@ export default function App() {
 
                 layoutIndex={layoutIndex}
                 themeIndex={cvThemeIndex}
+                fontIndex={cvFontIndex}
             />
         </div>
     )
 }
-
-//  themes +40 hue
-//  fonts, theme
