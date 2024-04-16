@@ -440,6 +440,21 @@ header {
                 }
             }
         }
+
+        a#github {
+            width: 35px;
+            height: 35px;
+            display: block;
+            margin: 2rem auto;
+
+            & * {
+                pointer-events: none;
+            }
+
+            svg {
+                path { fill: var(--color-primary); }
+            }
+        }
     }
 }
 
