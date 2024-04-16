@@ -1,7 +1,7 @@
 # [Live](https://onlinecvmaker.netlify.app/)
 
 ![app screenshot](public/images/screenshot-desktop.webp)
-![app screenshot](public/images/screenshot-mobile.webp){: width="375px"}
+<img src="public/images/screenshot-mobile.webp" width="290">
 
 ## Features 
 
