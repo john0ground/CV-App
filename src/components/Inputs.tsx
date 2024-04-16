@@ -91,10 +91,12 @@ function DateInput({label, name, value, id, endDate, onChange}: DateInputProps) 
         onChange(newValue);
     }
 
-    function handleDelete(e) {
-        if (e.keyCode !== 8 || presentDateStatus) return;
-
-        let value = e.target.value;
+    function handleDelete(e: React.KeyboardEvent<HTMLInputElement>) {
+        console.log(e);
+        if (e.code !== "Backspace" || presentDateStatus) return;
+    
+        const target = e.target as HTMLInputElement;
+        let value = target.value;
         if (getLastChar(value) === '/') value = '';
         onChange(value);
     }

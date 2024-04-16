@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, MouseEvent } from "react";
 
 interface LayoutsSectionProps {
     layoutIndex: number;
@@ -119,7 +119,7 @@ export default function CustomizeSideBar({
         
     const sideBarRef = useRef<HTMLDivElement>(null);
 
-    function handleToggleBar(e) {
+    function handleToggleBar(e: MouseEvent<HTMLDivElement>) {
         if ((e.target !== sideBarRef.current)) return;
         toggleCustomizeBar();
     }

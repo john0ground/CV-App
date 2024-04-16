@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TextArea } from "./Inputs";
 export type SummaryHandler = (value:string) => void;
 export interface Details {
-    length: number; summary:string, key:string 
+    summary:string, key:string 
 }
 
 interface SummaryEditorProps {
